@@ -154,15 +154,17 @@
 
               <select class="filter-categories border-0 mb-0 me-5">
                 <option>Danh mục sản phẩm</option>
-                <option>Trái cây</option>
-                <option>Hải sản</option>
-                <option>Thịt</option>
-                <option>Trứng</option>
-                <option>Rau</option>
-                <option>Đồ cho thú cưng</option>
-                <option>Mì</option>
-                <option>Vật dụng gia đình</option>
-                <option>Nước uống</option>
+              <?php
+                  $sql = "SELECT * FROM loaisanpham";
+
+                  $result = $conn->query($sql);
+                      if ($result->num_rows > 0) {
+                      $result = $conn->query($sql);
+                      $result_all = $result -> fetch_all(MYSQLI_ASSOC);
+                      foreach ($result_all as $row) {
+              ?>
+                  <option value="<?php echo $row['MALOAI'] ?>"><?php echo $row['TENLOAI'] ?></option>
+              <?php }} ?>
               </select>
 
               <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
