@@ -220,19 +220,17 @@ include'header.php';
                     </div>
                   </td>
                   <td class="py-4">
-                    <div class="total-price">
-                      <span class="money text-dark"><?php echo number_format($row['DONGIABANSP']) ?></span>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="cart-remove">
-                      <a href="delete-one-cart.php" type="reset">
-                        <svg width="24" height="24">
-                          <use xlink:href="#trash"></use>
-                        </svg>
-                      </a>
-                    </div>
-                  </td>
+  <div class="cart-remove">
+    <form action="delete-one-cart.php" method="post">
+      <input type="hidden" name="key" value="<?php echo $key ?>">
+      <button type="submit" class="btn-reset" aria-label="Remove item">
+        <svg width="24" height="24">
+          <use xlink:href="#trash"></use>
+        </svg>
+      </button>
+    </form>
+  </div>
+</td>
                 </tr>
                 <?php
                     }
