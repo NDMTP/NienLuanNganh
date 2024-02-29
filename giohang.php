@@ -157,7 +157,11 @@ include'header.php';
     <div class="container-fluid">
       <div class="row g-5">
         <div class="col-md-8">
-
+        <form class="shopping-cart-form" action="#" method="post">
+            <?php
+            $tongtien = 0;
+            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+            ?>
           <div class="table-responsive cart">
             <table class="table">
               <thead>
@@ -169,18 +173,26 @@ include'header.php';
                 </tr>
               </thead>
               <tbody>
+              <?php
+                  foreach ($_SESSION['cart'] as $key => $item) {
+                      $sql = "select * from sanpham where MASP = '{$item['id']}'";
+                      $result = $conn->query($sql);
+                      $row = $result->fetch_assoc();
+                      $string = $row['MASP'];
+                      $masp = preg_replace('/[0-9]/', '', $string);
+              ?>
                 <tr>
                   <td scope="row" class="py-4">
                     <div class="cart-info d-flex flex-wrap align-items-center mb-4">
                       <div class="col-lg-3">
                         <div class="card-image">
-                          <img src="images/NEC2.jpg" alt="cloth" class="img-fluid">
+                          <img src="images/<?php echo $masp."/".$row['LINKANH']?>" alt="cloth" class="img-fluid">
                         </div>
                       </div>
                       <div class="col-lg-9">
                         <div class="card-detail ps-3">
                           <h5 class="card-title">
-                            <a href="#" class="text-decoration-none">Nước ép đặc biệt phiên bản ngày tết</a>
+                            <a href="#" class="text-decoration-none"><?php echo $row['TENSP']?></a>
                           </h5>
                         </div>
                       </div>
@@ -209,12 +221,12 @@ include'header.php';
                   </td>
                   <td class="py-4">
                     <div class="total-price">
-                      <span class="money text-dark">89.000đ</span>
+                      <span class="money text-dark"><?php echo number_format($row['DONGIABANSP']) ?></span>
                     </div>
                   </td>
                   <td class="py-4">
                     <div class="cart-remove">
-                      <a href="#">
+                      <a href="delete-one-cart.php" type="reset">
                         <svg width="24" height="24">
                           <use xlink:href="#trash"></use>
                         </svg>
@@ -222,67 +234,29 @@ include'header.php';
                     </div>
                   </td>
                 </tr>
-                <tr>
-                  <td scope="row" class="py-4">
-                    <div class="cart-info d-flex flex-wrap align-items-center">
-                      <div class="col-lg-3">
-                        <div class="card-image">
-                          <img src="images/NEC1.jpg" alt="product" class="img-fluid">
-                        </div>
-                      </div>
-                      <div class="col-lg-9">
-                        <div class="card-detail ps-3">
-                          <h5 class="card-title">
-                            <a href="#" class="text-decoration-none">Nước ép cam</a>
-                          </h5>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="input-group product-qty w-50">
-                      <span class="input-group-btn">
-                        <button type="button" class="quantity-left-minus btn btn-light btn-number" data-type="minus">
-                          <svg width="16" height="16">
-                            <use xlink:href="#minus"></use>
-                          </svg>
-                        </button>
-                      </span>
-                      <input type="text" id="quantity" name="quantity" class="form-control input-number text-center"
-                        value="1">
-                      <span class="input-group-btn">
-                        <button type="button" class="quantity-right-plus btn btn-light btn-number" data-type="plus"
-                          data-field="">
-                          <svg width="16" height="16">
-                            <use xlink:href="#plus"></use>
-                          </svg>
-                        </button>
-                      </span>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="total-price">
-                      <span class="money text-dark">11.000đ</span>
-                    </div>
-                  </td>
-                  <td class="py-4">
-                    <div class="cart-remove">
-                      <a href="#">
-                        <svg width="24" height="24">
-                          <use xlink:href="#trash"></use>
-                        </svg>
-                      </a>
-                    </div>
-                  </td>
-                </tr>
+                <?php
+                    }
+                ?>
               </tbody>
             </table>
+            <?php
+            } else {
+                echo '<div class="shpcart-subtotal-block">';
+                echo '<h2>Không có sản phẩm nào trong giỏ hàng</h2>';
+                echo '<div class="btn-checkout">';
+                echo '   <a href="category-grid.php" class="btn checkout w-25">Xem tất cả sản phẩm</a>';
+                echo '</div>';
+                echo '</div>';
+                
+            }
+            ?>
+        </form>
           </div>
           
         </div>
         <div class="col-md-4">
           <div class="cart-totals bg-grey py-5">
-            <h4 class="text-dark pb-4">Cart Total</h4>
+            <h4 class="text-dark pb-4">Tổng cộng</h4>
             <div class="total-price pb-5">
               <table cellspacing="0" class="table text-uppercase">
                 <tbody>
@@ -309,12 +283,12 @@ include'header.php';
               </table>
             </div>
             <div class="button-wrap row g-2">
-              <div class="col-md-6"><button class="btn btn-dark py-3 px-4 text-uppercase btn-rounded-none w-100">Update
-                  Cart</button></div>
+              <div class="col-md-6"><button class="btn btn-dark py-3 px-4 text-uppercase btn-rounded-none w-100">Cập nhật giỏ hàng
+                  </button></div>
               <div class="col-md-6"><button
-                  class="btn btn-dark py-3 px-4 text-uppercase btn-rounded-none w-100">Continue Shopping</button></div>
+                  class="btn btn-dark py-3 px-4 text-uppercase btn-rounded-none w-100">Tiếp tục mua sắm</button></div>
               <div class="col-md-12"><button
-                  class="btn btn-primary py-3 px-4 text-uppercase btn-rounded-none w-100">Proceed to checkout</button>
+                  class="btn btn-primary py-3 px-4 text-uppercase btn-rounded-none w-100">Thanh toán</button>
               </div>
             </div>
           </div>

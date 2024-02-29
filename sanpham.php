@@ -3,6 +3,7 @@
 <?php
 require 'head.php';
 require 'connect.php';
+require 'popup_themthanhcong.php';
 
 ?>
 

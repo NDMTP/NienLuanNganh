@@ -79,7 +79,9 @@ require 'connect.php';
   <?php
   include "header.php";
   ?>
-
+<?php
+                        if (isset($_SESSION['email'])){
+                    ?>
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
     <div class="offcanvas-header justify-content-center">
       <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -88,7 +90,7 @@ require 'connect.php';
       <div class="order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Giỏ hàng của bạn</span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <span class="badge bg-primary rounded-pill"><?php echo $_SESSION['slsp'] ?></span>
         </h4>
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -136,7 +138,9 @@ require 'connect.php';
 
     </div>
   </div>
-
+  <?php
+                        }
+                    ?>
 
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
     aria-labelledby="Search">
