@@ -336,7 +336,7 @@ require 'connect.php';
                         <use xlink:href="#heart"></use>
                       </svg></a>
                     <figure>
-                      <a href="single-product.php" title="Product Title">
+                      <a href="single-product.php?id=<?php echo $row['MASP'] ?>" title="Product Title">
                         <img src="images/<?php echo $masp ?>/<?php echo $row['LINKANH'] ?>" alt="dd" width="270"
                           height="270" class="tab-image">
                       </a>
@@ -366,7 +366,7 @@ require 'connect.php';
                           </button>
                         </span>
                       </div>
-                      <a href="#" class="nav-link">Thêm vào giỏ<svg width="18" height="18">
+                      <a href="themvaogiohang.php?sb_cate=&pdid=<?php echo $row['MASP'] ?>&qty12554=1" class="nav-link">Thêm vào giỏ<svg width="18" height="18">
                           <use xlink:href="#cart"></use>
                         </svg></a>
                     </div>
