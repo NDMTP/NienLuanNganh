@@ -194,19 +194,34 @@ require 'popup_themthanhcong.php';
               <h5 class="widget-title">Danh mục sản phẩm</h5>
               <ul class="product-categories sidebar-list list-unstyled">
                 <li class="cat-item">
-                  <a href="/collections/categories">Tất cả</a>
+                  <a href="sanpham.php">Tất cả</a>
                 </li>
                 <li class="cat-item">
-                  <a href="#" class="nav-link">Trái cây</a>
+                  <a href="?loai=01" class="nav-link">Trái cây</a>
                 </li>
                 <li class="cat-item">
-                  <a href="#" class="nav-link">Nước ép</a>
+                  <a href="?loai=02" class="nav-link">Hải sản</a>
                 </li>
                 <li class="cat-item">
-                  <a href="#" class="nav-link">Rau củ quả</a>
+                  <a href="?loai=03" class="nav-link">Thịt</a>
                 </li>
                 <li class="cat-item">
-                  <a href="#" class="nav-link">Sữa chua</a>
+                  <a href="?loai=04" class="nav-link">Trứng</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=05" class="nav-link">Rau</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=06" class="nav-link">Đồ cho thú cưng</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=07" class="nav-link">Mì</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=08" class="nav-link">Vật dụng gia đình</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=09" class="nav-link">Nước uống</a>
                 </li>
               </ul>
             </div>
