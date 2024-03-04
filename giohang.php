@@ -325,17 +325,24 @@ require 'popup_themthanhcong.php';
             </table>
           </div>
           <div class="button-wrap row g-2">
-            <div class="col-md-6"><button class="btn btn-dark py-3 px-4 text-uppercase btn-rounded-none w-100">Cập nhật
-                giỏ hàng
-              </button></div>
-            <div class="col-md-6"><button class="btn btn-dark py-3 px-4 text-uppercase btn-rounded-none w-100">Tiếp tục
+
+            <div class="col-md-6"><button class="btn btn-dark py-3 px-4 text-uppercase btn-rounded-none w-100" id="tieptucmuasam">Tiếp tục
                 mua sắm</button></div>
-            <div class="col-md-12"><button class="btn btn-primary py-3 px-4 text-uppercase btn-rounded-none w-100">Thanh
+            <div class="col-md-6"><button class="btn btn-primary py-3 px-4 text-uppercase btn-rounded-none w-100" id="thanhtoan">Thanh
                 toán</button>
             </div>
           </div>
         </div>
       </div>
+        <script>
+      document.getElementById("tieptucmuasam").addEventListener("click", function () {
+        window.location.href = "sanpham.php";
+      });
+    </script>    <script>
+      document.getElementById("thanhtoan").addEventListener("click", function () {
+        window.location.href = "thanhtoannguoidung.php";
+      });
+    </script>
 
     </div>
     </div>
