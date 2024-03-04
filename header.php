@@ -96,7 +96,7 @@
               ?>
               <div class="hidden-sm hidden-xs m-2">
                 <div class="primary-menu">
-                  <ul class="menu biolife-menu clone-main-menu clone-primary-menu" id="primary-menu"
+                  <ul class="menu biolife-menu clone-main-menu clone-primary-menu" style="list-style-type: none; " id="primary-menu"
                     data-menuname="main menu">
                     <li class="menu-item menu-item-has-children has-megamenu">
                       <a href="#" class="menu-name" data-title="Shop"><span>Chào mừng,
@@ -117,7 +117,7 @@
               ?>
           <div class="hidden-sm hidden-xs m-2">
             <div class="primary-menu">
-              <ul class="menu biolife-menu clone-main-menu clone-primary-menu" id="primary-menu"
+              <ul class="menu biolife-menu clone-main-menu clone-primary-menu" id="primary-menu" style="list-style-type: none; "
                 data-menuname="main menu">
                 <li class="menu-item">
                   <a href="account.php" class="menu-name"><span>Đăng nhập </span></a>
