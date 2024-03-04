@@ -130,7 +130,11 @@ require 'popup_themthanhcong.php';
         </div>
       </div>
     </div>
-
+    <script>
+      document.getElementById("checkoutButton").addEventListener("click", function () {
+        window.location.href = "giohang.php";
+      });
+    </script>
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
     aria-labelledby="Search">
     <div class="offcanvas-header justify-content-center">
