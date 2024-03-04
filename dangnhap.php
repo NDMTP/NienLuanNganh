@@ -19,6 +19,7 @@ if ($result1->num_rows > 0) {
     $lastname = end($fullname);
     $_SESSION["lname"] = $lastname;
     $_SESSION["sdt"] = $row["SDT"];
+    $_SESSION["slsp"] = 0;
 
 
     header('Location: index.php');

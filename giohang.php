@@ -78,61 +78,57 @@ require 'popup_themthanhcong.php';
   </div>
 
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
-    <div class="offcanvas-header justify-content-center">
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div class="order-md-last">
-        <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Giỏ hàng của bạn</span>
-          <span class="badge bg-primary rounded-pill">3</span>
-        </h4>
-        <ul class="list-group mb-3">
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <?php
-            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-              foreach ($_SESSION['cart'] as $item) {
-                $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
-                $result = $conn->query($sql);
-                $row = $result->fetch_assoc();
-                $string = $row['MASP'];
-                $masp = preg_replace('/[0-9]/', '', $string);
-                ?>
-                <div>
-                  <h6 class="my-0"><a href="#" class="product-name">
-                      <?php echo $row['TENSP'] ?>
-                    </a></h6>
-                  <small class="text-body-secondary">
-                    <?php echo $row['MOTA'] ?>
-                  </small>
+      <div class="offcanvas-header justify-content-center">
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="order-md-last">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Giỏ hàng của bạn</span>
+            <span class="badge bg-primary rounded-pill">
+              <?php echo $_SESSION['slsp'] ?>
+            </span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <?php
+              if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                foreach ($_SESSION['cart'] as $item) {
+                  $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
+                  $result = $conn->query($sql);
+                  $row = $result->fetch_assoc();
+                  $string = $row['MASP'];
+                  $masp = preg_replace('/[0-9]/', '', $string);
+                  ?>
+                  <div>
+                    <h6 class="my-0"><a href="#" class="product-name">
+                        <?php echo $row['TENSP'] ?>
+                      </a></h6>
+                    <small class="text-body-secondary">
+                      <?php echo $row['MOTA'] ?>
+                    </small>
+                  </div>
+                  <span class="text-body-secondary">
+                    <?php echo number_format($row['DONGIABANSP']) ?>
+                  </span>
+                </li>
+                <div class="qty">
+                  <label for="cart[id123][qty]">Số lượng:</label>
+                  <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]"
+                    value="<?php echo $item['quant'] ?>" disabled>
                 </div>
-                <span class="text-body-secondary">
-                  <?php echo number_format($row['DONGIABANSP']) ?>
-                </span>
-              </li>
-              <div class="qty">
-                <label for="cart[id123][qty]">Số lượng:</label>
-                <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]"
-                  value="<?php echo $item['quant'] ?>" disabled>
-              </div>
-              <!-- <li class="list-group-item d-flex justify-content-between">
-              <span>Tổng cộng(VND)</span>
-              <strong>114.000đ</strong>
-            </li> -->
-            </ul>
-            <?php
+                <?php
+                }
+                ?>
+              <button class="w-100 btn btn-primary btn-lg" id="checkoutButton" type="button">Tiếp tục thanh toán</button>
+              <?php
+              } else {
+                echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
               }
               ?>
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Tiếp tục thanh toán</button>
-          <?php
-            } else {
-              echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
-            }
-            ?>
+        </div>
       </div>
-
     </div>
-  </div>
 
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
     aria-labelledby="Search">

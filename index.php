@@ -80,71 +80,74 @@ require 'popup_themthanhcong.php';
   <?php
   include "header.php";
   ?>
-<?php
-                        if (isset($_SESSION['email'])){
-                    ?>
-<div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
-    <div class="offcanvas-header justify-content-center">
+  <?php
+  if (isset($_SESSION['email'])) {
+    ?>
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
+      <div class="offcanvas-header justify-content-center">
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
+      </div>
+      <div class="offcanvas-body">
         <div class="order-md-last">
-            <h4 class="d-flex justify-content-between align-items-center mb-3">
-                <span class="text-primary">Giỏ hàng của bạn</span>
-                <span class="badge bg-primary rounded-pill"><?php echo $_SESSION['slsp'] ?></span>
-            </h4>
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between lh-sm">
-                    <?php
-                    if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                        foreach ($_SESSION['cart'] as $item) {
-                            $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
-                            $result = $conn->query($sql);
-                            $row = $result->fetch_assoc();
-                            $string = $row['MASP'];
-                            $masp = preg_replace('/[0-9]/', '', $string);
-                    ?>
-                            <div>
-                                <h6 class="my-0"><a href="#" class="product-name">
-                                        <?php echo $row['TENSP'] ?>
-                                    </a></h6>
-                                <small class="text-body-secondary">
-                                    <?php echo $row['MOTA'] ?>
-                                </small>
-                            </div>
-                            <span class="text-body-secondary">
-                                <?php echo number_format($row['DONGIABANSP']) ?>
-                            </span>
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-primary">Giỏ hàng của bạn</span>
+            <span class="badge bg-primary rounded-pill">
+              <?php echo $_SESSION['slsp'] ?>
+            </span>
+          </h4>
+          <ul class="list-group mb-3">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+              <?php
+              if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                foreach ($_SESSION['cart'] as $item) {
+                  $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
+                  $result = $conn->query($sql);
+                  $row = $result->fetch_assoc();
+                  $string = $row['MASP'];
+                  $masp = preg_replace('/[0-9]/', '', $string);
+                  ?>
+                  <div>
+                    <h6 class="my-0"><a href="#" class="product-name">
+                        <?php echo $row['TENSP'] ?>
+                      </a></h6>
+                    <small class="text-body-secondary">
+                      <?php echo $row['MOTA'] ?>
+                    </small>
+                  </div>
+                  <span class="text-body-secondary">
+                    <?php echo number_format($row['DONGIABANSP']) ?>
+                  </span>
                 </li>
                 <div class="qty">
-                    <label for="cart[id123][qty]">Số lượng:</label>
-                    <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]" value="<?php echo $item['quant'] ?>" disabled>
+                  <label for="cart[id123][qty]">Số lượng:</label>
+                  <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]"
+                    value="<?php echo $item['quant'] ?>" disabled>
                 </div>
-            <?php
-                        }
-            ?>
-            <button class="w-100 btn btn-primary btn-lg" id="checkoutButton" type="button">Tiếp tục thanh toán</button>
-            <?php
-                    } else {
-                        echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
-                    }
-            ?>
+                <?php
+                }
+                ?>
+              <button class="w-100 btn btn-primary btn-lg" id="checkoutButton" type="button">Tiếp tục thanh toán</button>
+              <?php
+              } else {
+                echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
+              }
+              ?>
         </div>
+      </div>
     </div>
-</div>
 
-<script>
-    document.getElementById("checkoutButton").addEventListener("click", function() {
+    <script>
+      document.getElementById("checkoutButton").addEventListener("click", function () {
         window.location.href = "giohang.php";
-    });
-</script>
+      });
+    </script>
 
 
     </div>
-  </div>
-  <?php
-                        }
-                    ?>
+    </div>
+    <?php
+  }
+  ?>
 
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
     aria-labelledby="Search">
