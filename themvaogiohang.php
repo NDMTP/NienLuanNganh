@@ -46,7 +46,7 @@ if (isset($_SESSION["lname"])){
         header('Location: product-detail.php?id='.$pdid.'&added=1'); 
     } 
     if (isset($_GET["sb_cate"])){
-        header('Location: themvaogiohang.php?added=1');
+        header('Location: giohang.php?added=1');
     }
     else {
         header('Location: index.php?added=1');
