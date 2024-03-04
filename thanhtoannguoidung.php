@@ -143,10 +143,10 @@ require 'connect.php';
     <section class="py-5 mb-5" style="background: url(images/background-pattern.jpg);">
       <div class="container-fluid">
         <div class="d-flex justify-content-between">
-          <h1 class="page-title pb-2">Hóa đơn</h1>
+          <h1 class="page-title pb-2">Thanh toán người dùng</h1>
           <nav class="breadcrumb fs-6">
             <a class="breadcrumb-item nav-link" href="index.php">Trang chủ</a>
-            <a class="breadcrumb-item nav-link" href="bill.php">Hóa đơn</a>
+            <a class="breadcrumb-item nav-link" href="thanhtoannguoidung.php">Thanh toán người dùng</a>
           </nav>
         </div>
       </div>
