@@ -186,7 +186,7 @@ require 'popup_themthanhcong.php';
                     <tr>
                       <th scope="col" class="card-title text-uppercase text-muted">Sản phẩm</th>
                       <th scope="col" class="card-title text-uppercase text-muted">Số lượng</th>
-                      <th scope="col" class="card-title text-uppercase text-muted">Giá</th>
+                      <th scope="col" class="card-title text-uppercase text-muted">Tổng</th>
                       <th scope="col" class="card-title text-uppercase text-muted"></th>
                     </tr>
                   </thead>
@@ -242,16 +242,17 @@ require 'popup_themthanhcong.php';
                             </span>
                           </div>
                         </td>
-                        <td class="product-price" data-title="Price">
+
+                        <td class="product-subtotal" data-title="Total">
                           <div class="price price-contain">
-                            <ins><span class="price-amount"><span class="currencySymbol"></span>
-                                <?php echo number_format($row['DONGIABANSP']) ?>
+                            <ins><span class="sum price-amount">
+                                <?php echo number_format($item['quant'] * $row['DONGIABANSP']);
+                                $tongtien += ($item['quant'] * $row['DONGIABANSP']) ?>
                                 đ
                               </span></ins>
-
                           </div>
                         </td>
-                        
+
                         <td class="py-4">
                           <div class="cart-remove">
                             <form action="delete-one-cart.php" method="post">
@@ -268,6 +269,14 @@ require 'popup_themthanhcong.php';
                       <?php
                     }
                     ?>
+
+                    <tr class="cart_item wrap-buttons ">
+                      <td class="wrap-btn-control float-end" colspan="4">
+
+                        <a href="delete-cart.php" class="btn btn-clear" type="reset">Xoá tất
+                          cả</a>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
                 <?php
@@ -275,7 +284,7 @@ require 'popup_themthanhcong.php';
               echo '<div class="shpcart-subtotal-block">';
               echo '<h2>Không có sản phẩm nào trong giỏ hàng</h2>';
               echo '<div class="btn-checkout">';
-              echo '   <a href="category-grid.php" class="btn checkout w-25">Xem tất cả sản phẩm</a>';
+              echo '   <a href="sanpham.php" class="btn checkout w-25">Xem tất cả sản phẩm</a>';
               echo '</div>';
               echo '</div>';
 
@@ -288,8 +297,10 @@ require 'popup_themthanhcong.php';
       <div class="col-md-4">
         <div class="cart-totals bg-grey py-5">
           <h4 class="text-dark pb-4">Tổng cộng</h4>
-          <span class="sub">(<?php echo $_SESSION['slsp'] ?>
-                                            món)</span>
+          <span class="sub">(
+            <?php echo $_SESSION['slsp'] ?>
+            món)
+          </span>
           <div class="total-price pb-5">
             <table cellspacing="0" class="table text-uppercase">
               <tbody>
@@ -298,9 +309,9 @@ require 'popup_themthanhcong.php';
                   <td data-title="Subtotal">
                     <span class="price-amount amount text-dark ps-5">
                       <bdi>
-                      <span id="tt" class="stt-price">0 đ</span>
-                                        <input type="hidden" name="tt" id="input_tt" value="">
-                                        <input type="hidden" name="gg" id="input_gg" value="">
+                        <span id="tt" class="stt-price">0 đ</span>
+                        <input type="hidden" name="tt" id="input_tt" value="">
+                        <input type="hidden" name="gg" id="input_gg" value="">
                       </bdi>
                     </span>
                   </td>
