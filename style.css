@@ -918,3 +918,100 @@ height: 740px;
   color: var(--font-color);
   cursor: pointer;
 } 
+.biolife-panigations-block{
+  display: block;
+  clear: both;
+  border-top: 1px solid #e6e6e6;
+  padding-top: 39px;
+  margin-top: 20px;
+  margin-bottom: 80px;
+}
+.biolife-panigations-block ul{
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  font-size: 0;
+  line-height: 0;
+}
+.biolife-panigations-block ul li{
+  list-style: none;
+  display: inline-block;
+  vertical-align: middle;
+}
+.biolife-panigations-block ul li+li{
+  margin-left: 5px;
+}
+.biolife-panigations-block ul li a,
+.biolife-panigations-block ul li span{
+  font-size: 14px;
+  line-height: 31px;
+  color: #666666;
+  min-width: 41px;
+  border: 1px solid #e6e6e6;
+  display: inline-block;
+  border-radius: 9999px;
+}
+.biolife-panigations-block ul li a.next,
+.biolife-panigations-block ul li a.prev{
+  border-width: 2px;
+  font-size: 18px;
+  line-height: 29px;
+  width: 55px;
+}
+.biolife-panigations-block ul li a.next{
+  margin-left: 20px;
+}
+.biolife-panigations-block ul li a.prev{
+  margin-right: 15px;
+}
+.biolife-panigations-block ul li a:hover,
+.biolife-panigations-block ul li .current-page{
+  color: #ffffff;
+}
+.biolife-panigations-block ul li .sep{
+  border-color: transparent;
+  width: auto;
+  min-width: auto;
+  padding-right: 12px;
+  margin-left: -3px;
+}
+.biolife-panigations-block.version-2{
+  margin: 0;
+  border: none;
+  padding-top: 49px;
+  padding-bottom: 7px;
+}
+.biolife-panigations-block.version-2 ul{
+  text-align: left;
+  display: inline-block;
+}
+.biolife-panigations-block.version-2 ul li{
+  text-align: center;
+}
+.biolife-panigations-block.version-2 .result-count{
+  display: inline-block;
+  float: right;
+  font-size: 0;
+}
+.biolife-panigations-block.version-2 .result-count .txt-count{
+  font-size: 14px;
+  line-height: 34px;
+  color: #333333;
+  display: inline-block;
+  margin: 0 41px 0 0;
+}
+.biolife-panigations-block.version-2 .result-count .txt-count b{
+  font-size: 15px;
+  font-weight: 700;
+}
+.biolife-panigations-block.version-2 .result-count a{
+  font-size: 15px;
+  line-height: 34px;
+  color: #333333;
+  display: inline-block;
+  font-weight: 600;
+}
+.biolife-panigations-block.version-2 .result-count a i{
+  margin-left: 6px;
+  display: inline-block;
+}

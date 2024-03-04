@@ -79,62 +79,62 @@ require 'popup_themthanhcong.php';
   </div>
 
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
-      <div class="offcanvas-header justify-content-center">
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <div class="order-md-last">
-          <h4 class="d-flex justify-content-between align-items-center mb-3">
-            <span class="text-primary">Giỏ hàng của bạn</span>
-            <span class="badge bg-primary rounded-pill">
-              <?php echo $_SESSION['slsp'] ?>
-            </span>
-          </h4>
-          <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <?php
-              if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-                foreach ($_SESSION['cart'] as $item) {
-                  $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
-                  $result = $conn->query($sql);
-                  $row = $result->fetch_assoc();
-                  $string = $row['MASP'];
-                  $masp = preg_replace('/[0-9]/', '', $string);
-                  ?>
-                  <div>
-                    <h6 class="my-0"><a href="#" class="product-name">
-                        <?php echo $row['TENSP'] ?>
-                      </a></h6>
-                    <small class="text-body-secondary">
-                      <?php echo $row['MOTA'] ?>
-                    </small>
-                  </div>
-                  <span class="text-body-secondary">
-                    <?php echo number_format($row['DONGIABANSP']) ?>
-                  </span>
-                </li>
-                <div class="qty">
-                  <label for="cart[id123][qty]">Số lượng:</label>
-                  <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]"
-                    value="<?php echo $item['quant'] ?>" disabled>
-                </div>
-                <?php
-                }
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Giỏ hàng của bạn</span>
+          <span class="badge bg-primary rounded-pill">
+            <?php echo $_SESSION['slsp'] ?>
+          </span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <?php
+            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+              foreach ($_SESSION['cart'] as $item) {
+                $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                $string = $row['MASP'];
+                $masp = preg_replace('/[0-9]/', '', $string);
                 ?>
-              <button class="w-100 btn btn-primary btn-lg" id="checkoutButton" type="button">Tiếp tục thanh toán</button>
+                <div>
+                  <h6 class="my-0"><a href="#" class="product-name">
+                      <?php echo $row['TENSP'] ?>
+                    </a></h6>
+                  <small class="text-body-secondary">
+                    <?php echo $row['MOTA'] ?>
+                  </small>
+                </div>
+                <span class="text-body-secondary">
+                  <?php echo number_format($row['DONGIABANSP']) ?>
+                </span>
+              </li>
+              <div class="qty">
+                <label for="cart[id123][qty]">Số lượng:</label>
+                <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]"
+                  value="<?php echo $item['quant'] ?>" disabled>
+              </div>
               <?php
-              } else {
-                echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
               }
               ?>
-        </div>
+            <button class="w-100 btn btn-primary btn-lg" id="checkoutButton" type="button">Tiếp tục thanh toán</button>
+            <?php
+            } else {
+              echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
+            }
+            ?>
       </div>
     </div>
-    <script>
-      document.getElementById("checkoutButton").addEventListener("click", function () {
-        window.location.href = "giohang.php";
-      });
-    </script>
+  </div>
+  <script>
+    document.getElementById("checkoutButton").addEventListener("click", function () {
+      window.location.href = "giohang.php";
+    });
+  </script>
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
     aria-labelledby="Search">
     <div class="offcanvas-header justify-content-center">
@@ -245,19 +245,19 @@ require 'popup_themthanhcong.php';
               <h5 class="widget-titlewidget-title">Giá</h5>
               <ul class="product-tags sidebar-list list-unstyled">
                 <li class="tags-item">
-                  <a href="#" class="nav-link">Thấp hơn 10.000đ</a>
+                  <a href="?gia=gia1" class="nav-link">Thấp hơn 10.000đ</a>
                 </li>
                 <li class="tags-item">
-                  <a href="#" class="nav-link">10.000đ-20.000đ</a>
+                  <a href="?gia=gia2" class="nav-link">10.000đ-20.000đ</a>
                 </li>
                 <li class="tags-item">
-                  <a href="#" class="nav-link">20.000đ-50.000đ</a>
+                  <a href="?gia=gia3" class="nav-link">20.000đ-50.000đ</a>
                 </li>
                 <li class="tags-item">
-                  <a href="#" class="nav-link">50.000đ-100.000đ</a>
+                  <a href="?gia=gia4" class="nav-link">50.000đ-100.000đ</a>
                 </li>
                 <li class="tags-item">
-                  <a href="#" class="nav-link">Lớn hơn 100.000đ</a>
+                  <a href="?gia=gia5" class="nav-link">Lớn hơn 100.000đ</a>
                 </li>
               </ul>
             </div>
@@ -286,113 +286,117 @@ require 'popup_themthanhcong.php';
 
           <div class="product-grid row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
 
-              <?php
+            <?php
 
-              // Số sản phẩm trên mỗi trang
-              $productsPerPage = 12;
+            // Số sản phẩm trên mỗi trang
+            $productsPerPage = 12;
 
-              // Xác định trang hiện tại từ biến GET
-              $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+            // Xác định trang hiện tại từ biến GET
+            $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-              // Truy vấn lấy dữ liệu sản phẩm từ cơ sở dữ liệu
-              $offset = ($current_page - 1) * $productsPerPage;
+            // Truy vấn lấy dữ liệu sản phẩm từ cơ sở dữ liệu
+            $offset = ($current_page - 1) * $productsPerPage;
 
-              $sql = " WHERE 1";
+            $sql = " WHERE 1";
 
 
 
-              if (isset($_GET['loai']) && $_GET['loai'] != "all") {
-                $sql = $sql . " AND MALOAI = " . $_GET['loai'];
+            if (isset($_GET['loai']) && $_GET['loai'] != "all") {
+              $sql = $sql . " AND MALOAI = " . $_GET['loai'];
+            }
+            if (isset($_GET['gia'])) {
+              switch ($_GET['gia']) {
+                case 'gia1':
+                  $sql = $sql . " AND DONGIABANSP BETWEEN 0 AND 10000";
+                  break;
+                case 'gia2':
+                  $sql = $sql . " AND DONGIABANSP BETWEEN 10000 AND 20000";
+                  break;
+                case 'gia3':
+                  $sql = $sql . " AND DONGIABANSP BETWEEN 20000 AND 50000";
+                  break;
+                case 'gia4':
+                  $sql = $sql . " AND DONGIABANSP BETWEEN 50000 AND 100000";
+                  break;
+                case 'gia5':
+                  $sql = $sql . " AND DONGIABANSP >  100000";
+                  break;
+                default:
+                  break;
               }
-              if (isset($_GET['gia'])) {
-                switch ($_GET['gia']) {
-                  case 'loc-gia-1':
-                    $sql = $sql . " AND DONGIABANSP BETWEEN 20000 AND 35000";
-                    break;
-                  case 'loc-gia-2':
-                    $sql = $sql . " AND DONGIABANSP BETWEEN 35000 AND 100000";
-                    break;
-                  case 'loc-gia-3':
-                    $sql = $sql . " AND DONGIABANSP BETWEEN 100000 AND 200000";
-                    break;
-                  case 'loc-gia-4':
-                    $sql = $sql . " AND DONGIABANSP >  200000";
-                    break;
-                  default:
-                    break;
-                }
 
-              }
+            }
 
 
 
 
-              if (isset($_GET['search'])) {
-                $s = $_GET['search'];
-              } else
-                $s = '';
-              $sql .= " AND TENSP like '%" . $s . "%'";
+            if (isset($_GET['search'])) {
+              $s = $_GET['search'];
+            } else
+              $s = '';
+            $sql .= " AND TENSP like '%" . $s . "%'";
 
-              $sql = $sql . " LIMIT $offset, $productsPerPage";
+            $sql = $sql . " LIMIT $offset, $productsPerPage";
 
-              $query = "SELECT * FROM sanpham" . $sql;
+            $query = "SELECT * FROM sanpham" . $sql;
 
+            $result = $conn->query($query);
+            if ($result->num_rows > 0) {
               $result = $conn->query($query);
-              if ($result->num_rows > 0) {
-                $result = $conn->query($query);
-                $result_all = $result->fetch_all(MYSQLI_ASSOC);
-                foreach ($result_all as $row) {
-                  $string = $row['MASP'];
-                  // Loại bỏ các kí tự số khỏi chuỗi
-                  $masp = preg_replace('/[0-9]/', '', $string);
-                  ?>
-                  <div class="product-item">
-                    <span class="badge bg-success position-absolute m-3">-30%</span>
-                    <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                        <use xlink:href="#heart"></use>
-                      </svg></a>
-                    <figure>
-                      <a href="single-product.php?id=<?php echo $row['MASP'] ?>" title="Product Title">
-                        <img src="images/<?php echo $masp ?>/<?php echo $row['LINKANH'] ?>" alt="dd" width="270"
-                          height="270" class="tab-image">
-                      </a>
-                    </figure>
-                    <h3>
-                      <?php echo $row['TENSP'] ?>
-                    </h3>
+              $result_all = $result->fetch_all(MYSQLI_ASSOC);
+              foreach ($result_all as $row) {
+                $string = $row['MASP'];
+                // Loại bỏ các kí tự số khỏi chuỗi
+                $masp = preg_replace('/[0-9]/', '', $string);
+                ?>
+                <div class="product-item">
+                  <span class="badge bg-success position-absolute m-3">-30%</span>
+                  <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                      <use xlink:href="#heart"></use>
+                    </svg></a>
+                  <figure>
+                    <a href="single-product.php?id=<?php echo $row['MASP'] ?>" title="Product Title">
+                      <img src="images/<?php echo $masp ?>/<?php echo $row['LINKANH'] ?>" alt="dd" width="270" height="270"
+                        class="tab-image">
+                    </a>
+                  </figure>
+                  <h3>
+                    <?php echo $row['TENSP'] ?>
+                  </h3>
 
-                    <span class="price">
-                      <?php echo number_format($row['DONGIABANSP']) ?> đ
-                    </span>
-                    <div class="d-flex align-items-center justify-content-between">
-                      <div class="input-group product-qty">
-                        <span class="input-group-btn">
-                          <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus">
-                            <svg width="16" height="16">
-                              <use xlink:href="#minus"></use>
-                            </svg>
-                          </button>
-                        </span>
-                        <input type="text" name="quantity" class="form-control input-number quantity" value="1">
-                        <span class="input-group-btn">
-                          <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus">
-                            <svg width="16" height="16">
-                              <use xlink:href="#plus"></use>
-                            </svg>
-                          </button>
-                        </span>
-                      </div>
-                      <a href="themvaogiohang.php?sb_cate=&pdid=<?php echo $row['MASP'] ?>&qty12554=1" class="nav-link">Thêm vào giỏ<svg width="18" height="18">
-                          <use xlink:href="#cart"></use>
-                        </svg></a>
+                  <span class="price">
+                    <?php echo number_format($row['DONGIABANSP']) ?> đ
+                  </span>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="input-group product-qty">
+                      <span class="input-group-btn">
+                        <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus">
+                          <svg width="16" height="16">
+                            <use xlink:href="#minus"></use>
+                          </svg>
+                        </button>
+                      </span>
+                      <input type="text" name="quantity" class="form-control input-number quantity" value="1">
+                      <span class="input-group-btn">
+                        <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus">
+                          <svg width="16" height="16">
+                            <use xlink:href="#plus"></use>
+                          </svg>
+                        </button>
+                      </span>
                     </div>
+                    <a href="themvaogiohang.php?sb_cate=&pdid=<?php echo $row['MASP'] ?>&qty12554=1" class="nav-link">Thêm
+                      vào giỏ<svg width="18" height="18">
+                        <use xlink:href="#cart"></use>
+                      </svg></a>
                   </div>
-                  <?php
-                }
-              } else {
-                echo "Không tìm thấy sản phẩm phù hợp";
+                </div>
+                <?php
               }
-              ?>
+            } else {
+              echo "Không tìm thấy sản phẩm phù hợp";
+            }
+            ?>
             <!-- <div class="col">
             </div> -->
 
@@ -406,15 +410,22 @@ require 'popup_themthanhcong.php';
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
-              <li class="page-item active" aria-current="page"><a class="page-link border-0" href="#">1</a></li>
-              <li class="page-item"><a class="page-link border-0" href="#">2</a></li>
-              <li class="page-item"><a class="page-link border-0" href="#">3</a></li>
+              <li class="page-item active" aria-current="page"><a class="page-link border-0"
+                  href="sanpham.php?page=1">1</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=2">2</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=3">3</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=4">4</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=5">5</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=6">6</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=7">7</a></li>
+              
               <li class="page-item">
                 <a class="page-link border-0" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
             </ul>
+
           </nav>
 
         </main>
