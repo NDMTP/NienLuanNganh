@@ -309,7 +309,7 @@ require 'popup_themthanhcong.php';
 
             <?php
             // Bước 1: Truy vấn cơ sở dữ liệu để lấy ra các khuyến mãi có điều kiện về giá tiền tối thiểu
-            $sql = "SELECT * FROM khuyenmai WHERE DIEUKIENKM <= ".$tonggiohang." order by DIEUKIENKM desc limit 2"; // $tonggiohang là tổng giỏ hàng
+            $sql = "SELECT * FROM khuyenmai WHERE DIEUKIENKM <= " . $tonggiohang . " order by DIEUKIENKM desc limit 2"; // $tonggiohang là tổng giỏ hàng
             $result = $conn->query($sql);
 
             // Bước 2: Lặp qua các khuyến mãi để kiểm tra xem tổng giỏ hàng có đáp ứng điều kiện không
@@ -324,7 +324,7 @@ require 'popup_themthanhcong.php';
                 $tongTienSauGiam = $tonggiohang - $giamGiaTien;
 
                 // Output hoặc sử dụng $tongTienSauGiam cho thanh toán
-                echo "Tổng tiền trước khi áp dụng khuyến mãi: " . $tonggiohang .'đ';
+                echo "Tổng tiền trước khi áp dụng khuyến mãi: " . $tonggiohang . 'đ';
                 break; // Nếu đã áp dụng khuyến mãi, không cần kiểm tra các khuyến mãi khác
               }
             }
@@ -353,21 +353,26 @@ require 'popup_themthanhcong.php';
                           <input type="hidden" name="gg" id="input_gg" value=""></bdi>
                       </span>
                     </td>
-                    <div class="subtotal-line"><b class="stt-name">Quận <br>
-                        <span style="color: red !important;" class="sub">(*Chỉ giao trong các quận
+                    <div class="subtotal-line"><b class="stt-name">Thành phố <br>
+                        <span style="color: red !important;" class="sub">(*Chỉ giao trong các tỉnh
                           sau:)</span></b>
                     </div>
                     <div>
                       <div style="width: 100% !important;" class="form_combobox w-100">
-                        <select required style="color: black !important; margin-left: 10px !important; " name="area"
+                        <select required style="color: black !important; margin-left: 10px !important;" name="area"
                           id="areaSelect">
-                          <option selected disabled value="">Chọn quận</option>
-                          <option value="NK">Ninh Kiều</option>
-                          <option value="BT">Bình Thuỷ</option>
-                          <option value="CR">Cái Răng</option>
+                          <option selected disabled value="">Chọn tỉnh</option>
+                          <?php
+                          $sql = "SELECT * FROM thanhpho";
+                          $result = $conn->query($sql);
+                          while ($row = $result->fetch_assoc()) {
+                            echo '<option style="color: black !important;" value="' . $row['MATP'] . '">' . $row['TENTP'] . '</option>';
+                          }
+                          ?>
                         </select>
                       </div>
                     </div>
+
 
 
                   </tr>
