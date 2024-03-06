@@ -182,6 +182,7 @@ require 'popup_themthanhcong.php';
                 <table class="table">
                   <thead>
                     <tr>
+                      <th scope="col" class="card-title text-uppercase text-muted"></th>
                       <th scope="col" class="card-title text-uppercase text-muted">Sản phẩm</th>
                       <th scope="col" class="card-title text-uppercase text-muted">Số lượng</th>
                       <th scope="col" class="card-title text-uppercase text-muted">Tổng</th>
@@ -199,7 +200,16 @@ require 'popup_themthanhcong.php';
                       ?>
 
                       <tr>
-                        
+                        <td class="product-quantity" data-title="Quantity" style="padding: 0 1rem !important;">
+                          <div class="form-check">
+                            <input class="check1" id="check" type="checkbox" style="scale: 1.5 !important;">
+
+                            <input class="masp" type="hidden" value="<?php echo $string ?>">
+                            <input class="sl" type="hidden" value="<?php echo $item['quant'] ?>">
+                            <input class="key" type="hidden" value="<?php echo $key ?>">
+                            <input class="dg" type="hidden" value="<?php echo $row['DONGIABANSP'] ?>">
+                          </div>
+                        </td>
                         <td scope="row" class="py-4">
                           <div class="cart-info d-flex flex-wrap align-items-center mb-4">
                             <div class="col-lg-3">
@@ -302,6 +312,7 @@ require 'popup_themthanhcong.php';
           </span>
 
           <form action="thongtinmuahang.php" method="get">
+
             <?php
             $sql = "select * from khuyenmai where ";
             ?>
@@ -343,12 +354,14 @@ require 'popup_themthanhcong.php';
                       $(document).ready(function () {
                         var tt = document.getElementById('input_tt')
                         var gg = document.getElementById('input_gg')
-                        $(".check1").on("change", function () {
+                        $("#check").on("change", function () {
                           //event.preventDefault();
+                          console.log("check");
                           if (this.checked) {
                             var pdid = $(this).siblings(".masp").val();
-
+                            
                             var qty12554 = $(this).closest(".pd").find(".num").val();
+                            console.log(pdid);
                             $.post('cart_temp.php', {
                               pdid: pdid,
                               qty12554: qty12554
