@@ -162,54 +162,41 @@ require 'connect.php';
       <div class="d-flex">
         <nav class="breadcrumb fs-6">
           <a class="breadcrumb-item nav-link" href="index.php">Trang chủ</a>
-          <a class="breadcrumb-item nav-link" href="thanhtoannguoidung.php">Thanh toán người dùng</a>
+          <a class="breadcrumb-item nav-link" href="thongtinmuahang.php">Thông tin mua hàng</a>
         </nav>
       </div>
     </div>
     <div class="container-fluid">
-      <div class="d-flex" >
-        <div class="row">
+      <div class="d-flex flex-row">
           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
-          <form action="thongtindonhang.php" method="get">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-              <h2>Thông tin mua hàng</h2>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <h2>Thông tin mua hàng</h2>
+            <form action="thongtindonhang.php" method="get">
               <div class="signin-container">
                 <p class="form-row">
                   <label for="fid-name">Tên:<span class="requite">*</span></label>
-                  <input required type="text" id="fid-name" name="hoten" value="<?php echo $_SESSION["hoten"] ?>"
+                  <input style="width:100%; padding: 5px" required type="text" id="fid-name" name="hoten" value="<?php echo $_SESSION["hoten"] ?>"
                     class="txt-input">
                 </p>
                 <p class="form-row">
                   <label for="fid-sdt">Số điện thoại:<span class="requite">*</span></label>
-                  <input required type="text" id="fid-sdt" name="sdt" value="<?php echo $_SESSION["sdt"] ?>"
+                  <input style="width:100%; padding: 5px" required type="text" id="fid-sdt" name="sdt" value="<?php echo $_SESSION["sdt"] ?>"
                     class="txt-input">
                 </p>
                 <p class="form-row">
 
-                  <label for="fid-thanhpho">Thành phố:<span class="requite">*</span></label>
                   <?php
                   $kv = $_GET['area'];
-                  switch ($kv) {
-                    case 'NK':
-                      $tkv = 'Ninh Kiều';
-                      break;
-                    case 'BT':
-                      $tkv = 'Bình Thuỷ';
-                      break;
-                    case 'CR':
-                      $tkv = 'Cái Răng';
-                      break;
-                    default:
-                      $tkv = 'Cần Thơ';
-                      break;
-                  }
-                  ?>
-                  <input readonly type="text" id="fid-thanhpho" name="thanhpho" value="<?php echo $tkv ?>"
-                    class="txt-input">
+                  $sql = "SELECT * FROM thanhpho where MATP='$kv'";
+                          $result = $conn->query($sql);
+                          $row = $result->fetch_assoc();
+                          echo ' <label>Thành phố:<span class="requite">'.$row['TENTP'].'</span></label>';
+                          ?>
+
                 </p>
                 <p class="form-row">
                   <label for="fid-note">Địa chỉ cụ thể:*<span class="requite"></span></label>
-                  <input required type="text" id="fid-note" name="note" value="" class="txt-input"
+                  <input style="width:100%; padding: 5px" required type="text" id="fid-note" name="note" value="" class="txt-input"
                     placeholder="Số nhà, đường,...">
                 </p>
                 <div class="row" style="padding-bottom: 40px;">
@@ -223,10 +210,9 @@ require 'connect.php';
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
           <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
-        </div>
       </div>
     </div>
   </section>
