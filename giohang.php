@@ -182,7 +182,7 @@ require 'popup_themthanhcong.php';
                 <table class="table">
                   <thead>
                     <tr>
-                      <th scope="col" class="card-title text-uppercase text-muted"></th>
+                      
                       <th scope="col" class="card-title text-uppercase text-muted">Sản phẩm</th>
                       <th scope="col" class="card-title text-uppercase text-muted">Số lượng</th>
                       <th scope="col" class="card-title text-uppercase text-muted">Tổng</th>
@@ -191,25 +191,19 @@ require 'popup_themthanhcong.php';
                   </thead>
                   <tbody>
                     <?php
+                    $tonggiohang=0;
                     foreach ($_SESSION['cart'] as $key => $item) {
                       $sql = "select * from sanpham where MASP = '{$item['id']}'";
                       $result = $conn->query($sql);
                       $row = $result->fetch_assoc();
                       $string = $row['MASP'];
                       $masp = preg_replace('/[0-9]/', '', $string);
+                      $tong= $row['DONGIABANSP']*$item['quant'];
+                      $tonggiohang=$tonggiohang+$tong;
                       ?>
 
                       <tr>
-                        <td class="product-quantity" data-title="Quantity" style="padding: 0 1rem !important;">
-                          <div class="form-check">
-                            <input class="check1" id="check" type="checkbox" style="scale: 1.5 !important;">
-
-                            <input class="masp" type="hidden" value="<?php echo $string ?>">
-                            <input class="sl" type="hidden" value="<?php echo $item['quant'] ?>">
-                            <input class="key" type="hidden" value="<?php echo $key ?>">
-                            <input class="dg" type="hidden" value="<?php echo $row['DONGIABANSP'] ?>">
-                          </div>
-                        </td>
+                        
                         <td scope="row" class="py-4">
                           <div class="cart-info d-flex flex-wrap align-items-center mb-4">
                             <div class="col-lg-3">
@@ -330,7 +324,7 @@ require 'popup_themthanhcong.php';
                     <td data-title="Total">
                       <span class="price-amount amount text-dark ps-5">
                         <bdi>
-                          <span id="tt" class="stt-price">0 đ</span>
+                          <span id="tt" class="stt-price"><?php echo $tonggiohang?> đ</span>
                           <input type="hidden" name="tt" id="input_tt" value="">
                           <input type="hidden" name="gg" id="input_gg" value=""></bdi>
                       </span>
@@ -350,94 +344,8 @@ require 'popup_themthanhcong.php';
                         </select>
                       </div>
                     </div>
-                    <script>
-                      $(document).ready(function () {
-                        var tt = document.getElementById('input_tt')
-                        var gg = document.getElementById('input_gg')
-                        $("#check").on("change", function () {
-                          //event.preventDefault();
-                          console.log("check");
-                          if (this.checked) {
-                            var pdid = $(this).siblings(".masp").val();
-                            
-                            var qty12554 = $(this).closest(".pd").find(".num").val();
-                            console.log(pdid);
-                            $.post('cart_temp.php', {
-                              pdid: pdid,
-                              qty12554: qty12554
-                            }, function (data) {
-                              $("#tong").html(data.toLocaleString() + "đ");
-                              $.post('get_session_sale.php', {
-                                tong: data
-                              }, function (data1) {
-                                $("#tile").html(data1 + "%")
-                                if (data1 != 0) {
-                                  $("#hint").html("")
-                                } else {
-                                  $("#hint").html("Mua trên 100K để được giảm giá")
-                                }
-                                $("#tt").html((data - (data * (data1 / 100))).toLocaleString() + "đ")
-                                tt.value = data - (data * (data1 / 100))
-                                gg.value = (data * (data1 / 100))
-                              });
-                            });
 
 
-                          } else {
-                            var key = $(this).siblings(".key").val();
-                            var dg = $(this).siblings(".dg").val();
-                            var qty12554 = $(this).closest(".pd").find(".num").val();
-                            var ma = $(this).siblings(".masp").val();
-
-                            $.post('cartsession_delete.php', {
-                              check: 1,
-
-                              ma: ma,
-                              dg: dg,
-                              qty12554: qty12554
-                            }, function (data) {
-                              $("#tong").html(data.toLocaleString() + "đ");
-                              $.post('get_session_sale.php', {
-                                tong: data
-                              }, function (data1) {
-                                $("#tile").html(data1 + "%")
-                                if (data1 == 0) {
-                                  $("#hint").html("Mua trên 100K để được giảm giá")
-                                } else {
-                                  $("#hint").html("")
-                                }
-                                $("#tt").html((data - (data * (data1 / 100))).toLocaleString() + "đ")
-                                tt.value = data - (data * (data1 / 100))
-                                gg.value = (data * (data1 / 100))
-                              });
-                            });
-                          }
-                        });
-                        $(".num").on("change", function () {
-                          var masp = $(this).siblings(".masp").val();
-
-                          var dg = $(this).siblings(".dg").val();
-                          var num = $(this).val();
-                          var $sum = $(this).closest(".pd").find(".sum");
-                          $.post("cart_changenum.php", {
-                            check: 2,
-
-                            ma: masp,
-                            num: num
-                          }, function (data) {
-                            var tong = data * dg;
-                            var tong1 = new Intl.NumberFormat('vi-VN', {
-                              style: 'currency',
-                              currency: 'VNDa',
-                            });
-                            var oldsum = $sum.data("old");
-                            $sum.html(tong1.format(tong));
-                            $sum.data("old", tong1.format(tong));
-                          });
-                        });
-
-                      });
-                    </script>
                   </tr>
                 </tbody>
               </table>
