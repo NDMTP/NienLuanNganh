@@ -72,10 +72,10 @@ require 'popup_themthanhcong.php';
     </defs>
   </svg>
 
-  <div class="preloader-wrapper">
+  <!-- <div class="preloader-wrapper">
     <div class="preloader">
     </div>
-  </div>
+  </div> -->
 
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
     <div class="offcanvas-header justify-content-center">
@@ -182,7 +182,7 @@ require 'popup_themthanhcong.php';
                 <table class="table">
                   <thead>
                     <tr>
-                      
+
                       <th scope="col" class="card-title text-uppercase text-muted">Sản phẩm</th>
                       <th scope="col" class="card-title text-uppercase text-muted">Số lượng</th>
                       <th scope="col" class="card-title text-uppercase text-muted">Tổng</th>
@@ -191,19 +191,19 @@ require 'popup_themthanhcong.php';
                   </thead>
                   <tbody>
                     <?php
-                    $tonggiohang=0;
+                    $tonggiohang = 0;
                     foreach ($_SESSION['cart'] as $key => $item) {
                       $sql = "select * from sanpham where MASP = '{$item['id']}'";
                       $result = $conn->query($sql);
                       $row = $result->fetch_assoc();
                       $string = $row['MASP'];
                       $masp = preg_replace('/[0-9]/', '', $string);
-                      $tong= $row['DONGIABANSP']*$item['quant'];
-                      $tonggiohang=$tonggiohang+$tong;
+                      $tong = $row['DONGIABANSP'] * $item['quant'];
+                      $tonggiohang = $tonggiohang + $tong;
                       ?>
 
                       <tr>
-                        
+
                         <td scope="row" class="py-4">
                           <div class="cart-info d-flex flex-wrap align-items-center mb-4">
                             <div class="col-lg-3">
@@ -308,8 +308,29 @@ require 'popup_themthanhcong.php';
           <form action="thongtinmuahang.php" method="get">
 
             <?php
-            $sql = "select * from khuyenmai where ";
+            // Bước 1: Truy vấn cơ sở dữ liệu để lấy ra các khuyến mãi có điều kiện về giá tiền tối thiểu
+            $sql = "SELECT * FROM khuyenmai WHERE DIEUKIENKM <= ".$tonggiohang." order by DIEUKIENKM desc limit 2"; // $tonggiohang là tổng giỏ hàng
+            $result = $conn->query($sql);
+
+            // Bước 2: Lặp qua các khuyến mãi để kiểm tra xem tổng giỏ hàng có đáp ứng điều kiện không
+            while ($row = $result->fetch_assoc()) {
+              // Nếu tổng giỏ hàng lớn hơn hoặc bằng giá tiền tối thiểu của khuyến mãi, áp dụng khuyến mãi đó
+              $giaTienToiThieu = $row['DIEUKIENKM'];
+              $giamGia = $row['PHANTRAMKM'];
+
+              if ($tonggiohang >= $giaTienToiThieu) {
+                // Áp dụng khuyến mãi
+                $giamGiaTien = $tonggiohang * ($giamGia / 100);
+                $tongTienSauGiam = $tonggiohang - $giamGiaTien;
+
+                // Output hoặc sử dụng $tongTienSauGiam cho thanh toán
+                echo "Tổng tiền trước khi áp dụng khuyến mãi: " . $tonggiohang .'đ';
+                break; // Nếu đã áp dụng khuyến mãi, không cần kiểm tra các khuyến mãi khác
+              }
+            }
             ?>
+
+
             <div class="total-price pb-5">
               <table cellspacing="0" class="table text-uppercase">
                 <tbody>
@@ -318,13 +339,16 @@ require 'popup_themthanhcong.php';
                         <span style="color: red !important;" class="sub" id="hint">Mua trên 100K để được giảm giá
                     </div>
 
+
                   </tr>
                   <tr class="order-total pt-2 pb-2 border-bottom">
                     <th>Thành tiền</th>
                     <td data-title="Total">
                       <span class="price-amount amount text-dark ps-5">
                         <bdi>
-                          <span id="tt" class="stt-price"><?php echo $tonggiohang?> đ</span>
+                          <span id="tt" class="stt-price">
+                            <?php echo $tongTienSauGiam ?> đ
+                          </span>
                           <input type="hidden" name="tt" id="input_tt" value="">
                           <input type="hidden" name="gg" id="input_gg" value=""></bdi>
                       </span>
