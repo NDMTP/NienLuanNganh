@@ -396,8 +396,16 @@ require 'popup_themthanhcong.php';
             });
           </script>
           <script>
-            document.getElementById("thanhtoan").addEventListener("click", function () {
-              window.location.href = "thongtinmuahang.php";
+            // Lắng nghe sự kiện khi người dùng chọn tỉnh
+            document.getElementById("areaSelect").addEventListener("change", function () {
+              // Kiểm tra xem tỉnh đã được chọn hay chưa
+              if (this.value !== "") {
+                // Kích hoạt nút thanh toán nếu tỉnh đã được chọn
+                document.getElementById("thanhtoan").disabled = false;
+              } else {
+                // Nếu tỉnh chưa được chọn, vô hiệu hóa nút thanh toán
+                document.getElementById("thanhtoan").disabled = true;
+              }
             });
           </script>
         </div>

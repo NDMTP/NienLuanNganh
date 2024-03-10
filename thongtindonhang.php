@@ -199,27 +199,27 @@ require 'connect.php';
                             </span><br>
 
                             <?php
-                                if (isset($_SESSION['cart_temp']) && !empty($_SESSION['cart_temp'])) {
-                                    echo '<table style="margin-top: 10px !important;">';
-                                    echo '<tr><th>Tên SP</th><th>Số lượng</th><th>Đơn giá</th><th>Tổng tiền</th></tr>';
-                                    $tongtien = 0;
-                                    foreach ($_SESSION['cart_temp'] as $item) {
-                                        $sql = "select * from sanpham where MASP = '{$item['id']}'";
-                                        $result = $conn->query($sql);
-                                        $sp = $result->fetch_assoc();
-                                        echo '<tr>';
-                                        echo '<td>' . $sp['TENSP'] . '</td>';
-                                        echo '<td>' . $item['quant'] . '</td>';
-                                        echo '<td>' . number_format($sp['DONGIABANSP']) . ' đ</td>';
-                                        echo '<td>' . number_format($sp['DONGIABANSP'] * $item['quant']) . ' đ</td>';
-                                        echo '</tr>';
-                                        $tongtien += ($sp['DONGIABANSP'] * $item['quant']);
-                                    }
-
-                                    echo '</table>';
+                            if (isset($_SESSION['cart_temp']) && !empty($_SESSION['cart_temp'])) {
+                                echo '<table style="margin-top: 10px !important;">';
+                                echo '<tr><th>Tên SP</th><th>Số lượng</th><th>Đơn giá</th><th>Tổng tiền</th></tr>';
+                                $tongtien = 0;
+                                foreach ($_SESSION['cart_temp'] as $item) {
+                                    $sql = "select * from sanpham where MASP = '{$item['id']}'";
+                                    $result = $conn->query($sql);
+                                    $sp = $result->fetch_assoc();
+                                    echo '<tr>';
+                                    echo '<td>' . $sp['TENSP'] . '</td>';
+                                    echo '<td>' . $item['quant'] . '</td>';
+                                    echo '<td>' . number_format($sp['DONGIABANSP']) . ' đ</td>';
+                                    echo '<td>' . number_format($sp['DONGIABANSP'] * $item['quant']) . ' đ</td>';
+                                    echo '</tr>';
+                                    $tongtien += ($sp['DONGIABANSP'] * $item['quant']);
                                 }
-                                ?>
-                            
+
+                                echo '</table>';
+                            }
+                            ?>
+
                             <div class="row" style="padding-bottom: 40px;">
                                 <input type="hidden" name="tt" value="<?php echo $_GET['tt'] ?>">
                                 <input type="hidden" name="gg" value="<?php echo $_GET['gg'] ?>">
@@ -237,6 +237,7 @@ require 'connect.php';
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
             </div>
             </div>
+    </section>
             <?php
             include 'footer.php';
             ?>

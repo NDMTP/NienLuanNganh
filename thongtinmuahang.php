@@ -184,7 +184,7 @@ require 'connect.php';
                   value="<?php echo $_SESSION["sdt"] ?>" class="txt-input">
               </p>
               <p class="form-row">
-                <label for="fid-sdt">Tên thành phố:<span class="requite" >*</span></label>
+                <label for="fid-sdt">Tên thành phố:<span class="requite">*</span></label>
                 <input style="width:100%; padding: 5px" required type="text" id="fid-sdt" name="tentp" value="<?php
                 $kv = $_GET['area'];
                 $sql = "SELECT * FROM thanhpho where MATP='$kv'";
