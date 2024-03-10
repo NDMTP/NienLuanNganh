@@ -168,51 +168,50 @@ require 'connect.php';
     </div>
     <div class="container-fluid">
       <div class="d-flex flex-row">
-          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <h2>Thông tin mua hàng</h2>
-            <form action="thongtindonhang.php" method="get">
-              <div class="signin-container">
-                <p class="form-row">
-                  <label for="fid-name">Tên:<span class="requite">*</span></label>
-                  <input style="width:100%; padding: 5px" required type="text" id="fid-name" name="hoten" value="<?php echo $_SESSION["hoten"] ?>"
-                    class="txt-input">
-                </p>
-                <p class="form-row">
-                  <label for="fid-sdt">Số điện thoại:<span class="requite">*</span></label>
-                  <input style="width:100%; padding: 5px" required type="text" id="fid-sdt" name="sdt" value="<?php echo $_SESSION["sdt"] ?>"
-                    class="txt-input">
-                </p>
-                <p class="form-row">
-
-                  <?php
-                  $kv = $_GET['area'];
-                  $sql = "SELECT * FROM thanhpho where MATP='$kv'";
-                          $result = $conn->query($sql);
-                          $row = $result->fetch_assoc();
-                          echo ' <label>Thành phố:<span class="requite">'.$row['TENTP'].'</span></label>';
-                          ?>
-
-                </p>
-                <p class="form-row">
-                  <label for="fid-note">Địa chỉ cụ thể:*<span class="requite"></span></label>
-                  <input style="width:100%; padding: 5px" required type="text" id="fid-note" name="note" value="" class="txt-input"
-                    placeholder="Số nhà, đường,...">
-                </p>
-                <div class="row" style="padding-bottom: 40px;">
-                  <input type="hidden" name="tt" value="<?php echo $_GET['tt'] ?>">
-                  <input type="hidden" name="gg" value="<?php echo $_GET['gg'] ?>">
-                  <input type="hidden" name="thanhtien" value="<?php echo $_GET['tt'] ?>">
-                  <div style="text-align: center;" class="col-12">
-                    <button type="submit"
-                      style="margin-top: 15px; padding: 10px 20px; background-color: #32CD32; color: white; border:none; border-radius: 15px;"><span
-                        style="font-size: 17px; font-weight: bold;">Xác nhận thông tin</span></button>
-                  </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <h2>Thông tin mua hàng</h2>
+          <form action="thongtindonhang.php" method="get">
+            <div class="signin-container">
+              <p class="form-row">
+                <label for="fid-name">Tên:<span class="requite">*</span></label>
+                <input style="width:100%; padding: 5px" required type="text" id="fid-name" name="hoten"
+                  value="<?php echo $_SESSION["hoten"] ?>" class="txt-input">
+              </p>
+              <p class="form-row">
+                <label for="fid-sdt">Số điện thoại:<span class="requite">*</span></label>
+                <input style="width:100%; padding: 5px" required type="text" id="fid-sdt" name="sdt"
+                  value="<?php echo $_SESSION["sdt"] ?>" class="txt-input">
+              </p>
+              <p class="form-row">
+                <label for="fid-sdt">Tên thành phố:<span class="requite" >*</span></label>
+                <input style="width:100%; padding: 5px" required type="text" id="fid-sdt" name="tentp" value="<?php
+                $kv = $_GET['area'];
+                $sql = "SELECT * FROM thanhpho where MATP='$kv'";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                echo ' ' . $row['TENTP'] . '';
+                ?>" class="txt-input">
+              </p>
+              <p class="form-row">
+                <label for="fid-note">Địa chỉ cụ thể:*<span class="requite"></span></label>
+                <input style="width:100%; padding: 5px" required type="text" id="fid-note" name="note" value=""
+                  class="txt-input" placeholder="Số nhà, đường,...">
+              </p>
+              <div class="row" style="padding-bottom: 40px;">
+                <input type="hidden" name="tt" value="<?php echo $_GET['tt'] ?>">
+                <input type="hidden" name="gg" value="<?php echo $_GET['gg'] ?>">
+                <input type="hidden" name="thanhtien" value="<?php echo $_GET['tt'] ?>">
+                <div style="text-align: center;" class="col-12">
+                  <button type="submit"
+                    style="margin-top: 15px; padding: 10px 20px; background-color: #32CD32; color: white; border:none; border-radius: 15px;"><span
+                      style="font-size: 17px; font-weight: bold;">Xác nhận thông tin</span></button>
                 </div>
               </div>
-            </form>
-          </div>
-          <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
       </div>
     </div>
   </section>
