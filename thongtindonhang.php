@@ -201,10 +201,10 @@ require 'connect.php';
                             <?php
                             if (isset($_SESSION['cart_temp']) && !empty($_SESSION['cart_temp'])) {
                                 echo '<table style="margin-top: 10px !important;">';
-                                echo '<tr><th>Tên SP</th><th>Số lượng</th><th>Đơn giá</th><th>Tổng tiền</th></tr>';
+                                echo '<tr><th>Sản phẩm</th><th>Số lượng</th><th>Đơn giá</th><th>Tổng tiền</th></tr>';
                                 $tongtien = 0;
                                 foreach ($_SESSION['cart_temp'] as $item) {
-                                    $sql = "select * from sanpham where MASP = '{$item['id']}'";
+                                    $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
                                     $result = $conn->query($sql);
                                     $sp = $result->fetch_assoc();
                                     echo '<tr>';
@@ -217,8 +217,11 @@ require 'connect.php';
                                 }
 
                                 echo '</table>';
+                            } else {
+                                echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
                             }
                             ?>
+
 
                             <div class="row" style="padding-bottom: 40px;">
                                 <input type="hidden" name="tt" value="<?php echo $_GET['tt'] ?>">
@@ -238,9 +241,9 @@ require 'connect.php';
             </div>
             </div>
     </section>
-            <?php
-            include 'footer.php';
-            ?>
+    <?php
+    include 'footer.php';
+    ?>
 </body>
 
 </html>
