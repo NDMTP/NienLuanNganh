@@ -36,6 +36,22 @@
                       <h4>Thêm sản phẩm</h4>
                     </div>
                     <div class="card-body">
+                    <div class="form-group">
+                        <label>Nhà sản xuất</label>
+                        <select name="nsx" id="" class="form-control">
+                          <?php
+                            $sql = "select * from nhasanxuat";
+                            $result = $conn->query($sql);
+                            if ($result->num_rows > 0) {
+                              $result = $conn->query($sql);
+                              $result_all = $result -> fetch_all(MYSQLI_ASSOC);
+                              foreach ($result_all as $row) {
+                                echo '<option value="'.$row['MANSX'].'">'.$row['TENNSX'].'</option>';
+                              }
+                            }
+                          ?>
+                        </select>
+                      </div>
                       <div class="form-group">
                         <label>Loại sản phẩm</label>
                         <select name="loai" id="" class="form-control">
