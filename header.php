@@ -27,77 +27,123 @@
 
             </select>
           </div>
-          <div class="col-11 col-md-7">
-            <form id="search-form" class="text-center" action="index.php" method="post">
-              <input type="text" class="form-control border-0 bg-transparent" placeholder="Bạn đang tìm gì vậy ?" />
-            </form>
-          </div>
-          <div class="col-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path fill="currentColor"
-                d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
-            </svg>
+          <div class="col-11 col-md-6">
+            <form action="sanpham.php" class="form-search" name="text-search" method="get">
+              <input type="text" name="search" class="form-control border-0 bg-transparent" value="<?php if (isset($_GET['search']))
+                echo $_GET['search'] ?>" placeholder="Bạn đang tìm gì....">
+              </form>
+              <form action="ai/image-search.php" class="form-upload" name="image-search" method="post"
+                enctype="multipart/form-data">
+                <input type="file" id="img" name="img" accept="image/*" style="display: none;">
+              </form>
+
+            </div>
+            <div class="col-1">
+              <button type="submit" class="btn-submit" onclick="chooseImage() " >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 15">
+                  <path
+                    d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z" />
+                  <path
+                    d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
+                </svg>
+              </button>
+            </div>
+            <div class="col-1">
+              <button type="submit" class="btn-submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                  <path fill="currentColor"
+                    d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+        <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lắng nghe sự kiện keydown trên trường nhập văn bản
+        document.querySelector('input[name="search"]').addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Ngăn chặn hành động mặc định của Enter (submit form)
+                var form = document.querySelector('.form-search');
+                form.submit();
+            }
+        });
+    });
 
-      <div
-        class="col-sm-8 col-lg-4 d-flex justify-content-end gap-6 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
-        <div class="support-box text-end d-none d-xl-block">
-          <span class="fs-6 text-muted">Liên hệ hỗ trợ</span>
-          <h5 class="mb-0">+84 939 826 024</h5>
-        </div>
+    function chooseImage() {
+        var imageInput = document.getElementById('img');
+        imageInput.click();
+    }
 
-        <ul class="d-flex justify-content-end list-unstyled m-0">
-          <li>
-            <a href="account.php" class="rounded-circle bg-light p-2 mx-1">
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <use xlink:href="#user"></use>
-              </svg>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="rounded-circle bg-light p-2 mx-1">
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <use xlink:href="#heart"></use>
-              </svg>
-            </a>
-          </li>
-          <li class="d-lg-none">
-            <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas"
+    function uploadAndSearch() {
+        var form = document.querySelector('.form-upload');
+        form.submit();
+    }
+    
+    // Xử lý sự kiện khi tải lên hình ảnh
+    document.getElementById('img').addEventListener('change', function() {
+        var form = document.querySelector('.form-upload');
+        form.submit();
+    });
+</script>
+
+        <div
+          class="col-sm-8 col-lg-4 d-flex justify-content-end gap-6 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
+          <div class="support-box text-end d-none d-xl-block">
+            <span class="fs-6 text-muted">Liên hệ hỗ trợ</span>
+            <h5 class="mb-0">+84 939 826 024</h5>
+          </div>
+
+          <ul class="d-flex justify-content-end list-unstyled m-0">
+            <li>
+              <a href="account.php" class="rounded-circle bg-light p-2 mx-1">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                  <use xlink:href="#user"></use>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="rounded-circle bg-light p-2 mx-1">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                  <use xlink:href="#heart"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="d-lg-none">
+              <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                  <use xlink:href="#cart"></use>
+                </svg>
+              </a>
+            </li>
+            <li class="d-lg-none">
+              <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
+                <svg width="24" height="24" viewBox="0 0 24 24">
+                  <use xlink:href="#search"></use>
+                </svg>
+              </a>
+            </li>
+          </ul>
+
+          <div class="cart text-end d-none d-lg-block dropdown">
+            <button class="border-0 bg-transparent d-flex flex-column gap-2 lh-1" type="button" data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <use xlink:href="#cart"></use>
-              </svg>
-            </a>
-          </li>
-          <li class="d-lg-none">
-            <a href="#" class="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas"
-              data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
-              <svg width="24" height="24" viewBox="0 0 24 24">
-                <use xlink:href="#search"></use>
-              </svg>
-            </a>
-          </li>
-        </ul>
+              <span class="fs-6 text-muted dropdown-toggle">Giỏ hàng</span>
+              <span class="cart-total fs-5 fw-bold">129.000đ</span>
+            </button>
+            <div>
+              <?php
 
-        <div class="cart text-end d-none d-lg-block dropdown">
-          <button class="border-0 bg-transparent d-flex flex-column gap-2 lh-1" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-            <span class="fs-6 text-muted dropdown-toggle">Giỏ hàng</span>
-            <span class="cart-total fs-5 fw-bold">129.000đ</span>
-          </button>
-          <div>
-            <?php
+              $is_logged_in = isset($_SESSION["email"]);
 
-            $is_logged_in = isset($_SESSION["email"]);
-
-            if ($is_logged_in) {
-              ?>
+              if ($is_logged_in) {
+                ?>
               <div class="hidden-sm hidden-xs m-2">
                 <div class="primary-menu">
-                  <ul class="menu biolife-menu clone-main-menu clone-primary-menu" style="list-style-type: none; " id="primary-menu"
-                    data-menuname="main menu">
+                  <ul class="menu biolife-menu clone-main-menu clone-primary-menu" style="list-style-type: none; "
+                    id="primary-menu" data-menuname="main menu">
                     <li class="menu-item menu-item-has-children has-megamenu">
                       <a href="#" class="menu-name" data-title="Shop"><span>Chào mừng,
                           <?php echo $_SESSION["lname"] ?>
@@ -113,12 +159,12 @@
           </div>
 
           <?php
-            } else {
-              ?>
+              } else {
+                ?>
           <div class="hidden-sm hidden-xs m-2">
             <div class="primary-menu">
-              <ul class="menu biolife-menu clone-main-menu clone-primary-menu" id="primary-menu" style="list-style-type: none; "
-                data-menuname="main menu">
+              <ul class="menu biolife-menu clone-main-menu clone-primary-menu" id="primary-menu"
+                style="list-style-type: none; " data-menuname="main menu">
                 <li class="menu-item">
                   <a href="account.php" class="menu-name"><span>Đăng nhập </span></a>
                 </li>
@@ -126,8 +172,8 @@
             </div>
           </div>
           <?php
-            }
-            ?>
+              }
+              ?>
       </div>
     </div>
 
@@ -154,17 +200,20 @@
 
               <select class="filter-categories border-0 mb-0 me-5">
                 <option>Danh mục sản phẩm</option>
-              <?php
-                  $sql = "SELECT * FROM loaisanpham";
+                <?php
+                $sql = "SELECT * FROM loaisanpham";
 
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
                   $result = $conn->query($sql);
-                      if ($result->num_rows > 0) {
-                      $result = $conn->query($sql);
-                      $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-                      foreach ($result_all as $row) {
-              ?>
-                  <option value="<?php echo $row['MALOAI'] ?>"><?php echo $row['TENLOAI'] ?></option>
-              <?php }} ?>
+                  $result_all = $result->fetch_all(MYSQLI_ASSOC);
+                  foreach ($result_all as $row) {
+                    ?>
+                    <option value="<?php echo $row['MALOAI'] ?>">
+                      <?php echo $row['TENLOAI'] ?>
+                    </option>
+                  <?php }
+                } ?>
               </select>
 
               <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
