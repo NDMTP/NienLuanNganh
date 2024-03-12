@@ -1,7 +1,7 @@
 <?php
 
 include("connect.php");
-                if(isset($_POST["mc1"])){
+                if(isset($_POST["st1"])){
                     
                     $sql="SELECT * FROM nguoidung where email='".$_POST["email"]."' AND matkhau='".md5($_POST["password"])."'";
                     $result1 = $conn->query($sql);

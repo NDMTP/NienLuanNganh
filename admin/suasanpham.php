@@ -3,73 +3,53 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "qlbanmicay";
+$dbname = "qlsthi";
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+  die("Connection failed: " . $conn->connect_error);
 }
 
-$masp = $_GET["masp"];
+// Assuming the product ID (MASP) is obtained from the form or another source
+$masp = $_GET["masp"]; // Adjust this according to your actual input method
+
 $maloai = $_GET["loai"];
 $tensp = $_GET["tensp"];
+$dongiabansp = $_GET["dongiabansp"];
+
+// Assuming $mansx is obtained from the form or another source
+$mansx = $_GET["nsx"]; // Adjust this according to your actual input method
+
+$pdimg = "default.png";
+$tardir = "../images/";
+
+// Check if the file is uploaded
+if (isset($_FILES["pdimg"]) && !empty($_FILES["pdimg"]["name"])) {
+  $file = $_FILES["pdimg"];
+  $filename = $file['name'];
+  if (move_uploaded_file($file['tmp_name'], $tardir . $filename)) {
+    $pdimg = $filename;
+  }
+}
+
 $motasp = $_GET["mota"];
 
-$sql = "update sanpham set TENSP = '$tensp', MOTA='$motasp', MALOAI='$maloai' where MASP = '$masp'";
-$conn->query($sql);
+// Construct the UPDATE query
+$sql = "UPDATE sanpham 
+        SET MANSX = '$mansx', MALOAI = '$maloai', TENSP = '$tensp', DONGIABANSP = '$dongiabansp', 
+            MOTA = '$motasp', LINKANH = '$pdimg'
+        WHERE MASP = '$masp'";
 
-if ($_GET["M"] != 0) {
-    $giaM = $_GET["M"];
-    if ($giaM != 0) {
-        $sql = "update sizecuasanpham set DONGIASP = $giaM where MASP='$masp' and MASIZE='M'";
-        echo $sql;
-        $conn->query($sql);
-    }
-}
-if ($_GET["L"] != 0) {
-    $giaL = $_GET["L"];
-    if ($giaL != 0) {
-        $sql = "update sizecuasanpham set DONGIASP = $giaL where MASP='$masp' and MASIZE='L'";
-        echo $sql;
-        $conn->query($sql);
-    }
-}
-if ($_GET["XL"] != 0) {
-    $giaXL = $_GET["XL"];
-    if ($giaXL != 0) {
-        $sql = "update sizecuasanpham set DONGIASP = $giaXL where MASP='$masp' and MASIZE='XL'";
-        echo $sql;
-        $conn->query($sql);
-    }
-}
-if ($_GET["Vừa"] != 0) {
-    $giaVua = $_GET["Vừa"];
-    if ($giaVua != 0) {
-        $sql = "update sizecuasanpham set DONGIASP = $giaVua where MASP='$masp' and MASIZE='Vừa'";
-        echo $sql;
-        $conn->query($sql);
-    }
-}
-if ($_GET["Lớn"] != 0) {
-    $giaLon = $_GET["Lớn"];
-    if ($giaLon != 0) {
-        $sql = "update sizecuasanpham set DONGIASP = $giaLon where MASP='$masp' and MASIZE='Lớn'";
-        echo $sql;
-        $conn->query($sql);
-    }
-}
-if ($_GET["Combo"] != 0) {
-    $giaCombo = $_GET["Combo"];
-    if ($giaCombo != 0) {
-        $sql = "update sizecuasanpham set DONGIASP = $giaCombo where MASP='$masp' and MASIZE='Combo'";
-        echo $sql;
-        $conn->query($sql);
-    }
-}
+$result = $conn->query($sql);
 
-header('Location: danhsachsanpham.php');
+if (!$result) {
+  echo "Cập nhật sản phẩm thất bại: " . $conn->error;
+} else {
+  echo '<script language="javascript">alert("Cập nhật thành công!");</script>';
+  header('Location: danhsachsanpham.php');
+}
 
 // Đóng kết nối
 $conn->close();

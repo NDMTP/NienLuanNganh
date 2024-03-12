@@ -64,7 +64,7 @@
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4"
-                                            name="mc1">
+                                            name="st1">
                                             Đăng nhập
                                         </button>
                                     </div>

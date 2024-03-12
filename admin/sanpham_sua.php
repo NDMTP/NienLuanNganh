@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <!-- email-inbox.html  21 Nov 2019 03:50:57 GMT -->
 <?php
 include("connect.php");
@@ -9,24 +8,18 @@ include('head.php');
 ?>
 
 <body>
-  <!-- <div class="loader"></div> -->
+  <div class="loader"></div>
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
       <?php
-        include('navbar.php');
-        if ($_SESSION['PHANQUYEN'] == 'Admin') {
-          include('sidebar.php');
-        }
-        if ($_SESSION['PHANQUYEN'] == 'nhanvien') {
-          include('sidebar_nv.php');
-        }
-
-        $masp = $_GET['spid'];
-        $sql = "select * from sanpham where MASP='$masp'";
-        $rs = $conn->query($sql);
-        $sp = $rs->fetch_assoc();
-
+      include('navbar.php');
+      if ($_SESSION['PHANQUYEN'] == 'Admin') {
+        include('sidebar.php');
+      }
+      if ($_SESSION['PHANQUYEN'] == 'nhanvien') {
+        include('sidebar_nv.php');
+      }
       ?>
       <!-- Main Content -->
       <div class="main-content">
@@ -36,12 +29,27 @@ include('head.php');
               <div class="col-lg-3"></div>
               <div class="col-6 col-md-6 col-lg-6">
                 <div class="card">
-                  <form method="GET" action="suasanpham.php">
-                    <input type="hidden" name="masp" value="<?php echo $masp ?>">
+                  <form method="GET" action="suasanpham.php"> <!-- Change the action to the update PHP file -->
                     <div class="card-header">
-                      <h4>Sửa sản phẩm <?php echo $sp['TENSP'] ?></h4>
+                      <h4>Sửa sản phẩm</h4> <!-- Change the title -->
                     </div>
                     <div class="card-body">
+                      <div class="form-group">
+                        <label>Nhà sản xuất</label>
+                        <select name="nsx" id="" class="form-control">
+                          <?php
+                          $sql = "select * from nhasanxuat";
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {
+                            $result = $conn->query($sql);
+                            $result_all = $result->fetch_all(MYSQLI_ASSOC);
+                            foreach ($result_all as $row) {
+                              echo '<option value="' . $row['MANSX'] . '">' . $row['TENNSX'] . '</option>';
+                            }
+                          }
+                          ?>
+                        </select>
+                      </div>
                       <div class="form-group">
                         <label>Loại sản phẩm</label>
                         <select name="loai" id="" class="form-control">
@@ -51,10 +59,8 @@ include('head.php');
                           if ($result->num_rows > 0) {
                             $result = $conn->query($sql);
                             $result_all = $result->fetch_all(MYSQLI_ASSOC);
-                            foreach ($result_all as $l) {
-                              if ($l['MALOAI'] == $sp['MALOAI']) $dl="selected";
-                              else $dl="";
-                              echo '<option '.$dl.' value="' . $l['MALOAI'] . '">' . $l['TENLOAI'] . '</option>';
+                            foreach ($result_all as $row) {
+                              echo '<option value="' . $row['MALOAI'] . '">' . $row['TENLOAI'] . '</option>';
                             }
                           }
                           ?>
@@ -62,41 +68,14 @@ include('head.php');
                       </div>
                       <div class="form-group">
                         <label>Tên sản phẩm</label>
-                        <input type="text" class="form-control" id="tensp" name="tensp" value="<?php echo $sp['TENSP'] ?>">
+                        <input type="text" class="form-control" id="tensp" name="tensp">
                       </div>
                       <div class="form-group">
-                        <label>Size, Giá:</label>
-
+                        <label>Giá:</label>
+                        <input type="text" class="form-control" id="dongiabansp" name="dongiabansp">
                         <div class="row">
                           <div class="col-1"></div>
-                          <?php
-                          
-                            $M = 0;
-                            $L = 0;
-                            $XL = 0;
-                            $Vừa = 0;
-                            $Lớn = 0;
-                            $Combo = 0;
 
-                            $sql = "select * from sizecuasanpham where MASP='$masp'";
-                            $rs = $conn->query($sql);
-                            $gia = $rs->fetch_all(MYSQLI_ASSOC);
-                            foreach ($gia as $g) {
-                              ${$g['MASIZE']} = $g['DONGIASP'];
-                            }
-                          
-                          ?>
-                          <div class="col-5 price">
-                            Size M - <input type="number" min="0" step="1000" name="M" id="" value="<?php echo $M ?>"><br>
-                            Size L - <input type="number" min="0" step="1000" name="L" id="" value="<?php echo $L ?>"><br>
-                            Size XL - <input type="number" min="0" step="1000" name="XL" id="" value="<?php echo $XL ?>"><br>
-                          </div>
-                          <div class="col-5 price">
-                            Size Vừa - <input type="number" min="0" step="1000" name="Vừa" id="" value="<?php echo $Vừa ?>"><br>
-                            Size Lớn - <input type="number" min="0" step="1000" name="Lớn" id="" value="<?php echo $Lớn ?>"><br>
-                            Size Combo - <input type="number" min="0" step="1000" name="Combo" id="" value="<?php echo $Combo ?>"><br>
-                          </div>
-                          <div class="col-1"></div>
                           <style>
                             .price {
                               display: flex;
@@ -112,22 +91,17 @@ include('head.php');
                       </div>
                       <div class="form-group">
                         <label>Mô tả</label>
-                        <input type="text" class="form-control" id="mota" name="mota" value="<?php echo $sp['MOTA'] ?>">
+                        <input type="text" class="form-control" id="mota" name="mota">
                       </div>
                       <div class="form-group">
-                        <label>Ảnh sản phẩm</label><br>
-                        <?php  
-                         preg_match('/^[A-Za-z]+/', $sp['MASP'], $matches);
-                         $spImgDir = $matches[0];
-                        ?>
+                        <label>Link ảnh sản phẩm</label><br>
                         <div class="text-center">
-                          <img style="height: 15rem;" src="../assets/images/products/<?php echo $spImgDir."/".$sp['LINKANH'] ?>" alt=""><br>
-                          <input class="mt-3" type="file" name="pdimg" id="" value="<?php echo $sp['LINKANH'] ?>">
+                          <input type="file" name="pdimg" id="">
                         </div>
                       </div>
                     </div>
                     <div class="card-footer text-right">
-                      <button class="btn btn-primary" class="mt-2">Sửa</button> 
+                      <button class="btn btn-primary" class="mt-2">Cập nhật sản phẩm</button> <!-- Change the button text -->
                     </div>
                   </form>
                 </div>
@@ -136,8 +110,105 @@ include('head.php');
             </div>
           </div>
         </section>
-
+        <div class="settingSidebar">
+          <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
+          </a>
+          <div class="settingSidebar-body ps-container ps-theme-default">
+            <div class=" fade show active">
+              <div class="setting-panel-header">Setting Panel
+              </div>
+              <div class="p-15 border-bottom">
+                <h6 class="font-medium m-b-10">Select Layout</h6>
+                <div class="selectgroup layout-color w-50">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="value" value="1" class="selectgroup-input-radio select-layout" checked>
+                    <span class="selectgroup-button">Light</span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="value" value="2" class="selectgroup-input-radio select-layout">
+                    <span class="selectgroup-button">Dark</span>
+                  </label>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <h6 class="font-medium m-b-10">Sidebar Color</h6>
+                <div class="selectgroup selectgroup-pills sidebar-color">
+                  <label class="selectgroup-item">
+                    <input type="radio" name="icon-input" value="1" class="selectgroup-input select-sidebar">
+                    <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip"
+                      data-original-title="Light Sidebar"><i class="fas fa-sun"></i></span>
+                  </label>
+                  <label class="selectgroup-item">
+                    <input type="radio" name="icon-input" value="2" class="selectgroup-input select-sidebar" checked>
+                    <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip"
+                      data-original-title="Dark Sidebar"><i class="fas fa-moon"></i></span>
+                  </label>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <h6 class="font-medium m-b-10">Color Theme</h6>
+                <div class="theme-setting-options">
+                  <ul class="choose-theme list-unstyled mb-0">
+                    <li title="white" class="active">
+                      <div class="white"></div>
+                    </li>
+                    <li title="cyan">
+                      <div class="cyan"></div>
+                    </li>
+                    <li title="black">
+                      <div class="black"></div>
+                    </li>
+                    <li title="purple">
+                      <div class="purple"></div>
+                    </li>
+                    <li title="orange">
+                      <div class="orange"></div>
+                    </li>
+                    <li title="green">
+                      <div class="green"></div>
+                    </li>
+                    <li title="red">
+                      <div class="red"></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <div class="theme-setting-options">
+                  <label class="m-b-0">
+                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input"
+                      id="mini_sidebar_setting">
+                    <span class="custom-switch-indicator"></span>
+                    <span class="control-label p-l-10">Mini Sidebar</span>
+                  </label>
+                </div>
+              </div>
+              <div class="p-15 border-bottom">
+                <div class="theme-setting-options">
+                  <label class="m-b-0">
+                    <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input"
+                      id="sticky_header_setting">
+                    <span class="custom-switch-indicator"></span>
+                    <span class="control-label p-l-10">Sticky Header</span>
+                  </label>
+                </div>
+              </div>
+              <div class="mt-4 mb-4 p-3 align-center rt-sidebar-last-ele">
+                <a href="#" class="btn btn-icon icon-left btn-primary btn-restore-theme">
+                  <i class="fas fa-undo"></i> Restore Default
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          <a href="templateshub.net">Templateshub</a></a>
+        </div>
+        <div class="footer-right">
+        </div>
+      </footer>
     </div>
   </div>
   <!-- General JS Scripts -->
@@ -150,7 +221,5 @@ include('head.php');
   <script src="assets/js/custom.js"></script>
 </body>
 
-
 <!-- email-inbox.html  21 Nov 2019 03:50:58 GMT -->
-
 </html>
