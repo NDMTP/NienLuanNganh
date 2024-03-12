@@ -282,7 +282,20 @@ require 'popup_themthanhcong.php';
         <main class="col-md-10">
           <div class="filter-shop d-flex justify-content-between">
             <div class="showing-product">
-              <p>Hiển thị 1 trong 155 sản phẩm</p>
+            <?php 
+            // Truy vấn SQL để đếm số lượng sản phẩm
+            $sql= 'SELECT COUNT(*) AS total FROM sanpham';
+            $result = $conn->query($sql);
+
+            // Kiểm tra và hiển thị số lượng sản phẩm
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $total_products = $row['total'];
+                echo "<p>Hiển thị 1 trong $total_products sản phẩm</p>";
+            } else {
+                echo "<p>Không có sản phẩm nào.</p>";
+            }
+            ?>
             </div>
             <div class="sort-by">
               <select id="input-sort" class="form-control" data-filter-sort="" data-filter-order="">
