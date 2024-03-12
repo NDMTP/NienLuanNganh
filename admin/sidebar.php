@@ -1,8 +1,8 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="index.php"> <img alt="image" src="assets/img/ndmtp.png" class="header-logo" /> <span
-                    class="logo-name">NDFOOD</span>
+            <a href="index.php"> <img alt="image" src="../images/logo.jpg" class="header-logo" /> <span
+                    class="logo-name">YiiFood</span>
             </a>
         </div>
         <ul class="sidebar-menu">

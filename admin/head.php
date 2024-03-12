@@ -1,7 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-    <title>NDMTP - FOOD </title>
+    <title>YiiFood </title>
     <!-- General CSS Files -->
     <link rel="stylesheet" href="assets/css/app.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="assets/css/components.css">
     <!-- Custom style CSS -->
     <link rel="stylesheet" href="assets/css/custom.css">
-    <link rel='shortcut icon' type='image/x-icon' href='assets/img/ndmtp.png' />
+    <link rel='shortcut icon' type='image/x-icon' href='../images/logo.jpg' />
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
