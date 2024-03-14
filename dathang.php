@@ -43,8 +43,8 @@
         // cập nhat lại tổng tiền của hóa đơn, chưa test đc, tại kh đặt hàng được
 
         // Tạo giao hàng
-        $mtp = $_GET['thanhpho'];
-        $ghichu = $_GET['ghichu'];
+        $mtp = $_GET['area'];
+        $ghichu = $_GET['note'];
         $phi = $_GET['phigiao'];
         $addTrans = "insert into giaohang values ('$mtp',$nextId, $phi, '$ghichu')";
         $conn->query($addTrans);
@@ -56,7 +56,7 @@
         // Về trang chủ
         header("Refresh: 5; url=index.php");
     } else {
-        echo "Looix r";
+        echo "Lỗi rồi nè bây";
     }
 
 ?>

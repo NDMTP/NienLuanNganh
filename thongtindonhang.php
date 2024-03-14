@@ -273,6 +273,9 @@ require 'connect.php';
                                 <input type="hidden" name="gg" value="<?php echo $_GET['gg'] ?>">
                                 <input type="hidden" name="thanhtien" value="<?php echo($_GET['tt']-$_GET['gg']) ?>">
                                 <input type="hidden" name="makm" value="<?php echo($_GET['makm']) ?>">
+                                <input type="hidden" name="area" value="<?php echo $_GET['area'] ?>">
+                                <input type="hidden" name="note" value="<?php echo $_GET['note'] ?>">
+                                <input type="hidden" name="phigiao" value="<?php echo $row['PHIGIAO'] ?>">
                                 <div class="row" style="padding-bottom: 40px;">
                                     <div style="text-align: center;" class="col-12">
                                         <h3>Tổng tiền: <span style="font-weight: bold;">
