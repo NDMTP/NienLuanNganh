@@ -317,6 +317,7 @@ require 'popup_themthanhcong.php';
               // Nếu tổng giỏ hàng lớn hơn hoặc bằng giá tiền tối thiểu của khuyến mãi, áp dụng khuyến mãi đó
               $giaTienToiThieu = $row['DIEUKIENKM'];
               $giamGia = $row['PHANTRAMKM'];
+              $makm = $row['MAKM'];
 
               if ($tonggiohang >= $giaTienToiThieu) {
                 // Áp dụng khuyến mãi
@@ -351,6 +352,7 @@ require 'popup_themthanhcong.php';
                           </span>
                           <input type="hidden" name="tt" id="input_tt" value="<?php echo $tongtien?>">
                           <input type="hidden" name="gg" id="input_gg" value="<?php echo $tongtien-$tongTienSauGiam ?>"></bdi>
+                          <input type="hidden" name="makm" id="makm" value="<?php echo $makm ?>"></bdi>
                       </span>
                     </td>
                     <div class="subtotal-line"><b class="stt-name">Thành phố <br>

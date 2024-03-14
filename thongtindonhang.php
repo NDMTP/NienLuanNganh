@@ -211,8 +211,8 @@ require 'connect.php';
                                     echo '<tr>';
                                     echo '<td>' . $sp['TENSP'] . '</td>';
                                     echo '<td>' . $item['quant'] . '</td>';
-                                    echo '<td>' . number_format($sp['DONGIABANSP']) . ' đ</td>';
-                                    echo '<td>' . number_format($sp['DONGIABANSP'] * $item['quant']) . ' đ</td>';
+                                    echo '<td>' . number_format($sp['DONGIABANSP']) . 'đ</td>';
+                                    echo '<td>' . number_format($sp['DONGIABANSP'] * $item['quant']) . 'đ</td>';
                                     echo '</tr>';
                                     $tongtien += ($sp['DONGIABANSP'] * $item['quant']);
                                 }
@@ -272,6 +272,7 @@ require 'connect.php';
                                 <input type="hidden" name="tt" value="<?php echo $_GET['tt'] ?>">
                                 <input type="hidden" name="gg" value="<?php echo $_GET['gg'] ?>">
                                 <input type="hidden" name="thanhtien" value="<?php echo($_GET['tt']-$_GET['gg']) ?>">
+                                <input type="hidden" name="makm" value="<?php echo($_GET['makm']) ?>">
                                 <div class="row" style="padding-bottom: 40px;">
                                     <div style="text-align: center;" class="col-12">
                                         <h3>Tổng tiền: <span style="font-weight: bold;">
