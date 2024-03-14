@@ -176,7 +176,7 @@ require 'connect.php';
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <h2>Thông tin đơn hàng</h2>
                     <?php
-                    $query = "SELECT * FROM thanhpho where TENTP LIKE '{$_GET['tentp']}'";
+                    $query = "SELECT * FROM thanhpho where MATP LIKE '{$_GET['area']}'";
                     $result = $conn->query($query);
                     $row = $result->fetch_assoc();
                     
@@ -271,12 +271,20 @@ require 'connect.php';
                             <div class="row" style="padding-bottom: 40px;">
                                 <input type="hidden" name="tt" value="<?php echo $_GET['tt'] ?>">
                                 <input type="hidden" name="gg" value="<?php echo $_GET['gg'] ?>">
-                                <input type="hidden" name="thanhtien" value="<?php echo number_format($tongtien-$_GET['gg']) ?>">
-                                <div style="text-align: center;" class="col-12">
-                                    <button type="submit"
-                                        style="margin-top: 15px; padding: 10px 20px; background-color: #32CD32; color: white; border:none; border-radius: 15px;"><span
-                                            style="font-size: 17px; font-weight: bold;">Xác nhận thông
-                                            tin</span></button>
+                                <input type="hidden" name="thanhtien" value="<?php echo($_GET['tt']-$_GET['gg']) ?>">
+                                <div class="row" style="padding-bottom: 40px;">
+                                    <div style="text-align: center;" class="col-12">
+                                        <h3>Tổng tiền: <span style="font-weight: bold;">
+                                                <?php echo number_format($_GET['thanhtien'] + $row['PHIGIAO']) ?>
+                                                đ
+                                            </span></h3>
+                                        <input type="hidden" name="thanhtien"
+                                            value="<?php echo ($_GET['thanhtien'] + $row['PHIGIAO']) ?>">
+                                        <button class="dathang"
+                                            style="margin-top: 15px; padding: 10px 20px; background-color: #32CD32; color: white; border:none; border-radius: 15px;"
+                                            type="submit"><span style="font-size: 17px; font-weight: bold;">Đặt
+                                                hàng</span></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
