@@ -349,8 +349,8 @@ require 'popup_themthanhcong.php';
                           <span id="tt" class="stt-price">
                             <?php echo $tongTienSauGiam ?> đ
                           </span>
-                          <input type="hidden" name="tt" id="input_tt" value="">
-                          <input type="hidden" name="gg" id="input_gg" value=""></bdi>
+                          <input type="hidden" name="tt" id="input_tt" value="<?php echo $tongtien?>">
+                          <input type="hidden" name="gg" id="input_gg" value="<?php echo $tongtien-$tongTienSauGiam ?>"></bdi>
                       </span>
                     </td>
                     <div class="subtotal-line"><b class="stt-name">Thành phố <br>

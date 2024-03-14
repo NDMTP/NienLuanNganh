@@ -170,15 +170,16 @@ require 'connect.php';
                 </nav>
             </div>
         </div>
-        <<div class="container-fluid">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <h2>Thông tin đơn hàng</h2>
                     <?php
-                    $query = "SELECT * FROM thanhpho where MATP = '{$_GET['tentp']}'";
+                    $query = "SELECT * FROM thanhpho where TENTP LIKE '{$_GET['tentp']}'";
                     $result = $conn->query($query);
                     $row = $result->fetch_assoc();
+                    
                     ?>
                     <form action="dathang.php" method="get">
                         <div class="signin-container">
@@ -199,11 +200,11 @@ require 'connect.php';
                             </span><br>
 
                             <?php
-                            if (isset($_SESSION['cart_temp']) && !empty($_SESSION['cart_temp'])) {
-                                echo '<table style="margin-top: 10px !important;">';
+                            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+                                echo '<table style="margin-top: 10px !important border:1px solid black !important;">';
                                 echo '<tr><th>Sản phẩm</th><th>Số lượng</th><th>Đơn giá</th><th>Tổng tiền</th></tr>';
                                 $tongtien = 0;
-                                foreach ($_SESSION['cart_temp'] as $item) {
+                                foreach ($_SESSION['cart'] as $item) {
                                     $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
                                     $result = $conn->query($sql);
                                     $sp = $result->fetch_assoc();
@@ -221,12 +222,56 @@ require 'connect.php';
                                 echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
                             }
                             ?>
+                            <div class="row" style="padding: 0 10px">
+                                    <div class="col-6">
+                                        <span style="color: red;">
+                                            * Phương thức thanh toán:
+                                        </span>
+                                        <br>
+                                        <select name="payment" id="" required>
+                                            <option value="" disabled selected>- Chọn phương thức -</option>
+                                            <?php
+                                            $sql = "select * from phuongthuctt";
+                                            $rs = $conn->query($sql);
+                                            $rsa = $rs->fetch_all(MYSQLI_ASSOC);
+                                            foreach ($rsa as $pt) {
+                                                echo '<option value="' . $pt['MAPT'] . '">' . $pt['TENPT'] . '</option>';
+                                            }
+                                            ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <div style="text-align: right;">
+                                            <h4>Tổng tiền: <span style="font-weight: bold;">
+                                                    <?php echo number_format($tongtien) ?> đ
+                                                </span>
+                                            </h4>
+                                            <h4>Giảm: <span style="font-weight: bold;">
+                                                    <?php echo number_format($_GET['gg']) ?> đ
+                                                </span>
+                                                <?php
+                                                if ($_GET['gg'] == 0)
+                                                    unset($_SESSION['makm']);
+                                                ?>
+                                            </h4>
+                                            <h4>Thành tiền: <span style="font-weight: bold;">
+                                                    <?php echo number_format($tongtien-$_GET['gg']) ?> đ
+                                                </span>
+                                            </h4>
+                                            <h4>Phí ship: <span style="font-weight: bold;">
+                                                    <?php echo number_format($row['PHIGIAO']) ?>
+                                                    đ
+                                                </span></h4>
+                                            <hr>
+
+                                        </div>
+                                    </div>
 
 
                             <div class="row" style="padding-bottom: 40px;">
                                 <input type="hidden" name="tt" value="<?php echo $_GET['tt'] ?>">
                                 <input type="hidden" name="gg" value="<?php echo $_GET['gg'] ?>">
-                                <input type="hidden" name="thanhtien" value="<?php echo $_GET['tt'] ?>">
+                                <input type="hidden" name="thanhtien" value="<?php echo number_format($tongtien-$_GET['gg']) ?>">
                                 <div style="text-align: center;" class="col-12">
                                     <button type="submit"
                                         style="margin-top: 15px; padding: 10px 20px; background-color: #32CD32; color: white; border:none; border-radius: 15px;"><span
