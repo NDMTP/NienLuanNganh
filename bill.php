@@ -199,6 +199,7 @@ require 'connect.php';
                     </td>
                     <td class="product-price"></td>
                     <td class="product-quantity"></td>
+                    <td class="product-quantity"></td>
                     <td scope="col" style="float:right; color: <?php echo $text_col ?>; font-weight: bold;">
                       <span class="<?php echo $text_col ?>">
                         <?php echo $status ?>
@@ -246,6 +247,51 @@ require 'connect.php';
                       <td style="padding-top:4rem">
                         <b>
                           <?php echo number_format($row1['TONGTIEN']) ?> đ
+                        </b>
+                      </td>
+                      <td style="padding-top:4rem">
+                        <b>
+                        <?php if ($row["TRANGTHAIHOADON"] != 0 && $row["TRANGTHAIHOADON"] != 1) { ?>
+                        <button class="btn" style="margin-right:1rem; background-color: #AFEEEE; color: black">
+                      Đánh giá
+                    </button>
+                        <div class="modal" id="reviewModal" tabindex="-1">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title">Đánh giá sản phẩm</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <!-- Nội dung của modal, ví dụ: form đánh giá -->
+                                <form>
+                                  <!-- Các trường đánh giá sản phẩm -->
+                                  <div class="mb-3">
+                                    <label for="rating" class="form-label">Đánh giá:</label>
+                                    <!-- Đây là nơi để người dùng chọn đánh giá -->
+                                    <select class="form-select" id="rating">
+                                      <option selected disabled>Chọn mức đánh giá</option>
+                                      <option value="1">1 sao</option>
+                                      <option value="2">2 sao</option>
+                                      <option value="3">3 sao</option>
+                                      <option value="4">4 sao</option>
+                                      <option value="5">5 sao</option>
+                                    </select>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="comment" class="form-label">Nhận xét:</label>
+                                    <!-- Đây là nơi để người dùng nhập nhận xét -->
+                                    <textarea class="form-control" id="comment" rows="3"></textarea>
+                                  </div>
+                                  <!-- Nút để gửi đánh giá -->
+                                  <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                    <?php } ?>
                         </b>
                       </td>
                     </tr>
