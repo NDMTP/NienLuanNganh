@@ -188,73 +188,75 @@ require 'connect.php';
           }
           ?>
           <table class="table dg" style="margin-top: 3rem ;  border: 1px solid #ccc ;box-shadow: 10px 10px 10px #E6E6E6;">
-            <form action="mualai.php" method="get" id="formMualai">
-              <table class="table" style="margin-top: 3rem ;  border: 1px solid #ccc ;box-shadow: 10px 10px 10px #E6E6E6;">
-                <thead>
-                  <tr>
-                    <td scope="col" style="float:left; color: grey;" class="product-thumbnail">
-                      <h5 style="margin: 0 !important">
-                        <?php echo $row['NGAYLAP'] ?>
-                      </h5>
+
+            <table class="table" style="margin-top: 3rem ;  border: 1px solid #ccc ;box-shadow: 10px 10px 10px #E6E6E6;">
+              <thead>
+                <tr>
+                  <td scope="col" style="float:left; color: grey;" class="product-thumbnail">
+                    <h5 style="margin: 0 !important">
+                      <?php echo $row['NGAYLAP'] ?>
+                    </h5>
+                  </td>
+                  <td class="product-price"></td>
+                  <td class="product-quantity"></td>
+                  <td class="product-quantity"></td>
+                  <td scope="col" style="float:right; color: <?php echo $text_col ?>; font-weight: bold;">
+                    <span class="<?php echo $text_col ?>">
+                      <?php echo $status ?>
+                  </td>
+                  </span>
+                </tr>
+              </thead>
+              <tbody class="dg">
+                <?php
+                $cthd = "SELECT * FROM chitiethoadon WHERE MAHOADON = '" . $row['MAHOADON'] . "' ORDER BY MAHOADON DESC";
+                ;
+                $cthd_result = $conn->query($cthd);
+                while ($row1 = $cthd_result->fetch_assoc()) {
+
+                  $masp = preg_replace('/[0-9]/', '', $row1['MASP']);
+                  $sp = "SELECT * FROM sanpham WHERE MASP = '" . $row1['MASP'] . "'";
+                  $kq = $conn->query($sp);
+                  $sp = $kq->fetch_assoc();
+                  ?>
+                  <tr class="pd cart_item">
+                    <td class="product-thumbnail row" data-title="Tên sản phẩm"
+                      style="display: flex; flex-direction: row; justified-content: center; align-items: center; margin-left: 0;">
+                      <a class="prd-thumb" href="#">
+                        <figure><img style="margin-right: 20px;" width="110" height="110"
+                            src="images/<?php echo $masp . "/" . $sp['LINKANH'] ?>" alt="shipping cart">
+                          <?php echo $sp['TENSP'] ?>
+                        </figure>
+                      </a>
+
                     </td>
-                    <td class="product-price"></td>
-                    <td class="product-quantity"></td>
-                    <td class="product-quantity"></td>
-                    <td scope="col" style="float:right; color: <?php echo $text_col ?>; font-weight: bold;">
-                      <span class="<?php echo $text_col ?>">
-                        <?php echo $status ?>
+                    <td class="product-price" data-title="Price" style="padding-top:3.5rem">
+                      <div class="price price-contain">
+                        <ins><span class="price-amount"><span class="currencySymbol"></span>
+                            <?php echo number_format($row1['DONBAN']) ?>
+                            đ
+                          </span></ins>
+                      </div>
                     </td>
-                    </span>
-                  </tr>
-                </thead>
-                <tbody class="dg">
-                  <?php
-                  $cthd = "SELECT * FROM chitiethoadon WHERE MAHOADON = '" . $row['MAHOADON'] . "' ORDER BY MAHOADON DESC";
-                  ;
-                  $cthd_result = $conn->query($cthd);
-                  while ($row1 = $cthd_result->fetch_assoc()) {
+                    <td style="padding-top:4rem">
+                      <b>Số lượng:
+                        <?php echo $row1['SOLUONGSP'] ?>
+                      </b>
 
-                    $masp = preg_replace('/[0-9]/', '', $row1['MASP']);
-                    $sp = "SELECT * FROM sanpham WHERE MASP = '" . $row1['MASP'] . "'";
-                    $kq = $conn->query($sp);
-                    $sp = $kq->fetch_assoc();
-                    ?>
-                    <tr class="pd cart_item">
-                      <td class="product-thumbnail row" data-title="Tên sản phẩm"
-                        style="display: flex; flex-direction: row; justified-content: center; align-items: center; margin-left: 0;">
-                        <a class="prd-thumb" href="#">
-                          <figure><img style="margin-right: 20px;" width="110" height="110"
-                              src="images/<?php echo $masp . "/" . $sp['LINKANH'] ?>" alt="shipping cart">
-                            <?php echo $sp['TENSP'] ?>
-                          </figure>
-                        </a>
-
-                      </td>
-                      <td class="product-price" data-title="Price" style="padding-top:3.5rem">
-                        <div class="price price-contain">
-                          <ins><span class="price-amount"><span class="currencySymbol"></span>
-                              <?php echo number_format($row1['DONBAN']) ?>
-                              đ
-                            </span></ins>
-                        </div>
-                      </td>
-                      <td style="padding-top:4rem">
-                        <b>Số lượng:
-                          <?php echo $row1['SOLUONGSP'] ?>
-                        </b>
-
-                      </td>
-                      <td style="padding-top:4rem">
-                        <b>
-                          <?php echo number_format($row1['TONGTIEN']) ?> đ
-                        </b>
-                      </td>
-                      <td style="padding-top:4rem">
-                        <b>
+                    </td>
+                    <td style="padding-top:4rem">
+                      <b>
+                        <?php echo number_format($row1['TONGTIEN']) ?> đ
+                      </b>
+                    </td>
+                    <td style="padding-top:4rem">
+                      <b>
                         <?php if ($row["TRANGTHAIHOADON"] != 0 && $row["TRANGTHAIHOADON"] != 1) { ?>
-                        <button class="btn" style="margin-right:1rem; background-color: #AFEEEE; color: black">
-                      Đánh giá
-                    </button>
+
+
+
+                        <?php } ?>
+                        <!-- Thêm modal vào phần HTML của bạn -->
                         <div class="modal" id="reviewModal" tabindex="-1">
                           <div class="modal-dialog">
                             <div class="modal-content">
@@ -291,57 +293,79 @@ require 'connect.php';
                           </div>
                         </div>
 
-                    <?php } ?>
-                        </b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
 
-              </form>
-              </td>
-              <td></td>
-              <td></td>
-              </tr>
-            <?php } ?>
-            <tr>
-              <td colspan="3"> </td>
-              <td>
-                <div style="color: #ff7300; font-weight: bold; text-align: right; padding: 1rem;">
-                  <i class="fa-solid fa-shield-halved"></i> Thành tiền:
-                  <?php echo number_format($row['TONGTIEN']) ?> Đ
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td scope="col">
-                <section class="d-flex" style="text-align: right; padding: 1rem">
-                  <a href="mualai.php?hoadon=<?php echo $row['MAHOADON'] ?>">
-                    <button class="btn" style="margin-right:1rem; background-color: #ff7300; color: white">
-                      Mua Lại
-                    </button>
-                  </a>
+                        <!-- Nút để kích hoạt modal -->
+                        <button class="btn" style="margin-right:1rem; background-color: #AFEEEE; color: black"
+                          id="reviewButton">Đánh giá</button>
+
+                        <script>
+                          // Khi người dùng bấm vào nút "Đánh giá", kích hoạt modal
+                          document.getElementById("reviewButton").addEventListener("click", function () {
+                            var myModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+                            myModal.show();
+                          });
+
+                          // Khi modal được ẩn (người dùng đóng modal), xóa nội dung trong textarea
+                          var reviewModal = document.getElementById('reviewModal');
+                          reviewModal.addEventListener('hidden.bs.modal', function () {
+                            var reviewTextarea = reviewModal.querySelector('#review');
+                            reviewTextarea.value = ''; // Xóa nội dung của textarea
+                          });
+                        </script>
 
 
 
-                </section>
+                      </b>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td></td>
+                    <td></td>
 
-              </td>
-            </tr>
-            </tbody>
-          </table>
-          </form>
-          <?php
+
+                    </td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                <?php } ?>
+                <tr>
+                  <td colspan="3"> </td>
+                  <td>
+                    <div style="color: #ff7300; font-weight: bold; text-align: right; padding: 1rem;">
+                      <i class="fa-solid fa-shield-halved"></i> Thành tiền:
+                      <?php echo number_format($row['TONGTIEN']) ?> Đ
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td scope="col">
+                    <section class="d-flex" style="text-align: right; padding: 1rem">
+                      <a href="mualai.php?hoadon=<?php echo $row['MAHOADON'] ?>">
+                        <button class="btn" style="margin-right:1rem; background-color: #ff7300; color: white">
+                          Mua Lại
+                        </button>
+                      </a>
+
+
+
+
+                    </section>
+
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            </form>
+            <?php
         }
         ?>
       </div>
       </div>
       </div>
-    <?php
+      <?php
   } else {
     echo '<div class="shpcart-subtotal-block">';
     echo '<h2>Lịch sử đơn hàng</h2>';
@@ -356,7 +380,7 @@ require 'connect.php';
     </div>
     </div>
 
-    
+
     </div>
   </section>
 
