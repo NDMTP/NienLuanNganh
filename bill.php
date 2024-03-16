@@ -210,11 +210,11 @@ require 'connect.php';
               <tbody class="dg">
                 <?php
                 $cthd = "SELECT * FROM chitiethoadon WHERE MAHOADON = '" . $row['MAHOADON'] . "' ORDER BY MAHOADON DESC";
-                ;
                 $cthd_result = $conn->query($cthd);
                 while ($row1 = $cthd_result->fetch_assoc()) {
 
-                  $masp = preg_replace('/[0-9]/', '', $row1['MASP']);
+                  $masp2 = preg_replace('/[0-9]/', '', $row1['MASP']);
+                  $masp = $row1['MASP'];
                   $sp = "SELECT * FROM sanpham WHERE MASP = '" . $row1['MASP'] . "'";
                   $kq = $conn->query($sp);
                   $sp = $kq->fetch_assoc();
@@ -224,11 +224,10 @@ require 'connect.php';
                       style="display: flex; flex-direction: row; justified-content: center; align-items: center; margin-left: 0;">
                       <a class="prd-thumb" href="#">
                         <figure><img style="margin-right: 20px;" width="110" height="110"
-                            src="images/<?php echo $masp . "/" . $sp['LINKANH'] ?>" alt="shipping cart">
+                            src="images/<?php echo $masp2 . "/" . $sp['LINKANH'] ?>" alt="shipping cart">
                           <?php echo $sp['TENSP'] ?>
                         </figure>
                       </a>
-
                     </td>
                     <td class="product-price" data-title="Price" style="padding-top:3.5rem">
                       <div class="price price-contain">
@@ -242,7 +241,6 @@ require 'connect.php';
                       <b>Số lượng:
                         <?php echo $row1['SOLUONGSP'] ?>
                       </b>
-
                     </td>
                     <td style="padding-top:4rem">
                       <b>
@@ -253,83 +251,70 @@ require 'connect.php';
                       <b>
                         <?php if ($row["TRANGTHAIHOADON"] != 0 && $row["TRANGTHAIHOADON"] != 1) { ?>
 
+                          <!-- Nút để kích hoạt modal -->
+                          <button class="btn" style="margin-right:1rem; background-color: #AFEEEE; color: black"
+                            data-bs-toggle="modal" data-bs-target="#reviewModal_<?php echo $masp ?>">Đánh giá</button>
 
-
-                        <?php } ?>
-                        <!-- Thêm modal vào phần HTML của bạn -->
-                        <div class="modal" id="reviewModal" tabindex="-1">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title">Đánh giá sản phẩm</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <!-- Nội dung của modal, ví dụ: form đánh giá -->
-                                <form>
-                                  <!-- Các trường đánh giá sản phẩm -->
-                                  <div class="mb-3">
-                                    <label for="rating" class="form-label">Đánh giá:</label>
-                                    <!-- Đây là nơi để người dùng chọn đánh giá -->
-                                    <select class="form-select" id="rating">
-                                      <option selected disabled>Chọn mức đánh giá</option>
-                                      <option value="1">1 sao</option>
-                                      <option value="2">2 sao</option>
-                                      <option value="3">3 sao</option>
-                                      <option value="4">4 sao</option>
-                                      <option value="5">5 sao</option>
-                                    </select>
-                                  </div>
-                                  <div class="mb-3">
-                                    <label for="comment" class="form-label">Nhận xét:</label>
-                                    <!-- Đây là nơi để người dùng nhập nhận xét -->
-                                    <textarea class="form-control" id="comment" rows="3"></textarea>
-                                  </div>
-                                  <!-- Nút để gửi đánh giá -->
-                                  <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
-                                </form>
+                          <!-- Modal -->
+                          <div class="modal fade" id="reviewModal_<?php echo $masp ?>" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Đánh giá sản phẩm</h5>
+                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <!-- Form đánh giá -->
+                                  <form method="post" action="handle_review.php">
+                                    <input type="hidden" name="masp" value="<?php echo $masp ?>">
+                                    <div class="mb-3">
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating"
+                                          id="rating1_<?php echo $masp ?>" value="1">
+                                        <label class="form-check-label" for="rating1_<?php echo $masp ?>">Rất Tệ</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating"
+                                          id="rating1_<?php echo $masp ?>" value="2">
+                                        <label class="form-check-label" for="rating2_<?php echo $masp ?>">Tệ</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating"
+                                          id="rating1_<?php echo $masp ?>" value="3">
+                                        <label class="form-check-label" for="rating3_<?php echo $masp ?>">Bình Thường</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating"
+                                          id="rating1_<?php echo $masp ?>" value="4">
+                                        <label class="form-check-label" for="rating4_<?php echo $masp ?>">Ngon</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="rating"
+                                          id="rating1_<?php echo $masp ?>" value="5">
+                                        <label class="form-check-label" for="rating5_<?php echo $masp ?>">Rất Ngon</label>
+                                      </div>
+                                    </div>
+                                    <div class="mb-3">
+                                      <label for="comment" class="form-label">Nhận xét:</label>
+                                      <textarea class="form-control" id="comment_<?php echo $masp ?>" name="comment"
+                                        rows="3"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+                                  </form>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
 
-
-                        <!-- Nút để kích hoạt modal -->
-                        <button class="btn" style="margin-right:1rem; background-color: #AFEEEE; color: black"
-                          id="reviewButton">Đánh giá</button>
-
-                        <script>
-                          // Khi người dùng bấm vào nút "Đánh giá", kích hoạt modal
-                          document.getElementById("reviewButton").addEventListener("click", function () {
-                            var myModal = new bootstrap.Modal(document.getElementById('reviewModal'));
-                            myModal.show();
-                          });
-
-                          // Khi modal được ẩn (người dùng đóng modal), xóa nội dung trong textarea
-                          var reviewModal = document.getElementById('reviewModal');
-                          reviewModal.addEventListener('hidden.bs.modal', function () {
-                            var reviewTextarea = reviewModal.querySelector('#review');
-                            reviewTextarea.value = ''; // Xóa nội dung của textarea
-                          });
-                        </script>
-
-
-
+                        <?php } ?>
                       </b>
                     </td>
                   </tr>
-                  <tr>
-                    <td></td>
-                    <td></td>
-
-
-                    </td>
-                    <td></td>
-                    <td></td>
-                  </tr>
                 <?php } ?>
+
                 <tr>
-                  <td colspan="3"> </td>
+                  <td colspan="4"> </td>
                   <td>
                     <div style="color: #ff7300; font-weight: bold; text-align: right; padding: 1rem;">
                       <i class="fa-solid fa-shield-halved"></i> Thành tiền:

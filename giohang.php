@@ -309,7 +309,7 @@ require 'popup_themthanhcong.php';
 
             <?php
             // Bước 1: Truy vấn cơ sở dữ liệu để lấy ra các khuyến mãi có điều kiện về giá tiền tối thiểu
-            $sql = "SELECT * FROM khuyenmai WHERE DIEUKIENKM <= " . $tonggiohang . " order by DIEUKIENKM desc limit 2"; // $tonggiohang là tổng giỏ hàng
+            $sql = "SELECT * FROM khuyenmai WHERE DIEUKIENKM <= " . $tonggiohang . " order by DIEUKIENKM desc limit 3"; // $tonggiohang là tổng giỏ hàng
             $result = $conn->query($sql);
 
             // Bước 2: Lặp qua các khuyến mãi để kiểm tra xem tổng giỏ hàng có đáp ứng điều kiện không
