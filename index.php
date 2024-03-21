@@ -298,55 +298,44 @@ require 'popup_themthanhcong.php';
 
           <div class="category-carousel swiper">
             <div class="swiper-wrapper">
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                <h3 class="category-title">Rau củ</h3>
-              </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-bread-baguette.png" alt="Category Thumbnail">
-                <h3 class="category-title">Bánh mì & kẹo</h3>
-              </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-soft-drinks-bottle.png" alt="Category Thumbnail">
-                <h3 class="category-title">Nước uống</h3>
-              </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-wine-glass-bottle.png" alt="Category Thumbnail">
-                <h3 class="category-title">Rượu</h3>
-              </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-animal-products-drumsticks.png" alt="Category Thumbnail">
-                <h3 class="category-title">Thịt và Hải sản</h3>
-              </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-bread-herb-flour.png" alt="Category Thumbnail">
+              <a href="sanpham.php?loai=01" class="nav-link category-item swiper-slide">
+              <i class="fa-regular fa-lemon fa-2xl" style="color: #FFD43B;"></i>
                 <h3 class="category-title">Trái cây</h3>
               </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                <h3 class="category-title">Fruits & Veges</h3>
+              <a href="sanpham.php?loai=02" class="nav-link category-item swiper-slide">
+              <i class="fa-solid fa-fish-fins fa-2xl" style="color: #24b8b4;"></i>
+                <h3 class="category-title">Hải sản</h3>
               </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                <h3 class="category-title">Fruits & Veges</h3>
+              <a href="sanpham.php?loai=03" class="nav-link category-item swiper-slide">
+                <img src="images/icon-animal-products-drumsticks.png" alt="Category Thumbnail">
+                <h3 class="category-title">Thịt</h3>
               </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                <h3 class="category-title">Fruits & Veges</h3>
+              <a href="sanpham.php?loai=04" class="nav-link category-item swiper-slide">
+              <i class="fa-solid fa-egg fa-2xl" style="color: #ffa742;"></i>
+                <h3 class="category-title">Trứng</h3>
               </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                <h3 class="category-title">Fruits & Veges</h3>
+              <a href="sanpham.php?loai=05" class="nav-link category-item swiper-slide">
+              <i class="fa-solid fa-carrot fa-2xl" style="color: #5ed756;"></i>
+                <h3 class="category-title">Rau</h3>
               </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                <h3 class="category-title">Fruits & Veges</h3>
+              
+              <a href="sanpham.php?loai=06" class="nav-link category-item swiper-slide">
+              <i class="fa-solid fa-paw fa-2xl" style="color: #fd0d0d;"></i>
+                <h3 class="category-title">Đồ cho thú cưng</h3>
               </a>
-              <a href="category.php" class="nav-link category-item swiper-slide">
-                <img src="images/icon-vegetables-broccoli.png" alt="Category Thumbnail">
-                <h3 class="category-title">Fruits & Veges</h3>
+              <a href="sanpham.php?loai=07" class="nav-link category-item swiper-slide">
+              <i class="fa-solid fa-bowl-rice fa-2xl" style="color: #ffdd00;"></i>
+                <h3 class="category-title">Mì</h3>
               </a>
-
+              <a href="sanpham.php?loai=08" class="nav-link category-item swiper-slide">
+              <i class="fa-solid fa-utensils fa-2xl"></i>
+                <h3 class="category-title">Vật dụng gia đình</h3>
+              </a>
+              <a href="sanpham.php?loai=09" class="nav-link category-item swiper-slide">
+              <i class="fa-solid fa-bottle-water fa-2xl" style="color: #B197FC;"></i>
+                <h3 class="category-title">Nước uống</h3>
+              </a>
+              
             </div>
           </div>
 

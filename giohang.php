@@ -93,7 +93,7 @@ require 'popup_themthanhcong.php';
 
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <?php
-            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+            if (isset ($_SESSION['cart']) && !empty ($_SESSION['cart'])) {
               foreach ($_SESSION['cart'] as $item) {
                 $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
                 $result = $conn->query($sql);
@@ -176,7 +176,7 @@ require 'popup_themthanhcong.php';
           <form class="shopping-cart-form" action="#" method="post">
             <?php
             $tongtien = 0;
-            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+            if (isset ($_SESSION['cart']) && !empty ($_SESSION['cart'])) {
               ?>
               <div class="table-responsive cart">
                 <table class="table">
@@ -308,28 +308,35 @@ require 'popup_themthanhcong.php';
           <form action="thongtinmuahang.php" method="get">
 
             <?php
-            // Bước 1: Truy vấn cơ sở dữ liệu để lấy ra các khuyến mãi có điều kiện về giá tiền tối thiểu
-            $sql = "SELECT * FROM khuyenmai WHERE DIEUKIENKM <= " . $tonggiohang . " order by DIEUKIENKM desc limit 3"; // $tonggiohang là tổng giỏ hàng
-            $result = $conn->query($sql);
+            $tonggiohang = 0;
+            // Bước 1: Kiểm tra xem có sản phẩm nào trong giỏ hàng không
+            if ($tonggiohang == 0) {
+              echo "<p>Không có sản phẩm nào trong giỏ hàng.</p>";
+            } else {
+              // Bước 2: Truy vấn cơ sở dữ liệu để lấy ra các khuyến mãi có điều kiện về giá tiền tối thiểu
+              $sql = "SELECT * FROM khuyenmai WHERE DIEUKIENKM <= " . $tonggiohang . " ORDER BY DIEUKIENKM DESC LIMIT 3"; // $tonggiohang là tổng giỏ hàng
+              $result = $conn->query($sql);
 
-            // Bước 2: Lặp qua các khuyến mãi để kiểm tra xem tổng giỏ hàng có đáp ứng điều kiện không
-            while ($row = $result->fetch_assoc()) {
-              // Nếu tổng giỏ hàng lớn hơn hoặc bằng giá tiền tối thiểu của khuyến mãi, áp dụng khuyến mãi đó
-              $giaTienToiThieu = $row['DIEUKIENKM'];
-              $giamGia = $row['PHANTRAMKM'];
-              $makm = $row['MAKM'];
+              // Bước 3: Lặp qua các khuyến mãi để kiểm tra xem tổng giỏ hàng có đáp ứng điều kiện không
+              while ($row = $result->fetch_assoc()) {
+                // Nếu tổng giỏ hàng lớn hơn hoặc bằng giá tiền tối thiểu của khuyến mãi, áp dụng khuyến mãi đó
+                $giaTienToiThieu = $row['DIEUKIENKM'];
+                $giamGia = $row['PHANTRAMKM'];
+                $makm = $row['MAKM'];
 
-              if ($tonggiohang >= $giaTienToiThieu) {
-                // Áp dụng khuyến mãi
-                $giamGiaTien = $tonggiohang * ($giamGia / 100);
-                $tongTienSauGiam = $tonggiohang - $giamGiaTien;
+                if ($tonggiohang >= $giaTienToiThieu) {
+                  // Áp dụng khuyến mãi
+                  $giamGiaTien = $tonggiohang * ($giamGia / 100);
+                  $tongTienSauGiam = $tonggiohang - $giamGiaTien;
 
-                // Output hoặc sử dụng $tongTienSauGiam cho thanh toán
-                echo "Tổng tiền trước khi áp dụng khuyến mãi: " . $tonggiohang . 'đ';
-                break; // Nếu đã áp dụng khuyến mãi, không cần kiểm tra các khuyến mãi khác
+                  // Output hoặc sử dụng $tongTienSauGiam cho thanh toán
+                  echo "Tổng tiền trước khi áp dụng khuyến mãi: " . $tonggiohang . 'đ';
+                  break; // Nếu đã áp dụng khuyến mãi, không cần kiểm tra các khuyến mãi khác
+                }
               }
             }
             ?>
+
 
 
             <div class="total-price pb-5">
@@ -348,11 +355,14 @@ require 'popup_themthanhcong.php';
                       <span class="price-amount amount text-dark ps-5">
                         <bdi>
                           <span id="tt" class="stt-price">
-                            <?php echo $tongTienSauGiam ?> đ
+                            <?php
+                            $tongTienSauGiam = 0;
+                            echo $tongTienSauGiam ?> đ
                           </span>
-                          <input type="hidden" name="tt" id="input_tt" value="<?php echo $tongtien?>">
-                          <input type="hidden" name="gg" id="input_gg" value="<?php echo $tongtien-$tongTienSauGiam ?>"></bdi>
-                          <input type="hidden" name="makm" id="makm" value="<?php echo $makm ?>"></bdi>
+                          <input type="hidden" name="tt" id="input_tt" value="<?php echo $tongtien ?>">
+                          <input type="hidden" name="gg" id="input_gg"
+                            value="<?php echo $tongtien - $tongTienSauGiam ?>"></bdi>
+                        <input type="hidden" name="makm" id="makm" value="<?php echo $makm ?>"></bdi>
                       </span>
                     </td>
                     <div class="subtotal-line"><b class="stt-name">Thành phố <br>
