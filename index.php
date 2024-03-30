@@ -72,10 +72,10 @@ require 'popup_themthanhcong.php';
     </defs>
   </svg>
 
-  <div class="preloader-wrapper">
+  <!-- <div class="preloader-wrapper">
     <div class="preloader">
     </div>
-  </div>
+  </div> -->
 
   <?php
   include "header.php";
@@ -299,11 +299,11 @@ require 'popup_themthanhcong.php';
           <div class="category-carousel swiper">
             <div class="swiper-wrapper">
               <a href="sanpham.php?loai=01" class="nav-link category-item swiper-slide">
-              <i class="fa-regular fa-lemon fa-2xl" style="color: #FFD43B;"></i>
+                <i class="fa-regular fa-lemon fa-2xl" style="color: #FFD43B;"></i>
                 <h3 class="category-title">Trái cây</h3>
               </a>
               <a href="sanpham.php?loai=02" class="nav-link category-item swiper-slide">
-              <i class="fa-solid fa-fish-fins fa-2xl" style="color: #24b8b4;"></i>
+                <i class="fa-solid fa-fish-fins fa-2xl" style="color: #24b8b4;"></i>
                 <h3 class="category-title">Hải sản</h3>
               </a>
               <a href="sanpham.php?loai=03" class="nav-link category-item swiper-slide">
@@ -311,31 +311,31 @@ require 'popup_themthanhcong.php';
                 <h3 class="category-title">Thịt</h3>
               </a>
               <a href="sanpham.php?loai=04" class="nav-link category-item swiper-slide">
-              <i class="fa-solid fa-egg fa-2xl" style="color: #ffa742;"></i>
+                <i class="fa-solid fa-egg fa-2xl" style="color: #ffa742;"></i>
                 <h3 class="category-title">Trứng</h3>
               </a>
               <a href="sanpham.php?loai=05" class="nav-link category-item swiper-slide">
-              <i class="fa-solid fa-carrot fa-2xl" style="color: #5ed756;"></i>
+                <i class="fa-solid fa-carrot fa-2xl" style="color: #5ed756;"></i>
                 <h3 class="category-title">Rau</h3>
               </a>
-              
+
               <a href="sanpham.php?loai=06" class="nav-link category-item swiper-slide">
-              <i class="fa-solid fa-paw fa-2xl" style="color: #fd0d0d;"></i>
+                <i class="fa-solid fa-paw fa-2xl" style="color: #fd0d0d;"></i>
                 <h3 class="category-title">Đồ cho thú cưng</h3>
               </a>
               <a href="sanpham.php?loai=07" class="nav-link category-item swiper-slide">
-              <i class="fa-solid fa-bowl-rice fa-2xl" style="color: #ffdd00;"></i>
+                <i class="fa-solid fa-bowl-rice fa-2xl" style="color: #ffdd00;"></i>
                 <h3 class="category-title">Mì</h3>
               </a>
               <a href="sanpham.php?loai=08" class="nav-link category-item swiper-slide">
-              <i class="fa-solid fa-utensils fa-2xl"></i>
+                <i class="fa-solid fa-utensils fa-2xl"></i>
                 <h3 class="category-title">Vật dụng gia đình</h3>
               </a>
               <a href="sanpham.php?loai=09" class="nav-link category-item swiper-slide">
-              <i class="fa-solid fa-bottle-water fa-2xl" style="color: #B197FC;"></i>
+                <i class="fa-solid fa-bottle-water fa-2xl" style="color: #B197FC;"></i>
                 <h3 class="category-title">Nước uống</h3>
               </a>
-              
+
             </div>
           </div>
 
@@ -496,419 +496,120 @@ require 'popup_themthanhcong.php';
 
                 <div class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
 
-                  <div class="col">
-                    <div class="product-item">
-                      <span class="badge bg-success position-absolute m-3">-30%</span>
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-bananas.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Chuối</h3>
-                      <span class="qty">1 Nải<i></i></span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">18.000</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
-                      </div>
-                    </div>
-                  </div>
+                  <?php
 
-                  <div class="col">
-                    <div class="product-item">
-                      <span class="badge bg-success position-absolute m-3">-30%</span>
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-biscuits.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Bánh Quy</h3>
-                      <span class="qty">1 Hộp</span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">18.000đ</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
-                      </div>
-                    </div>
-                  </div>
+                  // Số sản phẩm trên mỗi trang
+                  $productsPerPage = 10;
 
-                  <div class="col">
-                    <div class="product-item">
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-cucumber.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Dưa chuột</h3>
-                      <span class="qty">1 Unit</span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">18.000đ</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
-                      </div>
-                    </div>
-                  </div>
+                  // Xác định trang hiện tại từ biến GET
+                  $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
-                  <div class="col">
-                    <div class="product-item">
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-milk.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Sữa tươi</h3>
-                      <span class="qty">1 Hộp</span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">32.000đ</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
-                      </div>
-                    </div>
-                  </div>
+                  // Truy vấn lấy dữ liệu sản phẩm từ cơ sở dữ liệu
+                  $offset = ($current_page - 1) * $productsPerPage;
 
-                  <div class="col">
-                    <div class="product-item">
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-bananas.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Chuối</h3>
-                      <span class="qty">1 Nải</span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">18.000đ</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
-                      </div>
-                    </div>
-                  </div>
+                  $sql = " WHERE MALOAI ='01'";
 
-                  <div class="col">
-                    <div class="product-item">
-                      <span class="badge bg-success position-absolute m-3">-30%</span>
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-biscuits.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Bánh Quy</h3>
-                      <span class="qty">1 Hộp</span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">18.000đ</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="col">
-                    <div class="product-item">
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-cucumber.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Dưa chuột</h3>
-                      <span class="qty">1 Unit</span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">18.000đ</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div class="col">
-                    <div class="product-item">
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-milk.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Sữa tươi</h3>
-                      <span class="qty">1 Hộp</span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">32.000đ</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
-                      </div>
-                    </div>
-                  </div>
+                  if (isset($_GET['loai']) && $_GET['loai'] != "all") {
+                    $sql = $sql . " AND MALOAI = " . $_GET['loai'];
+                  }
+                  if (isset($_GET['gia'])) {
+                    switch ($_GET['gia']) {
+                      case 'gia1':
+                        $sql = $sql . " AND DONGIABANSP BETWEEN 0 AND 10000";
+                        break;
+                      case 'gia2':
+                        $sql = $sql . " AND DONGIABANSP BETWEEN 10000 AND 20000";
+                        break;
+                      case 'gia3':
+                        $sql = $sql . " AND DONGIABANSP BETWEEN 20000 AND 50000";
+                        break;
+                      case 'gia4':
+                        $sql = $sql . " AND DONGIABANSP BETWEEN 50000 AND 100000";
+                        break;
+                      case 'gia5':
+                        $sql = $sql . " AND DONGIABANSP >  100000";
+                        break;
+                      default:
+                        break;
+                    }
 
-                  <div class="col">
-                    <div class="product-item">
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-bananas.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Chuối</h3>
-                      <span class="qty">1 Nải</span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">18.000đ</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                        </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
-                      </div>
-                    </div>
-                  </div>
+                  }
 
-                  <div class="col">
-                    <div class="product-item">
-                      <span class="badge bg-success position-absolute m-3">-30%</span>
-                      <a href="#" class="btn-wishlist"><svg width="24" height="24">
-                          <use xlink:href="#heart"></use>
-                        </svg></a>
-                      <figure>
-                        <a href="single-product.php" title="Product Title">
-                          <img src="images/thumb-biscuits.png" class="tab-image">
-                        </a>
-                      </figure>
-                      <h3>Bánh Quy</h3>
-                      <span class="qty">1 Hộp</span><span class="rating"><svg width="24" height="24"
-                          class="text-primary">
-                          <use xlink:href="#star-solid"></use>
-                        </svg> 4.5</span>
-                      <span class="price">18.000đ</span>
-                      <div class="d-flex align-items-center justify-content-between">
-                        <div class="input-group product-qty">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-left-minus btn btn-danger btn-number"
-                              data-type="minus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                          <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
-                          <span class="input-group-btn">
-                            <button type="button" class="quantity-right-plus btn btn-success btn-number"
-                              data-type="plus">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
+
+
+
+                  if (isset($_GET['search'])) {
+                    $s = $_GET['search'];
+                  } else
+                    $s = '';
+                  $sql .= " AND TENSP like '%" . $s . "%'";
+
+                  $sql = $sql . " LIMIT $offset, $productsPerPage";
+
+                  $query = "SELECT * FROM sanpham " . $sql;
+
+                  $result = $conn->query($query);
+                  if ($result->num_rows > 0) {
+                    $result = $conn->query($query);
+                    $result_all = $result->fetch_all(MYSQLI_ASSOC);
+                    foreach ($result_all as $row) {
+                      $string = $row['MASP'];
+                      // Loại bỏ các kí tự số khỏi chuỗi
+                      $masp = preg_replace('/[0-9]/', '', $string);
+                      ?>
+                      <div class="product-item">
+                        <span class="badge bg-success position-absolute m-3">-30%</span>
+                        <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                            <use xlink:href="#heart"></use>
+                          </svg></a>
+                        <figure>
+                          <a href="single-product.php?id=<?php echo $row['MASP'] ?>" title="Product Title">
+                            <img src="images/<?php echo $masp ?>/<?php echo $row['LINKANH'] ?>" alt="dd" width="270"
+                              height="270" class="tab-image">
+                          </a>
+                        </figure>
+                        <h3>
+                          <?php echo $row['TENSP'] ?>
+                        </h3>
+
+                        <span class="price">
+                          <?php echo number_format($row['DONGIABANSP']) ?> đ
+                        </span>
+                        <div class="d-flex align-items-center justify-content-between">
+                          <div class="input-group product-qty">
+                            <span class="input-group-btn">
+                              <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus">
+                                <svg width="16" height="16">
+                                  <use xlink:href="#minus"></use>
+                                </svg>
+                              </button>
+                            </span>
+                            <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
+                            <span class="input-group-btn">
+                              <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus">
+                                <svg width="16" height="16">
+                                  <use xlink:href="#plus"></use>
+                                </svg>
+                              </button>
+                            </span>
+                          </div>
+                          <a href="themvaogiohang.php?sb_cate=&pdid=<?php echo $row['MASP'] ?>&qty12554=1"
+                            class="nav-link">Thêm
+                            vào giỏ<svg width="18" height="18">
+                              <use xlink:href="#cart"></use>
+                            </svg></a>
                         </div>
-                        <a href="#" class="nav-link">Thêm vào giỏ hàng <iconify-icon icon="uil:shopping-cart"></a>
                       </div>
-                    </div>
-                  </div>
+                      <?php
+                    }
+                  } else {
+                    echo "Không tìm thấy sản phẩm phù hợp";
+                  }
+                  ?>
+
+
 
                 </div>
                 <!-- / product-grid -->

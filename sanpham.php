@@ -155,7 +155,7 @@ require 'popup_themthanhcong.php';
   </div>
 
   <?php
-  include('header.php');
+  include ('header.php');
   ?>
 
   <section class="py-5 mb-5" style="background: url(images/background-pattern.jpg);">
@@ -282,20 +282,20 @@ require 'popup_themthanhcong.php';
         <main class="col-md-10">
           <div class="filter-shop d-flex justify-content-between">
             <div class="showing-product">
-            <?php 
-            // Truy vấn SQL để đếm số lượng sản phẩm
-            $sql= 'SELECT COUNT(*) AS total FROM sanpham';
-            $result = $conn->query($sql);
+              <?php
+              // Truy vấn SQL để đếm số lượng sản phẩm
+              $sql = 'SELECT COUNT(*) AS total FROM sanpham';
+              $result = $conn->query($sql);
 
-            // Kiểm tra và hiển thị số lượng sản phẩm
-            if ($result->num_rows > 0) {
+              // Kiểm tra và hiển thị số lượng sản phẩm
+              if ($result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $total_products = $row['total'];
                 echo "<p>Hiển thị 1 trong $total_products sản phẩm</p>";
-            } else {
+              } else {
                 echo "<p>Không có sản phẩm nào.</p>";
-            }
-            ?>
+              }
+              ?>
             </div>
             <div class="sort-by">
               <select id="input-sort" class="form-control" data-filter-sort="" data-filter-order="">
@@ -404,7 +404,7 @@ require 'popup_themthanhcong.php';
                           </svg>
                         </button>
                       </span>
-                      <input type="text" name="quantity" class="form-control input-number quantity" value="1">
+                      <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
                       <span class="input-group-btn">
                         <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus">
                           <svg width="16" height="16">
@@ -446,7 +446,7 @@ require 'popup_themthanhcong.php';
               <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=5">5</a></li>
               <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=6">6</a></li>
               <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=7">7</a></li>
-              
+
               <li class="page-item">
                 <a class="page-link border-0" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
@@ -509,7 +509,7 @@ require 'popup_themthanhcong.php';
   </section>
 
   <?php
-  include("footer.php");
+  include ("footer.php");
   ?>
 
 </html>
