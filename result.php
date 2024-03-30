@@ -1,116 +1,320 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en">
+<?php
+require 'head.php';
+require 'connect.php';
+require 'popup_themthanhcong.php';
 
-<?php 
-    require 'head.php' ;
-    require 'connect.php';    
 ?>
-<body class="biolife-body">
 
-    <!-- Preloader -->
-        <!-- <div id="biof-loading">
-            <div class="biof-loading-center">
-                <div class="biof-loading-center-absolute">
-                    <div class="dot dot-one"></div>
-                    <div class="dot dot-two"></div>
-                    <div class="dot dot-three"></div>
+<body>
+
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <defs>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="link" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M12 19a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0-4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm-5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm7-12h-1V2a1 1 0 0 0-2 0v1H8V2a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3Zm1 17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9h16Zm0-11H4V6a1 1 0 0 1 1-1h1v1a1 1 0 0 0 2 0V5h8v1a1 1 0 0 0 2 0V5h1a1 1 0 0 1 1 1ZM7 15a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0 4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="arrow-right" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M17.92 11.62a1 1 0 0 0-.21-.33l-5-5a1 1 0 0 0-1.42 1.42l3.3 3.29H7a1 1 0 0 0 0 2h7.59l-3.3 3.29a1 1 0 0 0 0 1.42a1 1 0 0 0 1.42 0l5-5a1 1 0 0 0 .21-.33a1 1 0 0 0 0-.76Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="category" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 5.5h-6.28l-.32-1a3 3 0 0 0-2.84-2H5a3 3 0 0 0-3 3v13a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-10a3 3 0 0 0-3-3Zm1 13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-13a1 1 0 0 1 1-1h4.56a1 1 0 0 1 .95.68l.54 1.64a1 1 0 0 0 .95.68h7a1 1 0 0 1 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="calendar" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 4h-2V3a1 1 0 0 0-2 0v1H9V3a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3Zm1 15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7h16Zm0-9H4V7a1 1 0 0 1 1-1h2v1a1 1 0 0 0 2 0V6h6v1a1 1 0 0 0 2 0V6h2a1 1 0 0 1 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="heart" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M20.16 4.61A6.27 6.27 0 0 0 12 4a6.27 6.27 0 0 0-8.16 9.48l7.45 7.45a1 1 0 0 0 1.42 0l7.45-7.45a6.27 6.27 0 0 0 0-8.87Zm-1.41 7.46L12 18.81l-6.75-6.74a4.28 4.28 0 0 1 3-7.3a4.25 4.25 0 0 1 3 1.25a1 1 0 0 0 1.42 0a4.27 4.27 0 0 1 6 6.05Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="plus" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 11h-6V5a1 1 0 0 0-2 0v6H5a1 1 0 0 0 0 2h6v6a1 1 0 0 0 2 0v-6h6a1 1 0 0 0 0-2Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="minus" viewBox="0 0 24 24">
+        <path fill="currentColor" d="M19 11H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="cart" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M8.5 19a1.5 1.5 0 1 0 1.5 1.5A1.5 1.5 0 0 0 8.5 19ZM19 16H7a1 1 0 0 1 0-2h8.491a3.013 3.013 0 0 0 2.885-2.176l1.585-5.55A1 1 0 0 0 19 5H6.74a3.007 3.007 0 0 0-2.82-2H3a1 1 0 0 0 0 2h.921a1.005 1.005 0 0 1 .962.725l.155.545v.005l1.641 5.742A3 3 0 0 0 7 18h12a1 1 0 0 0 0-2Zm-1.326-9l-1.22 4.274a1.005 1.005 0 0 1-.963.726H8.754l-.255-.892L7.326 7ZM16.5 19a1.5 1.5 0 1 0 1.5 1.5a1.5 1.5 0 0 0-1.5-1.5Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="check" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M18.71 7.21a1 1 0 0 0-1.42 0l-7.45 7.46l-3.13-3.14A1 1 0 1 0 5.29 13l3.84 3.84a1 1 0 0 0 1.42 0l8.16-8.16a1 1 0 0 0 0-1.47Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="trash" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M10 18a1 1 0 0 0 1-1v-6a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1ZM20 6h-4V5a3 3 0 0 0-3-3h-2a3 3 0 0 0-3 3v1H4a1 1 0 0 0 0 2h1v11a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8h1a1 1 0 0 0 0-2ZM10 5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1h-4Zm7 14a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V8h10Zm-3-1a1 1 0 0 0 1-1v-6a1 1 0 0 0-2 0v6a1 1 0 0 0 1 1Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="star-outline" viewBox="0 0 15 15">
+        <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+          d="M7.5 9.804L5.337 11l.413-2.533L4 6.674l2.418-.37L7.5 4l1.082 2.304l2.418.37l-1.75 1.793L9.663 11L7.5 9.804Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="star-solid" viewBox="0 0 15 15">
+        <path fill="currentColor"
+          d="M7.953 3.788a.5.5 0 0 0-.906 0L6.08 5.85l-2.154.33a.5.5 0 0 0-.283.843l1.574 1.613l-.373 2.284a.5.5 0 0 0 .736.518l1.92-1.063l1.921 1.063a.5.5 0 0 0 .736-.519l-.373-2.283l1.574-1.613a.5.5 0 0 0-.283-.844L8.921 5.85l-.968-2.062Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="search" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M21.71 20.29L18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0a1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 7-7a7 7 0 0 1-7 7Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="user" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M15.71 12.71a6 6 0 1 0-7.42 0a10 10 0 0 0-6.22 8.18a1 1 0 0 0 2 .22a8 8 0 0 1 15.9 0a1 1 0 0 0 1 .89h.11a1 1 0 0 0 .88-1.1a10 10 0 0 0-6.25-8.19ZM12 12a4 4 0 1 1 4-4a4 4 0 0 1-4 4Z" />
+      </symbol>
+      <symbol xmlns="http://www.w3.org/2000/svg" id="close" viewBox="0 0 15 15">
+        <path fill="currentColor"
+          d="M7.953 3.788a.5.5 0 0 0-.906 0L6.08 5.85l-2.154.33a.5.5 0 0 0-.283.843l1.574 1.613l-.373 2.284a.5.5 0 0 0 .736.518l1.92-1.063l1.921 1.063a.5.5 0 0 0 .736-.519l-.373-2.283l1.574-1.613a.5.5 0 0 0-.283-.844L8.921 5.85l-.968-2.062Z" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <div class="preloader-wrapper">
+    <div class="preloader">
+    </div>
+  </div>
+
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart" aria-labelledby="My Cart">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Giỏ hàng của bạn</span>
+          <span class="badge bg-primary rounded-pill">
+            <?php echo $_SESSION['slsp'] ?>
+          </span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <?php
+            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+              foreach ($_SESSION['cart'] as $item) {
+                $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                $string = $row['MASP'];
+                $masp = preg_replace('/[0-9]/', '', $string);
+                ?>
+                <div>
+                  <h6 class="my-0"><a href="#" class="product-name">
+                      <?php echo $row['TENSP'] ?>
+                    </a></h6>
+                  <small class="text-body-secondary">
+                    <?php echo $row['MOTA'] ?>
+                  </small>
                 </div>
-            </div>
-        </div> -->
+                <span class="text-body-secondary">
+                  <?php echo number_format($row['DONGIABANSP']) ?>
+                </span>
+              </li>
+              <div class="qty">
+                <label for="cart[id123][qty]">Số lượng:</label>
+                <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]"
+                  value="<?php echo $item['quant'] ?>" disabled>
+              </div>
+              <?php
+              }
+              ?>
+            <button class="w-100 btn btn-primary btn-lg" id="checkoutButton" type="button">Tiếp tục thanh toán</button>
+            <?php
+            } else {
+              echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
+            }
+            ?>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById("checkoutButton").addEventListener("click", function () {
+      window.location.href = "giohang.php";
+    });
+  </script>
+  <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
+    aria-labelledby="Search">
+    <div class="offcanvas-header justify-content-center">
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Search</span>
+        </h4>
+        <form role="search" action="index.php" method="get" class="d-flex mt-3 gap-0">
+          <input class="form-control rounded-start rounded-0 bg-light" type="email"
+            placeholder="What are you looking for?" aria-label="What are you looking for?">
+          <button class="btn btn-dark rounded-end rounded-0" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
-    <!-- HEADER -->
-    <?php require 'header.php' ?>
+  <?php
+  include ('header.php');
+  ?>
 
-
-    <!--Navigation section-->
-    <!-- <div class="container">
-        <nav class="biolife-nav">
-            <ul>
-                <li class="nav-item"><a href="index-2.html" class="permal-link">Home</a></li>
-                <li class="nav-item"><a href="#" class="permal-link">Natural Organic</a></li>
-                <li class="nav-item"><span class="current-page">Fresh Fruit</span></li>
-            </ul>
+  <section class="py-5 mb-5" style="background: url(images/background-pattern.jpg);">
+    <div class="container-fluid">
+      <div class="d-flex justify-content-between">
+        <h1 class="page-title pb-2">Sản phẩm</h1>
+        <nav class="breadcrumb fs-6">
+          <a class="breadcrumb-item nav-link" href="index.php">Trang chủ</a>
+          <a class="breadcrumb-item nav-link" href="sanpham.php">Sản phẩm</a>
+          <span class="breadcrumb-item active" aria-current="page">Shop</span>
         </nav>
-    </div> -->
+      </div>
+    </div>
+  </section>
 
-    <div class="page-contain category-page no-sidebar">
-        <div class="container">
-            <div class="row">
+  <div class="shopify-grid">
+    <div class="container-fluid">
+      <div class="row g-5">
+        <aside class="col-md-2">
+          <div class="sidebar">
+            <div class="widget-menu">
+              <div class="widget-search-bar">
+                <form role="search" method="get" class="d-flex position-relative">
+                  <form class="d-flex mt-3 gap-0" action="index.php">
+                    <input class="form-control form-control-lg rounded-2 bg-light" type="email"
+                      placeholder="Bạn đang tìm gì" aria-label="Search here">
+                    <button class="btn bg-transparent position-absolute end-0" type="submit"><svg width="24" height="24"
+                        viewBox="0 0 24 24">
+                        <use xlink:href="#search"></use>
+                      </svg></button>
+                  </form>
+                </form>
+              </div>
+            </div>
+            <div class="widget-product-categories pt-5">
+              <h5 class="widget-title">Danh mục sản phẩm</h5>
+              <ul class="product-categories sidebar-list list-unstyled">
+                <li class="cat-item">
+                  <a href="sanpham.php">Tất cả</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=01" class="nav-link">Trái cây</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=02" class="nav-link">Hải sản</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=03" class="nav-link">Thịt</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=04" class="nav-link">Trứng</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=05" class="nav-link">Rau</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=06" class="nav-link">Đồ cho thú cưng</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=07" class="nav-link">Mì</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=08" class="nav-link">Vật dụng gia đình</a>
+                </li>
+                <li class="cat-item">
+                  <a href="?loai=09" class="nav-link">Nước uống</a>
+                </li>
+              </ul>
+            </div>
+            <div class="widget-product-tags pt-3">
+              <h5 class="widget-title">Đồ ăn nhanh</h5>
+              <ul class="product-tags sidebar-list list-unstyled">
+                <li class="tags-item">
+                  <a href="#" class="nav-link">Mỳ ý</a>
+                </li>
+                <li class="tags-item">
+                  <a href="#" class="nav-link">Hamberger</a>
+                </li>
+                <li class="tags-item">
+                  <a href="#" class="nav-link">Hot Dog</a>
+                </li>
+                <li class="tags-item">
+                  <a href="#" class="nav-link">Gà Rán</a>
+                </li>
+              </ul>
+            </div>
+            <div class="widget-product-brands pt-3">
+              <h5 class="widget-title">Hải sản</h5>
+              <ul class="product-tags sidebar-list list-unstyled">
+                <li class="tags-item">
+                  <a href="#" class="nav-link">Tôm</a>
+                </li>
+                <li class="tags-item">
+                  <a href="#" class="nav-link">Cua</a>
+                </li>
+                <li class="tags-item">
+                  <a href="#" class="nav-link">Các loại hải sản khác</a>
+                </li>
+              </ul>
+            </div>
+            <div class="widget-price-filter pt-3">
+              <h5 class="widget-titlewidget-title">Giá</h5>
+              <ul class="product-tags sidebar-list list-unstyled">
+                <li class="tags-item">
+                  <a href="?gia=gia1" class="nav-link">Thấp hơn 10.000đ</a>
+                </li>
+                <li class="tags-item">
+                  <a href="?gia=gia2" class="nav-link">10.000đ-20.000đ</a>
+                </li>
+                <li class="tags-item">
+                  <a href="?gia=gia3" class="nav-link">20.000đ-50.000đ</a>
+                </li>
+                <li class="tags-item">
+                  <a href="?gia=gia4" class="nav-link">50.000đ-100.000đ</a>
+                </li>
+                <li class="tags-item">
+                  <a href="?gia=gia5" class="nav-link">Lớn hơn 100.000đ</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </aside>
 
-                <!-- Main content -->
-                <div id="main-content" class="main-content col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <main class="col-md-10">
+          <div class="filter-shop d-flex justify-content-between">
+            <div class="showing-product">
+              <?php
+              // Truy vấn SQL để đếm số lượng sản phẩm
+              $sql = 'SELECT COUNT(*) AS total FROM sanpham';
+              $result = $conn->query($sql);
 
-                    <div class="block-item recently-products-cat md-margin-bottom-39">
-                        
-                    </div>
+              // Kiểm tra và hiển thị số lượng sản phẩm
+              if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $total_products = $row['total'];
+                echo "<p>Hiển thị 1 trong $total_products sản phẩm</p>";
+              } else {
+                echo "<p>Không có sản phẩm nào.</p>";
+              }
+              ?>
+            </div>
+            <div class="sort-by">
+              <select id="input-sort" class="form-control" data-filter-sort="" data-filter-order="">
+                <option value="">Sắp xếp theo mặc định</option>
+                <option value="">Tên (A - Z)</option>
+                <option value="">Tên (Z - A)</option>
+                <option value="">Giá (Thấp-Cao)</option>
+                <option value="">Giá (Cao-Thấp)</option>
+                <option value="">Đánh giá (Cao)</option>
+                <option value="">Rating (Lowest)</option>
+                <option value="">Model (A - Z)</option>
+                <option value="">Model (Z - A)</option>
+              </select>
+            </div>
+          </div>
 
-                    <div class="product-category grid-style">
+          <div class="product-grid row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
 
-                        <div id="top-functions-area" class="top-functions-area" >
-                            <div class="flt-item to-left group-on-mobile">
-                                <span class="flt-title">Lọc sản phẩm:</span>
-                                <a href="#" class="icon-for-mobile">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                </a>
-                                <div class="wrap-selectors">
-                                    <form action="#" name="frm-refine" method="get">
-                                        <span class="title-for-mobile">Lọc sản phẩm:</span>
-                                        <div data-title="Price:" class="selector-item">
-                                            <select name="gia" class="selector">
-                                                <option value="">Giá</option>
-                                                <option value="loc-gia-1">25K - 35K</option>
-                                                <option value="loc-gia-2">35K - 100K</option>
-                                                <option value="loc-gia-3">100K - 200K</option>
-                                                <option value="loc-gia-4">> 200K</option>
-                                            </select>
-                                        </div>
-                                        <div data-title="Brand:" class="selector-item">
-                                            <select name="loai" class="selector">
-                                                <option value="all">Tất cả sản phẩm</option>
-                                                <?php
-                                                    $sql = "SELECT * FROM loaisanpham";
-                                                    $result = $conn->query($sql);
-                                                        if ($result->num_rows > 0) {
-                                                        $result = $conn->query($sql);
-                                                        $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-                                                        foreach ($result_all as $row) {
-                                                ?>
-                                                    <option value="<?php echo $row['MALOAI'] ?>"><?php echo $row['TENLOAI'] ?></option>
-                                                <?php }} ?>
-                                            </select>
-                                        </div>
-                                        <div class="selector-item">
-                                            <button class="btn-fill">Lọc</button>
-                                        </div>
-                                        <p class="btn-for-mobile"><button type="submit" class="btn-submit">Lọc</button></p>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="flt-item to-right">
-                                <span class="flt-title">Sắp xếp</span>
-                                <div class="wrap-selectors">
-                                    <div class="selector-item orderby-selector">
-                                        <select name="orderby" class="orderby" aria-label="Shop order">
-                                            <option value="menu_order" selected="selected">Mặc định</option>
-                                            <option value="popularity">Bán chạy nhất</option>
-                                            <option value="highest">Giá cao đến thấp</option>
-                                            <option value="lowest">Giá thấp đến cao</option>
-                                        </select>
-                                    </div>
-                                    <!-- <div class="selector-item viewmode-selector">
-                                        <a href="category-grid-left-sidebar.html" class="viewmode grid-mode active"><i class="biolife-icon icon-grid"></i></a>
-                                        <a href="category-list-left-sidebar.html" class="viewmode detail-mode"><i class="biolife-icon icon-list"></i></a>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <ul class="products-list">
-
-                            <?php
+          <?php
                                 // Số sản phẩm trên mỗi trang
                                 $productsPerPage = 12;
 
@@ -163,90 +367,138 @@
                                         // Loại bỏ các kí tự số khỏi chuỗi
                                         $masp = preg_replace('/[0-9]/', '', $string);
                             ?>
-                                <li class="product-item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                                    <div class="contain-product layout-default">
-                                        <div class="image-container">
-                                            <div class="product-thumb">
-                                                <a href="product-detail.php?id=<?php echo $row['MASP'] ?>" class="link-to-product">
-                                                    <img class="fit-image" src="images/<?php echo $masp ?>/<?php echo $row['LINKANH'] ?>" alt="dd" width="270" height="270" class="product-thumnail">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="info">
-                                            <h4 class="product-title"><a href="#" class="pr-name"><?php echo $row['TENSP'] ?></a></h4>
-                                            <div class="price">
-                                                <ins><span class="price-amount"><span class="currencySymbol"></span><?php echo number_format($row['DONGIABANSP']) ?> đ</span></ins>
-                                                <del><span class="price-amount"><span class="currencySymbol"></span><?php echo number_format($row['DONGIABANSP']+10000) ?> đ</span></del>
-                                            </div>
-                                            <!-- <div class="shipping-info">
-                                                <p class="shipping-day">3-Day Shipping</p>
-                                                <p class="for-today">Pree Pickup Today</p>
-                                            </div> -->
-                                            <div class="slide-down-box">
-                                                <div class="buttons">
-                                                    <a href="#" style="padding: 10px 5px !important; margin-right: 5px !important;" class="btn add-to-cart-btn">đặt hàng ngay</a>
-                                                    <a href="#" style="padding: 0 !important; width: 10px !important;" class="btn"></a>
-                                                    <a href="themvaogiohang.php?from=index&pdid=<?php echo $row['MASP'] ?>&qty12554=1" 
-                                                                style="padding: 10px 5px !important; " class="btn add-to-cart-btn">thêm vào giỏ</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                            <?php
-                                    }
-                                } 
-                            }
-                            ?>
+                <div class="product-item">
+                  <span class="badge bg-success position-absolute m-3">-30%</span>
+                  <a href="#" class="btn-wishlist"><svg width="24" height="24">
+                      <use xlink:href="#heart"></use>
+                    </svg></a>
+                  <figure>
+                    <a href="single-product.php?id=<?php echo $row['MASP'] ?>" title="Product Title">
+                      <img src="images/<?php echo $masp ?>/<?php echo $row['LINKANH'] ?>" alt="dd" width="270" height="270"
+                        class="tab-image">
+                    </a>
+                  </figure>
+                  <h3>
+                    <?php echo $row['TENSP'] ?>
+                  </h3>
 
-                            </ul>
-                        </div>
-
-                        <div class="biolife-panigations-block">
-                            <ul class="panigation-contain">
-                                <li><a href="#" class="link-page next"><i class="fa fa-angle-left" aria-hidden="true"></i></a></li>
-                                <?php
-                                     // Tính số trang dựa trên tổng số sản phẩm
-                                    $q = "SELECT COUNT(*) AS total FROM sanpham";
-                                    $rs = $conn->query($q);
-
-                                    if ($rs->num_rows > 0) {
-                                        $r = $rs->fetch_assoc();
-                                        $total_products = $r['total'];
-                                    } else {
-                                        $total_products = 0;
-                                    }
-                                    $total_pages = ceil($total_products / $productsPerPage);
-                                    for ($i = 1; $i <= $total_pages; $i++) {
-                                        $active_class = ($i == $current_page) ? 'current-page' : 'link-page';
-                                        echo '<li><a href="?page='.$i.'" class="'. $active_class .'">'.$i.'</a></li>';
-                                    }
-                                ?>
-                                <li><a href="#" class="link-page next"><i class="fa fa-angle-right" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-
+                  <span class="price">
+                    <?php echo number_format($row['DONGIABANSP']) ?> đ
+                  </span>
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div class="input-group product-qty">
+                      <span class="input-group-btn">
+                        <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus">
+                          <svg width="16" height="16">
+                            <use xlink:href="#minus"></use>
+                          </svg>
+                        </button>
+                      </span>
+                      <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
+                      <span class="input-group-btn">
+                        <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus">
+                          <svg width="16" height="16">
+                            <use xlink:href="#plus"></use>
+                          </svg>
+                        </button>
+                      </span>
                     </div>
-
+                    <a href="themvaogiohang.php?sb_cate=&pdid=<?php echo $row['MASP'] ?>&qty12554=1" class="nav-link">Thêm
+                      vào giỏ<svg width="18" height="18">
+                        <use xlink:href="#cart"></use>
+                      </svg></a>
+                  </div>
                 </div>
+                <?php
+              }
+            } 
+        }
+            ?>
+            <!-- <div class="col">
+            </div> -->
+
+          </div>
+          <!-- / product-grid -->
+
+          <nav class="text-center py-4" aria-label="Page navigation">
+            <ul class="pagination d-flex justify-content-center">
+              <li class="page-item disabled">
+                <a class="page-link bg-none border-0" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item active" aria-current="page"><a class="page-link border-0"
+                  href="sanpham.php?page=1">1</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=2">2</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=3">3</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=4">4</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=5">5</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=6">6</a></li>
+              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=7">7</a></li>
+
+              <li class="page-item">
+                <a class="page-link border-0" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+
+          </nav>
+
+        </main>
+
+      </div>
+    </div>
+  </div>
+
+  <section class="py-5">
+    <div class="container-fluid">
+
+      <div class="bg-secondary py-5 my-5 rounded-5"
+        style="background: url('images/bg-leaves-img-pattern.png') no-repeat;">
+        <div class="container my-5">
+          <div class="row">
+            <div class="col-md-6 p-5">
+              <div class="section-header">
+                <h2 class="section-title display-4">Get <span class="text-primary">25% Discount</span> on your first
+                  purchase</h2>
+              </div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dictumst amet, metus, sit massa posuere
+                maecenas. At tellus ut nunc amet vel egestas.</p>
+            </div>
+            <div class="col-md-6 p-5">
+              <form>
+                <div class="mb-3">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control form-control-lg" name="name" id="name" placeholder="Name">
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">Email</label>
+                  <input type="email" class="form-control form-control-lg" name="email" id="email"
+                    placeholder="abc@mail.com">
+                </div>
+                <div class="form-check form-check-inline mb-3">
+                  <label class="form-check-label" for="subscribe">
+                    <input class="form-check-input" type="checkbox" id="subscribe" value="subscribe">
+                    Subscribe to the newsletter</label>
+                </div>
+                <div class="d-grid gap-2">
+                  <button type="submit" class="btn btn-dark btn-lg">Submit</button>
+                </div>
+              </form>
 
             </div>
+
+          </div>
+
         </div>
+      </div>
+
     </div>
+  </section>
 
-   <?php require 'footer.php' ?>
-
-    <!-- Scroll Top Button -->
-    <a class="btn-scroll-top"><i class="biolife-icon icon-left-arrow"></i></a>
-
-    <script src="assets/js/jquery-3.4.1.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/jquery.countdown.min.js"></script>
-    <script src="assets/js/jquery.nice-select.min.js"></script>
-    <script src="assets/js/jquery.nicescroll.min.js"></script>
-    <script src="assets/js/slick.min.js"></script>
-    <script src="assets/js/biolife.framework.js"></script>
-    <script src="assets/js/functions.js"></script>
-</body>
+  <?php
+  include ("footer.php");
+  ?>
 
 </html>
