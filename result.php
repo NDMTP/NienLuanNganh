@@ -168,7 +168,7 @@
                                         <div class="image-container">
                                             <div class="product-thumb">
                                                 <a href="product-detail.php?id=<?php echo $row['MASP'] ?>" class="link-to-product">
-                                                    <img class="fit-image" src="assets/images/products/<?php echo $masp ?>/<?php echo $row['LINKANH'] ?>" alt="dd" width="270" height="270" class="product-thumnail">
+                                                    <img class="fit-image" src="images/<?php echo $masp ?>/<?php echo $row['LINKANH'] ?>" alt="dd" width="270" height="270" class="product-thumnail">
                                                 </a>
                                             </div>
                                         </div>
