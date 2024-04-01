@@ -12,9 +12,9 @@ $thanhtien = $_GET['thanhtien'];
 $ok = 0;
 // Tạo hoá đơn :  các trang thái đơn chưa thanh toán =0; đã thanh toán = 1; huy don = -1
 if (isset ($_GET['makm']))
-    $addBill = "insert into hoadon values($nextId,'{$_SESSION['email']}',$payment,'{$_GET['makm']}', sysdate(), 0,$thanhtien)";
+    $addBill = "insert into hoadon values($nextId,'{$_GET['makm']}','{$_SESSION['email']}',$payment, sysdate(), 0,$thanhtien)";
 else
-    $addBill = "insert into hoadon values($nextId,'{$_SESSION['email']}',$payment,'{$_GET['makm']}', sysdate(), 0,$thanhtien)";
+    $addBill = "insert into hoadon values($nextId,'{$_GET['makm']}','{$_SESSION['email']}',$payment, sysdate(), 0,$thanhtien)";
 if ($conn->query($addBill))
     $ok = 1;
 
