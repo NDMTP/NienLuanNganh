@@ -93,6 +93,7 @@ require 'popup_themthanhcong.php';
 
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <?php
+            $tonggiohang = 0;
             if (isset ($_SESSION['cart']) && !empty ($_SESSION['cart'])) {
               foreach ($_SESSION['cart'] as $item) {
                 $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
@@ -308,7 +309,7 @@ require 'popup_themthanhcong.php';
           <form action="thongtinmuahang.php" method="get">
 
             <?php
-            $tonggiohang = 0;
+            
             // Bước 1: Kiểm tra xem có sản phẩm nào trong giỏ hàng không
             if ($tonggiohang == 0) {
               echo "<p>Không có sản phẩm nào trong giỏ hàng.</p>";
@@ -356,7 +357,7 @@ require 'popup_themthanhcong.php';
                         <bdi>
                           <span id="tt" class="stt-price">
                             <?php
-                            $tongTienSauGiam = 0;
+                            
                             echo $tongTienSauGiam ?> đ
                           </span>
                           <input type="hidden" name="tt" id="input_tt" value="<?php echo $tongtien ?>">
