@@ -2167,6 +2167,17 @@ require 'popup_themthanhcong.php';
       </div>
     </div>
   </section>
+  <!-- Chatbot Interface -->
+  <div id="chatbot"
+    style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: #f9f9f9; border: 1px solid #ccc; padding: 10px; border-radius: 50%; cursor: pointer; overflow: hidden;">
+    <div id="chatMessages" style="display: none; width: 240px; height: 200px; overflow-y: auto; margin-bottom: 10px;">
+    </div>
+    <input type="text" id="chatInput" style="display: none; width: 70%;" placeholder="Type your message...">
+    <button onclick="sendMessage()" style="display: none;">Send</button>
+  </div>
+  <script src="chatbot.js"></script>
+  
+
   <?php
   include "footer.php";
   ?>

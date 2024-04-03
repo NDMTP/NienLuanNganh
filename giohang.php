@@ -4,6 +4,8 @@
 require 'head.php';
 require 'connect.php';
 require 'popup_themthanhcong.php';
+$tonggiohang = 0;
+$tongTienSauGiam = 0;
 ?>
 
 <body>
@@ -93,6 +95,7 @@ require 'popup_themthanhcong.php';
 
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <?php
+            
             $tonggiohang = 0;
             if (isset ($_SESSION['cart']) && !empty ($_SESSION['cart'])) {
               foreach ($_SESSION['cart'] as $item) {

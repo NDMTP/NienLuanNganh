@@ -404,7 +404,11 @@ require 'popup_themthanhcong.php';
                           </svg>
                         </button>
                       </span>
-                      <input type="text" id="quantity" name="quantity" class="form-control input-number" value="1">
+                      <?php
+                      $biennhap = 1;
+                      
+                      ?>
+                      <input type="text" id="quantity" name="quantity" class="form-control input-number" value="<?php echo $biennhap ?>">
                       <span class="input-group-btn">
                         <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus">
                           <svg width="16" height="16">
