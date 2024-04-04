@@ -304,206 +304,109 @@ require 'connect.php';
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-description" role="tabpanel"
               aria-labelledby="v-pills-description-tab" tabindex="0">
-              <h5>Mô tả chi tiết sản phẩm</h5>
-              <p>Mình hãy cứ sống thế đi, ta cứ mãi ước mơ
-                <br>
-                Ta cứ luôn mong chờ điều tuyệt vời nhé em
-                <br>
-                Cầm tay nhau, mãi bước đi, sẽ cứ thế mỉm cười
-                <br>
-                Ta sẽ quên đi bao nhiêu tình yêu tan vỡ như là giấc mơ
-              </p>
-              <ul style="list-style-type:disc;" class="list-unstyled ps-4">
-                <li>No love, no life, no love, no life</li>
-                <li>Anh chẳng còn muốn quay về nơi ấy</li>
-                <li>No love, no life, no love, no life (hey, Kewtiie) (what's up?)</li>
-                <li>Sẽ mãi thuộc về nơi đây với em</li>
-              </ul>
-              <p>Em biết anh là một thằng rapper rót mật vào tai bằng dây thanh
-                <br>
-                Chỉ xuất hiện là họ đã say nhanh
-                <br>
-                Mang tiếp trap và trăm cái red flag là bởi vì luôn luôn có phụ nữ vây quanh
-                <br>
-                Có một ngàn lý do để phải ghen nhưng em không
-                <br>
-                Em up hình, biết chắc anh phải xem và đặc biệt phải khen sau mỗi lần xem xong
-              </p>
+              <?php echo $row['MOTA'] ?>
             </div>
             <div class="tab-pane fade" id="v-pills-additional" role="tabpanel" aria-labelledby="v-pills-additional-tab"
               tabindex="0">
-              <p>It is Comfortable and Best</p>
-              <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-                laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
-                id est laborum.</p>
+              <!-- Phần thông tin thêm -->
             </div>
             <div class="tab-pane fade" id="v-pills-reviews" role="tabpanel" aria-labelledby="v-pills-reviews-tab"
               tabindex="0">
-              <div class="review-box d-flex flex-wrap">
-                <div class="col-lg-6 d-flex flex-wrap gap-3">
-                  <div class="col-md-2">
-                    <div class="image-holder">
-                      <img src="images/reviewer-1.jpg" alt="review" class="img-fluid rounded-circle">
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="review-content">
-                      <div class="rating-container d-flex align-items-center">
-                        <div class="rating" data-rating="1">
-                          <svg width="24" height="24" class="text-primary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="2">
-                          <svg width="24" height="24" class="text-primary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="3">
-                          <svg width="24" height="24" class="text-primary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="4">
-                          <svg width="24" height="24" class="text-secondary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="5">
-                          <svg width="24" height="24" class="text-secondary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <span class="rating-count">(3.5)</span>
-                      </div>
-                      <div class="review-header">
-                        <span class="author-name">Tina Johnson</span>
-                        <span class="review-date">– 03/07/2023</span>
-                      </div>
-                      <p>Vitae tortor condimentum lacinia quis vel eros donec ac. Nam at lectus urna duis convallis
-                        convallis</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6 d-flex flex-wrap gap-3">
-                  <div class="col-md-2">
-                    <div class="image-holder">
-                      <img src="images/reviewer-2.jpg" alt="review" class="img-fluid rounded-circle">
-                    </div>
-                  </div>
-                  <div class="col-md-8">
-                    <div class="review-content">
-                      <div class="rating-container d-flex align-items-center">
-                        <div class="rating" data-rating="1">
-                          <svg width="24" height="24" class="text-primary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="2">
-                          <svg width="24" height="24" class="text-primary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="3">
-                          <svg width="24" height="24" class="text-primary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="4">
-                          <svg width="24" height="24" class="text-secondary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="5">
-                          <svg width="24" height="24" class="text-secondary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <span class="rating-count">(3.5)</span>
-                      </div>
-                      <div class="review-header">
-                        <span class="author-name">Jenny Willis</span>
-                        <span class="review-date">– 03/06/2022</span>
-                      </div>
-                      <p>Vitae tortor condimentum lacinia quis vel eros donec ac. Nam at lectus urna duis convallis
-                        convallis</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <!-- Phần đánh giá của khách hàng -->
+              <?php
+              // Lấy MASP từ URL
+              $spid = $_GET['id'];
 
-              <div class="add-review mt-5">
-                <h3>Add a review</h3>
-                <p>Your email address will not be published. Required fields are marked *</p>
-                <form id="form" class="form-group">
+              // Truy vấn để lấy thông tin sản phẩm
+              $querySanPham = "SELECT * FROM sanpham WHERE MASP = '" . $spid . "'";
+              $resultSanPham = $conn->query($querySanPham);
 
-                  <div class="pb-3">
-                    <div class="review-rating">
-                      <span>Your rating *</span>
-                      <div class="rating-container d-flex align-items-center">
-                        <div class="rating" data-rating="1">
-                          <svg width="24" height="24" class="text-primary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
+              if ($resultSanPham->num_rows > 0) {
+                $rowSanPham = $resultSanPham->fetch_assoc();
+
+                // Truy vấn để lấy đánh giá của sản phẩm kết hợp với thông tin người dùng
+                $queryDanhGia = "SELECT danhgiasp.*, nguoidung.ten AS ten_nguoidung
+                                            FROM danhgiasp
+                                            LEFT JOIN nguoidung ON danhgiasp.email = nguoidung.email
+                                            WHERE danhgiasp.masp = '" . $spid . "'";
+                $resultDanhGia = $conn->query($queryDanhGia);
+
+                echo "<div class='product-reviews'>";
+                if ($resultDanhGia->num_rows > 0) {
+                  // Hiển thị các đánh giá nếu có
+                  echo "<div class='row'>";
+                  while ($rowDanhGia = $resultDanhGia->fetch_assoc()) {
+                    ?>
+                    <div class="col-lg-4">
+                      <div class="review-box d-flex flex-wrap">
+                        <div class="col-md-2">
+                          <div class="image-holder">
+                            <img src="images/reviewer-2.jpg" alt="review" class="img-fluid rounded-circle">
+                          </div>
                         </div>
-                        <div class="rating" data-rating="2">
-                          <svg width="24" height="24" class="text-primary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
+                        <div class="col-md-10">
+                          <div class="review-content">
+                            <div class="rating-container d-flex align-items-center">
+                              <div class="rating" data-rating="1">
+                                <svg width="24" height="24" class="text-primary">
+                                  <use xlink:href="#star-solid"></use>
+                                </svg>
+                              </div>
+                              <div class="rating" data-rating="2">
+                                <svg width="24" height="24" class="text-primary">
+                                  <use xlink:href="#star-solid"></use>
+                                </svg>
+                              </div>
+                              <div class="rating" data-rating="3">
+                                <svg width="24" height="24" class="text-primary">
+                                  <use xlink:href="#star-solid"></use>
+                                </svg>
+                              </div>
+                              <div class="rating" data-rating="4">
+                                <svg width="24" height="24" class="text-secondary">
+                                  <use xlink:href="#star-solid"></use>
+                                </svg>
+                              </div>
+                              <div class="rating" data-rating="5">
+                                <svg width="24" height="24" class="text-secondary">
+                                  <use xlink:href="#star-solid"></use>
+                                </svg>
+                              </div>
+                            </div>
+                            <div class="review-header">
+                              <span class="author-name">
+                                <?php echo "<strong>Tên người dùng: </strong>" . $rowDanhGia['ten_nguoidung']; ?>
+                              </span>
+                              
+                              <span class="review-date">
+                                <?php echo "<strong>Thời gian đánh giá: </strong>" . $rowDanhGia['TGDANHGIA']; ?>
+                              </span>
+                            </div>
+                            <p>
+                              <?php echo "<strong>Nội dung đánh giá: </strong>" . $rowDanhGia['NOIDUNGDG']; ?>
+                            </p>
+                          </div>
                         </div>
-                        <div class="rating" data-rating="3">
-                          <svg width="24" height="24" class="text-primary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="4">
-                          <svg width="24" height="24" class="text-secondary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <div class="rating" data-rating="5">
-                          <svg width="24" height="24" class="text-secondary">
-                            <use xlink:href="#star-solid"></use>
-                          </svg>
-                        </div>
-                        <span class="rating-count">(3.5)</span>
                       </div>
                     </div>
-                  </div>
-                  <div class="pb-3">
-                    <input type="file" class="form-control" data-text="Choose your file">
-                  </div>
-                  <div class="pb-3">
-                    <label>Your Review *</label>
-                    <textarea class="form-control" placeholder="Write your review here"></textarea>
-                  </div>
-                  <div class="pb-3">
-                    <label>Your Name *</label>
-                    <input type="text" name="name" placeholder="Write your name here" class="form-control">
-                  </div>
-                  <div class="pb-3">
-                    <label>Your Email *</label>
-                    <input type="text" name="email" placeholder="Write your email here" class="form-control">
-                  </div>
-                  <div class="pb-3">
-                    <label>
-                      <input type="checkbox" required="">
-                      <span class="label-body">Save my name, email, and website in this browser for the next
-                        time.</span>
-                    </label>
-                  </div>
-                  <button type="submit" name="submit"
-                    class="btn btn-dark btn-large text-uppercase w-100">Submit</button>
-                </form>
-              </div>
+                    <?php
+                  }
+                  echo "</div>"; // Đóng row
+                } else {
+                  echo "<p>Không có đánh giá nào cho sản phẩm này.</p>";
+                }
+                echo "</div>"; // Đóng product-reviews
+              } else {
+                echo "<p>Sản phẩm không tồn tại.</p>";
+              }
+              ?>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
 
   <section id="related-products" class="product-store position-relative py-5">
     <div class="container-fluid">
@@ -542,7 +445,7 @@ require 'connect.php';
             // Truy vấn lấy dữ liệu sản phẩm từ cơ sở dữ liệu
             $offset = ($current_page - 1) * $productsPerPage;
 
-            $sql = " WHERE MALOAI ='02'";
+            $sql = "WHERE MALOAI = " . $row['MALOAI'];
 
 
 
