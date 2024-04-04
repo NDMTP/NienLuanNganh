@@ -222,7 +222,7 @@ require 'connect.php';
                   <tr class="pd cart_item">
                     <td class="product-thumbnail row" data-title="Tên sản phẩm"
                       style="display: flex; flex-direction: row; justified-content: center; align-items: center; margin-left: 0;">
-                      <a class="prd-thumb" href="#">
+                      <a class="prd-thumb" href="single-product.php?id=<?php echo $row1['MASP']?>">
                         <figure><img style="margin-right: 20px;" width="110" height="110"
                             src="images/<?php echo $masp2 . "/" . $sp['LINKANH'] ?>" alt="shipping cart">
                           <?php echo $sp['TENSP'] ?>
