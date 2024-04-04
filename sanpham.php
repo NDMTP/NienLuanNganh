@@ -406,9 +406,10 @@ require 'popup_themthanhcong.php';
                       </span>
                       <?php
                       $biennhap = 1;
-                      
+
                       ?>
-                      <input type="text" id="quantity" name="quantity" class="form-control input-number" value="<?php echo $biennhap ?>">
+                      <input type="text" id="quantity" name="quantity" class="form-control input-number"
+                        value="<?php echo $biennhap ?>">
                       <span class="input-group-btn">
                         <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus">
                           <svg width="16" height="16">
@@ -417,11 +418,20 @@ require 'popup_themthanhcong.php';
                         </button>
                       </span>
                     </div>
-                    <a href="themvaogiohang.php?sb_cate=&pdid=<?php echo $row['MASP'] ?>&qty12554=1" class="nav-link">Thêm
-                      vào giỏ<svg width="18" height="18">
+                    <a href="javascript:void(0);" onclick="addToCart('<?php echo $row['MASP']; ?>')" class="nav-link">Thêm
+                      vào giỏ
+                      <svg width="18" height="18">
                         <use xlink:href="#cart"></use>
-                      </svg></a>
+                      </svg>
+                    </a>
+                    <script>
+                      function addToCart(productId) {
+                        var qty = document.getElementById('quantity').value;
+                        window.location.href = 'themvaogiohang.php?sb_cate=&pdid=' + productId + '&qty12554=' + qty;
+                      }
+                    </script>
                   </div>
+
                 </div>
                 <?php
               }

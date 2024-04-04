@@ -241,7 +241,7 @@ require 'popup_themthanhcong.php';
                 <div class="content-wrapper col-md-7">
                   <div class="categories mb-3 pb-3">Giảm giá 20%</div>
                   <h3 class="banner-title">Trái cây và rau củ</h3>
-                  <a href="sanpham.php" class="d-flex align-items-center nav-link">Xem chi tiết <svg width="24"
+                  <a href="sanpham.php?loai=01" class="d-flex align-items-center nav-link">Xem chi tiết <svg width="24"
                       height="24">
                       <use xlink:href="#arrow-right"></use>
                     </svg></a>
@@ -375,12 +375,12 @@ require 'popup_themthanhcong.php';
                 <div class="card mb-3 p-3 rounded-4 shadow border-0">
                   <div class="row g-0">
                     <div class="col-md-4">
-                      <img src="images/product-thumb-11.jpg" class="img-fluid rounded" alt="Card title">
+                      <img src="./images/milo.jpg" class="img-fluid rounded" alt="Card title">
                     </div>
                     <div class="col-md-8">
                       <div class="card-body py-0">
-                        <p class="text-muted mb-0">Amber Jar</p>
-                        <h5 class="card-title">Honey best nectar you wish to get</h5>
+                        <p class="text-muted mb-0">Milo</p>
+                        <h5 class="card-title">Thức uống lúa mạch từ thiên nhiên</h5>
                       </div>
                     </div>
                   </div>
@@ -390,12 +390,12 @@ require 'popup_themthanhcong.php';
                 <div class="card mb-3 p-3 rounded-4 shadow border-0">
                   <div class="row g-0">
                     <div class="col-md-4">
-                      <img src="images/product-thumb-12.jpg" class="img-fluid rounded" alt="Card title">
+                      <img src="./images/omachi.jpg" class="img-fluid rounded" alt="Card title">
                     </div>
                     <div class="col-md-8">
                       <div class="card-body py-0">
-                        <p class="text-muted mb-0">Amber Jar</p>
-                        <h5 class="card-title">Honey best nectar you wish to get</h5>
+                        <p class="text-muted mb-0">Omachi</p>
+                        <h5 class="card-title">Sức hấp dẫn không thể chối từ</h5>
                       </div>
                     </div>
                   </div>
@@ -405,12 +405,12 @@ require 'popup_themthanhcong.php';
                 <div class="card mb-3 p-3 rounded-4 shadow border-0">
                   <div class="row g-0">
                     <div class="col-md-4">
-                      <img src="images/product-thumb-13.jpg" class="img-fluid rounded" alt="Card title">
+                      <img src="./images/kokomi.jpg" class="img-fluid rounded" alt="Card title">
                     </div>
                     <div class="col-md-8">
                       <div class="card-body py-0">
-                        <p class="text-muted mb-0">Amber Jar</p>
-                        <h5 class="card-title">Honey best nectar you wish to get</h5>
+                        <p class="text-muted mb-0">Kokomi</p>
+                        <h5 class="card-title">Trong dai ngoài giòn</h5>
                       </div>
                     </div>
                   </div>
@@ -420,12 +420,12 @@ require 'popup_themthanhcong.php';
                 <div class="card mb-3 p-3 rounded-4 shadow border-0">
                   <div class="row g-0">
                     <div class="col-md-4">
-                      <img src="images/product-thumb-14.jpg" class="img-fluid rounded" alt="Card title">
+                      <img src="./images/knorr.jpg" class="img-fluid rounded" alt="Card title">
                     </div>
                     <div class="col-md-8">
                       <div class="card-body py-0">
-                        <p class="text-muted mb-0">Amber Jar</p>
-                        <h5 class="card-title">Honey best nectar you wish to get</h5>
+                        <p class="text-muted mb-0">Knoor</p>
+                        <h5 class="card-title">Ngon từ thịt ngọt từ xương</h5>
                       </div>
                     </div>
                   </div>
@@ -2167,17 +2167,7 @@ require 'popup_themthanhcong.php';
       </div>
     </div>
   </section>
-  <!-- Chatbot Interface -->
-  <div id="chatbot"
-    style="position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: #f9f9f9; border: 1px solid #ccc; padding: 10px; border-radius: 50%; cursor: pointer; overflow: hidden;">
-    <div id="chatMessages" style="display: none; width: 240px; height: 200px; overflow-y: auto; margin-bottom: 10px;">
-    </div>
-    <input type="text" id="chatInput" style="display: none; width: 70%;" placeholder="Type your message...">
-    <button onclick="sendMessage()" style="display: none;">Send</button>
-  </div>
-  <script src="chatbot.js"></script>
   
-
   <?php
   include "footer.php";
   ?>
