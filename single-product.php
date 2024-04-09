@@ -155,7 +155,11 @@ require 'connect.php';
 
           <?php
           $spid = $_GET['id'];
-          $query = "select * from sanpham where MASP = '" . $spid . "'";
+          $query = "SELECT sanpham.*, loaisanpham.TENLOAI, nhasanxuat.TENNSX
+          FROM sanpham
+          LEFT JOIN loaisanpham ON sanpham.MALOAI = loaisanpham.MALOAI
+          LEFT JOIN nhasanxuat ON sanpham.MANSX = nhasanxuat.MANSX
+          WHERE sanpham.MASP = '" . $spid . "'";
           $result = $conn->query($query);
           $row = $result->fetch_assoc();
           $string = $row['MASP'];
@@ -260,22 +264,19 @@ require 'connect.php';
                 <h6 class="item-title no-margin pe-2">Danh mục sản phẩm:</h6>
                 <ul class="select-list list-unstyled d-flex">
                   <li data-value="S" class="select-item">
-                    <a href="#">Nước ép</a>,
-                  </li>
-                  <li data-value="S" class="select-item">
-                    <a href="#"> Trái cây</a>,
+                    <a href="#">
+                      <?php echo $row['TENLOAI']; ?>
+                    </a>
                   </li>
                 </ul>
               </div>
               <div class="meta-item d-flex align-items-baseline">
-                <h6 class="item-title no-margin pe-2">Tags:</h6>
+                <h6 class="item-title no-margin pe-2">Nhà Sản Xuất:</h6>
                 <ul class="select-list list-unstyled d-flex">
                   <li data-value="S" class="select-item">
-                    <a href="#">Classic</a>,
+                    <?php echo $row['TENNSX']; ?>
                   </li>
-                  <li data-value="S" class="select-item">
-                    <a href="#"> Modern</a>
-                  </li>
+
                 </ul>
               </div>
             </div>
@@ -341,7 +342,7 @@ require 'connect.php';
                       <div class="review-box d-flex flex-wrap">
                         <div class="col-md-2">
                           <div class="image-holder">
-                            <img src="images/reviewer-2.jpg" alt="review" class="img-fluid rounded-circle">
+                            <img src="./images/usericon.png" alt="review" class="img-fluid rounded-circle">
                           </div>
                         </div>
                         <div class="col-md-10">
@@ -377,7 +378,7 @@ require 'connect.php';
                               <span class="author-name">
                                 <?php echo "<strong>Tên người dùng: </strong>" . $rowDanhGia['ten_nguoidung']; ?>
                               </span>
-                              
+
                               <span class="review-date">
                                 <?php echo "<strong>Thời gian đánh giá: </strong>" . $rowDanhGia['TGDANHGIA']; ?>
                               </span>

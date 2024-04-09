@@ -18,6 +18,9 @@
                     <li><a class="nav-link" href="loaisp.php">Danh sách loại sản phẩm</a></li>
                     <li><a class="nav-link" href="loaisp_them.php">Thêm loại</a></li>
                     <li><a class="nav-link" href="khuyenmai_ds.php">Cập nhật khuyến mãi</a></li>
+                    <li><a class="nav-link" href="nhacungcap.php">Danh sách nhà cung cấp</a></li>
+                    <li><a class="nav-link" href="nhacungcap_them.php">Thêm nhà cung cấp</a></li>
+                    <li><a class="nav-link" href="nhasanxuat.php">Danh sách nhà sản xuất</a></li>
                 </ul>
             </li>
             <li>
