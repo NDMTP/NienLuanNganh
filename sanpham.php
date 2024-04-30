@@ -398,24 +398,43 @@ require 'popup_themthanhcong.php';
                   <div class="d-flex align-items-center justify-content-between">
                     <div class="input-group product-qty">
                       <span class="input-group-btn">
-                        <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus">
-                          <svg width="16" height="16">
-                            <use xlink:href="#minus"></use>
-                          </svg>
-                        </button>
+                      <button type="button" class="quantity-left-minus btn btn-danger btn-number" data-type="minus" onclick="decrementQuantity('<?php echo $row['MASP']; ?>')">
+  <svg width="16" height="16">
+    <use xlink:href="#minus"></use>
+  </svg>
+</button>
                       </span>
                       <?php
                       $biennhap = 1;
 
                       ?>
-                      <input type="text" id="quantity" name="quantity" class="form-control input-number"
-                        value="<?php echo $biennhap ?>">
+                      <input type="text" id="quantity_<?php echo $row['MASP']; ?>" name="quantity" class="form-control input-number" value="<?php echo $biennhap ?>" min="1" max="10">
+
                       <span class="input-group-btn">
-                        <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus">
-                          <svg width="16" height="16">
-                            <use xlink:href="#plus"></use>
-                          </svg>
-                        </button>
+ 
+<button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" onclick="incrementQuantity('<?php echo $row['MASP']; ?>')">
+  <svg width="16" height="16">
+    <use xlink:href="#plus"></use>
+  </svg>
+</button>
+<script>
+function incrementQuantity(productId) {
+    var inputField = document.getElementById('quantity_' + productId);
+    var currentValue = parseInt(inputField.value);
+    if (currentValue < 10) {
+        inputField.value = currentValue + 1;
+    }
+}
+
+function decrementQuantity(productId) {
+    var inputField = document.getElementById('quantity_' + productId);
+    var currentValue = parseInt(inputField.value);
+    if (currentValue > 1) { // Assuming you do not want the quantity to go below 1
+        inputField.value = currentValue - 1;
+    }
+}
+</script>
+
                       </span>
                     </div>
                     <a href="javascript:void(0);" onclick="addToCart('<?php echo $row['MASP']; ?>')" class="nav-link">Thêm
@@ -425,11 +444,19 @@ require 'popup_themthanhcong.php';
                       </svg>
                     </a>
                     <script>
-                      function addToCart(productId) {
-                        var qty = document.getElementById('quantity').value;
-                        window.location.href = 'themvaogiohang.php?sb_cate=&pdid=' + productId + '&qty12554=' + qty;
-                      }
-                    </script>
+function addToCart(productId) {
+    var inputField = document.getElementById('quantity_' + productId); // Assume each product has a unique quantity input field
+    var currentQuantity = parseInt(inputField.value);
+    if (isNaN(currentQuantity)) {
+        currentQuantity = 0;
+    }
+    if (currentQuantity < 10) {
+        inputField.value = currentQuantity + 1; // Increment only if less than 10
+    }
+    window.location.href = 'themvaogiohang.php?sb_cate=&pdid=' + productId + '&qty12554=' + currentQuantity;
+}
+</script>
+
                   </div>
 
                 </div>
