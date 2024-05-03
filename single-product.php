@@ -219,7 +219,6 @@ require 'connect.php';
             <div class="cart-wrap py-5">
 
               <div class="product-quantity pt-3">
-                <div class="stock-number text-dark"><em>Còn 5 trong kho</em></div>
                 <div class="stock-button-wrap">
 
                   <div class="input-group product-qty" style="max-width: 150px;">
