@@ -68,8 +68,8 @@ if ($ok) {
 
 <div style="width: 100%; height: 100%; background-color: #32CD32 !important;">
     <div class="noti">
-        <i style="color: green; font-size: 50px; margin-top: 9px; margin-right: 15px;"
-            class="fas fa-check-circle fa-lg"></i>
+        <i style="color: green; font-size: 50px; margin-top: px; margin-right: 15px;"
+            class="fas fa-check-circle fa-lg" ></i>
         <h1>Đặt hàng thành công !</h1>
         <a href="chitiethoadon.php?hdid=<?php echo $nextId ?>">
             <h4>Xem chi tiết đơn mua hàng</h4>

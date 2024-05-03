@@ -410,7 +410,7 @@ require 'popup_themthanhcong.php';
 
                       ?>
                       <input type="text" id="quantity_<?php echo $row['MASP']; ?>" name="quantity"
-                        class="form-control input-number" value="<?php echo $biennhap ?>" min="1" max="10">
+                        class="form-control input-number" value="<?php echo $biennhap ?>" min="1" max="9">
 
                       <span class="input-group-btn">
 
@@ -424,7 +424,7 @@ require 'popup_themthanhcong.php';
                           function incrementQuantity(productId) {
                             var inputField = document.getElementById('quantity_' + productId);
                             var currentValue = parseInt(inputField.value);
-                            if (currentValue < 10) {
+                            if (currentValue < 9) {
                               inputField.value = currentValue + 1;
                             }
                           }
@@ -453,7 +453,7 @@ require 'popup_themthanhcong.php';
                         if (isNaN(currentQuantity)) {
                           currentQuantity = 0;
                         }
-                        if (currentQuantity < 10) {
+                        if (currentQuantity < 9) {
                           inputField.value = currentQuantity + 1; // Increment only if less than 10
                         }
                         window.location.href = 'themvaogiohang.php?sb_cate=&pdid=' + productId + '&qty12554=' + currentQuantity;

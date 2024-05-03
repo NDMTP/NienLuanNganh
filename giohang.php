@@ -348,7 +348,7 @@ $tongTienSauGiam = 0;
                 <tbody>
                   <tr class="subtotal pt-2 pb-2 border-top border-bottom">
                     <div class="subtotal-line"><b class="stt-name">Giảm giá <span id="tile"> chưa áp dụng</span> <br>
-                        <span style="color: red !important;" class="sub" id="hint">Mua trên 100K để được giảm giá
+                        <span style="color: red !important;" class="sub" id="hint">Mua trên 100K để được giảm giá 10%
                     </div>
 
 
