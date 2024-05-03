@@ -90,7 +90,9 @@
         <div
           class="col-sm-8 col-lg-4 d-flex justify-content-end gap-6 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
           <div class="support-box text-end d-none d-xl-block">
-            <span class="fs-6 text-muted">Liên hệ hỗ trợ</span>
+            <span class="fs-6 text-muted">
+            <a  href="bot.php">
+            Liên hệ hỗ trợ</a></span>
             <h5 class="mb-0">+84 939 826 024</h5>
           </div>
 

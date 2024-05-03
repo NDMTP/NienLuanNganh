@@ -91,7 +91,7 @@ require 'connect.php';
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <?php
-            if (isset ($_SESSION['cart']) && !empty ($_SESSION['cart'])) {
+            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
               foreach ($_SESSION['cart'] as $item) {
                 $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
                 $result = $conn->query($sql);
@@ -157,7 +157,7 @@ require 'connect.php';
   include 'header.php';
   ?>
   <?php
-  if (isset ($_SESSION['email'])) {
+  if (isset($_SESSION['email'])) {
     ?>
     <section class="py-5 mb-5" style="background: url(images/background-pattern.jpg);">
       <div class="container-fluid">
@@ -222,7 +222,7 @@ require 'connect.php';
                   <tr class="pd cart_item">
                     <td class="product-thumbnail row" data-title="Tên sản phẩm"
                       style="display: flex; flex-direction: row; justified-content: center; align-items: center; margin-left: 0;">
-                      <a class="prd-thumb" href="single-product.php?id=<?php echo $row1['MASP']?>">
+                      <a class="prd-thumb" href="single-product.php?id=<?php echo $row1['MASP'] ?>">
                         <figure><img style="margin-right: 20px;" width="110" height="110"
                             src="images/<?php echo $masp2 . "/" . $sp['LINKANH'] ?>" alt="shipping cart">
                           <?php echo $sp['TENSP'] ?>
@@ -249,6 +249,7 @@ require 'connect.php';
                     </td>
                     <td style="padding-top:4rem">
                       <b>
+
                         <?php if ($row["TRANGTHAIHOADON"] != 0 && $row["TRANGTHAIHOADON"] != 1) { ?>
 
                           <!-- Nút để kích hoạt modal -->
@@ -332,7 +333,21 @@ require 'connect.php';
                         <button class="btn" style="margin-right:1rem; background-color: #ff7300; color: white">
                           Mua Lại
                         </button>
+
                       </a>
+
+                      <?php if ($row["TRANGTHAIHOADON"] == 0) { ?>
+                        <!-- Existing code for displaying buttons when the invoice status is 0 -->
+                        <!-- Additional button for 'Hủy đơn' -->
+                        <button onclick="cancelOrderFunction(<?php echo $row['MAHOADON']; ?>);">Hủy đơn</button>
+                      <?php } ?>
+                      <script>
+                        function cancelOrderFunction(mahd) {
+                          // Chuyển đến trang hủy và gửi MAHOADON qua URL
+                          window.location.href = 'hoadon_huy.php?mahd=' + mahd;
+                        }
+                      </script>
+
 
 
 
