@@ -95,9 +95,9 @@ $tongTienSauGiam = 0;
 
           <li class="list-group-item d-flex justify-content-between lh-sm">
             <?php
-            
+
             $tonggiohang = 0;
-            if (isset ($_SESSION['cart']) && !empty ($_SESSION['cart'])) {
+            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
               foreach ($_SESSION['cart'] as $item) {
                 $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
                 $result = $conn->query($sql);
@@ -180,7 +180,7 @@ $tongTienSauGiam = 0;
           <form class="shopping-cart-form" action="#" method="post">
             <?php
             $tongtien = 0;
-            if (isset ($_SESSION['cart']) && !empty ($_SESSION['cart'])) {
+            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
               ?>
               <div class="table-responsive cart">
                 <table class="table">
@@ -262,14 +262,12 @@ $tongTienSauGiam = 0;
 
                         <td class="py-4">
                           <div class="cart-remove">
-                            <form action="delete-one-cart.php" method="post">
-                              <input type="hidden" name="key" value="<?php echo $key ?>">
-                              <button type="submit" class="btn-reset" aria-label="Remove item">
-                                <svg width="24" height="24">
-                                  <use xlink:href="#trash"></use>
-                                </svg>
-                              </button>
-                            </form>
+                            <input type="hidden" id="key-delete" name="key" value="<?php echo $key ?>">
+                            <button type="button" class="btn-reset button-delete" aria-label="Remove item">
+                              <svg width="24" height="24">
+                                <use xlink:href="#trash"></use>
+                              </svg>
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -312,7 +310,7 @@ $tongTienSauGiam = 0;
           <form action="thongtinmuahang.php" method="get">
 
             <?php
-            
+
             // Bước 1: Kiểm tra xem có sản phẩm nào trong giỏ hàng không
             if ($tonggiohang == 0) {
               echo "<p>Không có sản phẩm nào trong giỏ hàng.</p>";
@@ -360,7 +358,7 @@ $tongTienSauGiam = 0;
                         <bdi>
                           <span id="tt" class="stt-price">
                             <?php
-                            
+
                             echo $tongTienSauGiam ?> đ
                           </span>
                           <input type="hidden" name="tt" id="input_tt" value="<?php echo $tongtien ?>">
@@ -482,3 +480,20 @@ $tongTienSauGiam = 0;
   ?>
 
 </html>
+<script>
+  $(document).ready(function () {
+    $(".button-delete").on('click', function () {
+      var key = $("#key-delete").val();
+      $.ajax({
+        url: "delete-one-cart.php",
+        type: "POST",
+        data: {
+          key: key
+        },
+        success: function (data) {
+          location.reload();
+        }
+      });
+    })
+  });
+</script>
