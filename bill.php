@@ -168,141 +168,176 @@ require 'connect.php';
             <a class="breadcrumb-item nav-link" href="bill.php">Hóa đơn</a>
           </nav>
         </div>
-        <?php
-        $sql = "SELECT * FROM nguoidung, hoadon WHERE hoadon.EMAIL = nguoidung.EMAIL AND hoadon.EMAIL ='" . $_SESSION['email'] . "'";
-        $result = $conn->query($sql);
-        $status = " ";
-        while ($row = $result->fetch_assoc()) {
-          if ($row["TRANGTHAIHOADON"] == 1) {
-            $status = "Đang giao hàng";
-            $text_col = "#11d12e";
-          } elseif ($row["TRANGTHAIHOADON"] == 0) {
-            $status = "Đang duyệt đơn";
-            $text_col = "#ff7300";
-          } elseif ($row["TRANGTHAIHOADON"] == 2) {
-            $status = "Giao hàng thành công";
-            $text_col = "#11d12e";
-          } else {
-            $status = "Đã Hủy";
-            $text_col = "#f00";
-          }
-          ?>
-          <table class="table dg" style="margin-top: 3rem ;  border: 1px solid #ccc ;box-shadow: 10px 10px 10px #E6E6E6;">
+                  <?php
+          $sql = "SELECT * FROM nguoidung, hoadon WHERE hoadon.EMAIL = nguoidung.EMAIL AND hoadon.EMAIL ='" . $_SESSION['email'] . "'";
+          $result = $conn->query($sql);
+          while ($row = $result->fetch_assoc()) {
+              // Xác định trạng thái đơn hàng
+              $status = "";
+              $text_col = "";
+              switch ($row["TRANGTHAIHOADON"]) {
+                  case 1:
+                      $status = "Đang giao hàng";
+                      $text_col = "#11d12e";
+                      break;
+                  case 0:
+                      $status = "Đang duyệt đơn";
+                      $text_col = "#ff7300";
+                      break;
+                  case 2:
+                      $status = "Giao hàng thành công";
+                      $text_col = "#11d12e";
+                      break;
+                  case -1:
+                      $status = "Đã Hủy";
+                      $text_col = "#f00";
+                      break;
+              }
+              ?>
 
-          <table class="table" style="margin-top: 3rem; border: 1px solid #ccc; box-shadow: 10px 10px 10px #E6E6E6;">
-  <tbody class="dg">
-    <!-- Dòng 1: Ngày lập (NGAYLAP) và Tình trạng giao hàng (TRANGTHAIHOADON) -->
-    <tr>
-      <td colspan="6">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <!-- Ngày lập -->
-          <h5 style="margin: 0; color: grey;">
-            <?php echo $row['NGAYLAP'] ?>
-          </h5>
-          <!-- Tình trạng giao hàng -->
-          <span style="color: <?php echo $text_col ?>; font-weight: bold;">
-            <?php echo $status ?>
-          </span>
-        </div>
-      </td>
-    </tr>
+              <table class="table" style="margin-top: 3rem; border: 1px solid #ccc; box-shadow: 10px 10px 10px #E6E6E6;">
+                  <tbody>
+                      <!-- Dòng 1: Ngày lập (NGAYLAP) và Tình trạng giao hàng (TRANGTHAIHOADON) -->
+                      <tr>
+                          <td colspan="6">
+                              <div style="display: flex; justify-content: space-between; align-items: center;">
+                                  <h5 style="margin: 0; color: grey;"><?php echo $row['NGAYLAP'] ?></h5>
+                                  <span style="color: <?php echo $text_col ?>; font-weight: bold;"><?php echo $status ?></span>
+                              </div>
+                          </td>
+                      </tr>
 
-    <?php
-    $cthd = "SELECT * FROM chitiethoadon WHERE MAHOADON = '" . $row['MAHOADON'] . "' ORDER BY MAHOADON DESC";
-    $cthd_result = $conn->query($cthd);
-    while ($row1 = $cthd_result->fetch_assoc()) {
+                <?php
+                $cthd = "SELECT * FROM chitiethoadon WHERE MAHOADON = '" . $row['MAHOADON'] . "' ORDER BY MAHOADON DESC";
+                $cthd_result = $conn->query($cthd);
+                while ($row1 = $cthd_result->fetch_assoc()) {
 
-      $masp2 = preg_replace('/[0-9]/', '', $row1['MASP']);
-      $masp = $row1['MASP'];
-      $sp = "SELECT * FROM sanpham WHERE MASP = '" . $row1['MASP'] . "'";
-      $kq = $conn->query($sp);
-      $sp = $kq->fetch_assoc();
-    ?>
+                  $masp2 = preg_replace('/[0-9]/', '', $row1['MASP']);
+                  $masp = $row1['MASP'];
+                  $sp = "SELECT * FROM sanpham WHERE MASP = '" . $row1['MASP'] . "'";
+                  $kq = $conn->query($sp);
+                  $sp = $kq->fetch_assoc();
+                  ?>
 
-    <!-- Dòng 2: LINKANH, TENSP, DONBAN, SOLUONGSP, TONGTIEN, và nút Đánh giá -->
-    <tr>
-      <!-- Cột 1: LINKANH -->
-      <td style="text-align: center; vertical-align: middle;">
-        <a href="single-product.php?id=<?php echo $row1['MASP'] ?>">
-          <img src="images/<?php echo $masp2 . "/" . $sp['LINKANH'] ?>" alt="shipping cart" width="110" height="110" style="margin-right: 20px;">
-        </a>
-      </td>
-      
-      <!-- Cột 2: TENSP -->
-      <td style="text-align: center; vertical-align: middle;">
-        <a href="single-product.php?id=<?php echo $row1['MASP'] ?>">
-          <?php echo $sp['TENSP'] ?>
-        </a>
-      </td>
-      
-      <!-- Cột 3: DONBAN -->
-      <td style="text-align: center; vertical-align: middle;">
-        <b><?php echo number_format($row1['DONBAN']) ?> đ</b>
-      </td>
-      
-      <!-- Cột 4: SOLUONGSP -->
-      <td style="text-align: center; vertical-align: middle;">
-        <b><?php echo $row1['SOLUONGSP'] ?></b>
-      </td>
-      
-      <!-- Cột 5: TONGTIEN -->
-      <td style="text-align: center; vertical-align: middle;">
-        <b><?php echo number_format($row1['TONGTIEN']) ?> đ</b>
-      </td>
+                  <!-- Dòng 2: LINKANH, TENSP, DONBAN, SOLUONGSP, TONGTIEN, và nút Đánh giá -->
+                  <tr>
+                    <!-- Cột 1: LINKANH -->
+                    <td style="text-align: center; vertical-align: middle;">
+                      <a href="single-product.php?id=<?php echo $row1['MASP'] ?>">
+                        <img src="images/<?php echo $masp2 . "/" . $sp['LINKANH'] ?>" alt="shipping cart" width="110"
+                          height="110" style="margin-right: 20px;">
+                      </a>
+                    </td>
 
-      <!-- Cột 6: Nút Đánh giá -->
-      <td style="text-align: center; vertical-align: middle;">
-        <?php if ($row["TRANGTHAIHOADON"] != 0 && $row["TRANGTHAIHOADON"] != 1) { ?>
-          <button class="btn" style="background-color: #AFEEEE; color: black" data-bs-toggle="modal" data-bs-target="#reviewModal_<?php echo $masp ?>">Đánh giá</button>
+                    <!-- Cột 2: TENSP -->
+                    <td style="text-align: center; vertical-align: middle;">
+                      <a href="single-product.php?id=<?php echo $row1['MASP'] ?>">
+                        <?php echo $sp['TENSP'] ?>
+                      </a>
+                    </td>
 
-          <!-- Modal đánh giá -->
-          <div class="modal fade" id="reviewModal_<?php echo $masp ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Đánh giá sản phẩm</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form method="post" action="handle_review.php">
-                    <input type="hidden" name="masp" value="<?php echo $masp ?>">
-                    <div class="mb-3">
-                      <label for="comment_<?php echo $masp ?>" class="form-label">Nhận xét:</label>
-                      <textarea class="form-control" id="comment_<?php echo $masp ?>" name="comment" rows="3"></textarea>
+                    <!-- Cột 3: DONBAN -->
+                    <td style="text-align: center; vertical-align: middle;">
+                      <b><?php echo number_format($row1['DONBAN']) ?> đ</b>
+                    </td>
+
+                    <!-- Cột 4: SOLUONGSP -->
+                    <td style="text-align: center; vertical-align: middle;">
+                      <b><?php echo $row1['SOLUONGSP'] ?></b>
+                    </td>
+
+                    <!-- Cột 5: TONGTIEN -->
+                    <td style="text-align: center; vertical-align: middle;">
+                      <b><?php echo number_format($row1['TONGTIEN']) ?> đ</b>
+                    </td>
+
+                    <!-- Cột 6: Nút Đánh giá -->
+                    <td style="text-align: center; vertical-align: middle;">
+                      <?php if ($row["TRANGTHAIHOADON"] != 0 && $row["TRANGTHAIHOADON"] != 1) { ?>
+                        <button class="btn" style="background-color: #AFEEEE; color: black" data-bs-toggle="modal"
+                          data-bs-target="#reviewModal_<?php echo $masp ?>">Đánh giá</button>
+
+                        <!-- Modal đánh giá -->
+                        <div class="modal fade" id="reviewModal_<?php echo $masp ?>" tabindex="-1"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Đánh giá sản phẩm</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <!-- Form đánh giá -->
+                                <form method="post" action="handle_review.php">
+                                  <input type="hidden" name="masp" value="<?php echo $masp ?>">
+                                  <div class="mb-3">
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="rating"
+                                        id="rating1_<?php echo $masp ?>" value="1">
+                                      <label class="form-check-label" for="rating1_<?php echo $masp ?>">Rất Tệ</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="rating"
+                                        id="rating1_<?php echo $masp ?>" value="2">
+                                      <label class="form-check-label" for="rating2_<?php echo $masp ?>">Tệ</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="rating"
+                                        id="rating1_<?php echo $masp ?>" value="3">
+                                      <label class="form-check-label" for="rating3_<?php echo $masp ?>">Bình Thường</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="rating"
+                                        id="rating1_<?php echo $masp ?>" value="4">
+                                      <label class="form-check-label" for="rating4_<?php echo $masp ?>">Tốt</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="rating"
+                                        id="rating1_<?php echo $masp ?>" value="5">
+                                      <label class="form-check-label" for="rating5_<?php echo $masp ?>">Tuyệt vời</label>
+                                    </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="comment" class="form-label">Nhận xét:</label>
+                                    <textarea class="form-control" id="comment_<?php echo $masp ?>" name="comment"
+                                      rows="3"></textarea>
+                                  </div>
+                                  <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      <?php } ?>
+                    </td>
+                  </tr>
+
+                <?php } ?>
+
+                <!-- Dòng 3: Thành tiền (hiển thị 1 lần cho cả đơn hàng) -->
+                <tr>
+                  <td colspan="6" style="text-align: right;">
+                    <div style="color: #ff7300; font-weight: bold; text-align: right; padding: 1rem;">
+                      <i class="fa-solid fa-shield-halved"></i> Thành tiền: <?php echo number_format($row['TONGTIEN']) ?> Đ
                     </div>
-                    <button type="submit" class="btn btn-primary">Gửi đánh giá</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        <?php } ?>
-      </td>
-    </tr>
+                  </td>
+                </tr>
 
-    <?php } ?>
-
-    <!-- Dòng 3: Thành tiền (hiển thị 1 lần cho cả đơn hàng) -->
-    <tr>
-      <td colspan="6" style="text-align: right;">
-        <div style="color: #ff7300; font-weight: bold; text-align: right; padding: 1rem;">
-          <i class="fa-solid fa-shield-halved"></i> Thành tiền: <?php echo number_format($row['TONGTIEN']) ?> Đ
-        </div>
-      </td>
-    </tr>
-
-    <!-- Dòng 4: Nút Mua Lại (căn sát phải) -->
-    <tr>
-      <td colspan="6" style="text-align: right; padding: 1rem;">
-        <a href="mualai.php?hoadon=4">
-          <button class="btn" style="background-color: #ff7300; color: white;">
-            Mua Lại
-          </button>
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<!-- Dòng 4: Nút Mua Lại và Hủy Đơn -->
+<tr>
+                <td colspan="6" style="text-align: right; padding: 1rem;">
+                    <a href="mualai.php?hoadon=<?php echo $row['MAHOADON'] ?>">
+                        <button class="btn" style="background-color: #ff7300; color: white;">Mua Lại</button>
+                    </a>
+                    <?php if ($row["TRANGTHAIHOADON"] == 0) { // Đang duyệt đơn ?>
+                        <a href="hoadon_huy.php?hoadon=<?php echo $row['MAHOADON'] ?>" onclick="return confirm('Bạn có chắc chắn muốn hủy đơn hàng này không?');">
+                            <button class="btn" style="background-color: #f00; color: white;">Hủy Đơn</button>
+                        </a>
+                    <?php } ?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
             </form>
             <?php
