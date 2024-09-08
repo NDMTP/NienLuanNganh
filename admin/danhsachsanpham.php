@@ -4,8 +4,8 @@
 
 <!-- chat.html  21 Nov 2019 03:50:11 GMT -->
 <?php
-  include("connect.php");
-  include('head.php');
+include("connect.php");
+include('head.php');
 ?>
 
 <body>
@@ -13,16 +13,16 @@
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
-            <?php 
-        include('navbar.php');
-        if($_SESSION['PHANQUYEN']=='Admin'){
-          include('sidebar.php');
-      }
-      if($_SESSION['PHANQUYEN']=='nhanvien'){
-          include('sidebar_nv.php');
-          
-      }
-      ?>
+            <?php
+            include('navbar.php');
+            if ($_SESSION['PHANQUYEN'] == 'Admin') {
+                include('sidebar.php');
+            }
+            if ($_SESSION['PHANQUYEN'] == 'nhanvien') {
+                include('sidebar_nv.php');
+
+            }
+            ?>
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
@@ -39,87 +39,87 @@
                                                 style="width:100%;">
                                                 <tbody>
                                                     <?php
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $dbname = "qlsthi"; // 
+                                                    $servername = "localhost";
+                                                    $username = "root";
+                                                    $password = "";
+                                                    $dbname = "qlsthi"; // 
+                                                    
+                                                    // Tạo kết nối đến cơ sở dữ liệu
+                                                    $conn = new mysqli($servername, $username, $password, $dbname);
+                                                    if ($conn->connect_error) {
+                                                        die("Connection failed: " . $conn->connect_error);
+                                                    }
 
-                        // Tạo kết nối đến cơ sở dữ liệu
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
-
-                        // Truy vấn SQL để lấy danh sách sản phẩm với tên loại sản phẩm
-                        $sql = "SELECT sanpham.masp, loaisanpham.tenloai, sanpham.tensp, sanpham.mota, sanpham.linkanh
+                                                    // Truy vấn SQL để lấy danh sách sản phẩm với tên loại sản phẩm
+                                                    $sql = "SELECT sanpham.masp, loaisanpham.tenloai, sanpham.tensp, sanpham.mota, sanpham.linkanh
                                 FROM sanpham 
                                 INNER JOIN loaisanpham ON sanpham.maloai = loaisanpham.maloai";
-                        $result = $conn->query($sql);
+                                                    $result = $conn->query($sql);
 
-                        if ($result->num_rows > 0) {
-                            echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
-                            echo '<thead>';
-                            echo '<tr>';
-                            echo '<th>Hình ảnh</th>';
-                            echo '<th>Mã sản phẩm</th>';
-                            echo '<th>Tên loại</th>';
-                            echo '<th>Tên sản phẩm</th>';
-                            echo '<th>Mô tả</th>';
-                            echo '<th></th>';
-                            echo '<th></th>';
-                            echo '</tr>';
-                            echo '</thead>';
-                            echo '<tbody>';
+                                                    if ($result->num_rows > 0) {
+                                                        echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
+                                                        echo '<thead>';
+                                                        echo '<tr>';
+                                                        echo '<th>Hình ảnh</th>';
+                                                        echo '<th>Mã sản phẩm</th>';
+                                                        echo '<th>Tên loại</th>';
+                                                        echo '<th>Tên sản phẩm</th>';
+                                                        echo '<th>Mô tả</th>';
+                                                        echo '<th></th>';
+                                                        echo '<th></th>';
+                                                        echo '</tr>';
+                                                        echo '</thead>';
+                                                        echo '<tbody>';
 
-                            $totalProducts = 0; // Khởi tạo biến tổng số sản phẩm
-
-                            while ($row = $result->fetch_assoc()) {
-                                preg_match('/^[A-Za-z]+/', $row['masp'], $matches);
-                                $spImgDir = $matches[0];
-                                echo "<tr>
-                                        <td><img style='width: 4rem;' src='../images/".$spImgDir."/" . $row["linkanh"] . "'/></td>
+                                                        $totalProducts = 0; // Khởi tạo biến tổng số sản phẩm
+                                                    
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            preg_match('/^[A-Za-z]+/', $row['masp'], $matches);
+                                                            $spImgDir = $matches[0];
+                                                            echo "<tr>
+                                        <td><img style='width: 4rem;' src='../images/" . $spImgDir . "/" . $row["linkanh"] . "'/></td>
                                         <td>" . $row["masp"] . "</td>
                                         <td>" . $row["tenloai"] . "</td>
                                         <td>" . $row["tensp"] . "</td>
                                         <td>" . $row["mota"] . "</td>
                                         <td>";
-                                        ?>
-                                                    <form action="sanpham_sua.php" method="get">
-                                                        <input type="hidden" name="spid"
-                                                            value="<?php echo $row["masp"] ?>">
-                                                        <button class="btn btn-link" href="sanpham_sua.php"><i
-                                                                class="fas fa-edit"></i></button>
-                                                    </form>
-                                                    <?php
-                                echo "</td>
+                                                            ?>
+                                                            <form action="sanpham_sua.php" method="get">
+                                                                <input type="hidden" name="spid"
+                                                                    value="<?php echo $row["masp"] ?>">
+                                                                <button class="btn btn-link" href="sanpham_sua.php"><i
+                                                                        class="fas fa-edit"></i></button>
+                                                            </form>
+                                                            <?php
+                                                            echo "</td>
                                       <td>";
-                                        ?>
+                                                            ?>
 
-                                                    <form action="sanpham_xoa.php" method="get">
-                                                        <input type="hidden" name="spid"
-                                                            value="<?php echo $row["masp"] ?>">
-                                                        <button class="btn btn-link"><i
-                                                                class="fas fa-trash-alt"></i></button>
-                                                    </form>
-                                                    <?php
-                                        
-                                echo "</td>
+                                                            <form action="sanpham_xoa.php" method="get">
+                                                                <input type="hidden" name="spid"
+                                                                    value="<?php echo $row["masp"] ?>">
+                                                                <button class="btn btn-link"><i
+                                                                        class="fas fa-trash-alt"></i></button>
+                                                            </form>
+                                                            <?php
+
+                                                            echo "</td>
                                       </td>
                                       </tr>";
 
-                                $totalProducts++; // Tăng tổng số sản phẩm lên 1
-                            }
+                                                            $totalProducts++; // Tăng tổng số sản phẩm lên 1
+                                                        }
 
-                            echo '</tbody>';
-                            echo '</table>';
+                                                        echo '</tbody>';
+                                                        echo '</table>';
 
-                            echo "<p>Tổng số sản phẩm: $totalProducts</p>"; // Hiển thị tổng số sản phẩm
-                        } else {
-                            echo "Không có dữ liệu sản phẩm.";
-                        }
+                                                        echo "<p>Tổng số sản phẩm: $totalProducts</p>"; // Hiển thị tổng số sản phẩm
+                                                    } else {
+                                                        echo "Không có dữ liệu sản phẩm.";
+                                                    }
 
-                        $conn->close();
-                        ?>
+                                                    $conn->close();
+                                                    ?>
 
 
 
@@ -228,7 +228,7 @@
                     </div>
                 </div>
             </div>
-            <?php 
-        require 'settingSide.php';
-        require 'footer.php';
-      ?>
+            <?php
+            require 'settingSide.php';
+            require 'footer.php';
+            ?>
