@@ -21,6 +21,7 @@
                     <li><a class="nav-link" href="nhacungcap.php">Danh sách nhà cung cấp</a></li>
                     <li><a class="nav-link" href="nhacungcap_them.php">Thêm nhà cung cấp</a></li>
                     <li><a class="nav-link" href="nhasanxuat.php">Danh sách nhà sản xuất</a></li>
+                    <li><a class="nav-link" href="nhasanxuat_them.php">Thêm nhà sản xuất</a></li>
                 </ul>
             </li>
             <li>
