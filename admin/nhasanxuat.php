@@ -4,8 +4,8 @@
 
 <!-- chat.html  21 Nov 2019 03:50:11 GMT -->
 <?php
-  include("connect.php");
-  include('head.php');
+include("connect.php");
+include('head.php');
 ?>
 
 <body>
@@ -13,16 +13,16 @@
     <div id="app">
         <div class="main-wrapper main-wrapper-1">
             <div class="navbar-bg"></div>
-            <?php 
-        include('navbar.php');
-        if($_SESSION['PHANQUYEN']=='Admin'){
-            include('sidebar.php');
-        }
-        if($_SESSION['PHANQUYEN']=='nhanvien'){
-            include('sidebar_nv.php');
-            
-        }
-      ?>
+            <?php
+            include('navbar.php');
+            if ($_SESSION['PHANQUYEN'] == 'Admin') {
+                include('sidebar.php');
+            }
+            if ($_SESSION['PHANQUYEN'] == 'nhanvien') {
+                include('sidebar_nv.php');
+
+            }
+            ?>
             <!-- Main Content -->
             <div class="main-content">
                 <section class="section">
@@ -39,56 +39,47 @@
                                                 style="width:100%;">
                                                 <tbody>
                                                     <?php
-                           
+                                                    $hd = "SELECT * FROM nhasanxuat";
+                                                    $result = $conn->query($hd);
 
-                         
-                           $hd="SELECT * FROM nhasanxuat ";
-                           $result = $conn->query($hd);                   
+                                                    if ($result->num_rows > 0) {
+                                                        echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
+                                                        echo '<thead>';
+                                                        echo '<tr>';
+                                                        echo '<th>Mã nhà sản xuất</th>';
+                                                        echo '<th>Tên nhà sản xuất</th>';
+                                                        echo '<th>Thao tác</th>';
+                                                        echo '</tr>';
+                                                        echo '</thead>';
+                                                        echo '<tbody>';
 
-                            if ($result->num_rows > 0) {
-                                echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
-                                echo '<thead>';
-                                echo '<tr>';
-                                echo '<th>Mã nhà sản xuất</th>';
-                                echo '<th>Tên nhà sản xuất</th>';
-                                echo '<th >Thao tác</th>';
-                                echo '</tr>';
-                                echo '</thead>';
-                                echo '<tbody>';
-                                
-                                while ($row = $result->fetch_assoc()) {
-                                    echo "<tr>
-                                            <td>" . $row["MANSX"] . "</td>
-                                            <td>" . $row["TENNSX"] . "</td>"
-                                          ?>
-                                                    <td>
-                                                        <form action="nhasanxuat_crud.php" method="get">
-                                                            <input type="hidden" name="mancc"
-                                                                value="<?php echo $row["MANSX"] ?>">
-                                                            <button type="submit" class="btn btn-link" name='tt'>
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </button>
-                                                        </form>
-                                                    </td>
-                                                    <?php
-                                          "</tr>";
-                                }
-
-                                echo '</tbody>';
-                                echo '</table>';
-                                
-                                $totalEmployees = $result->num_rows;
-                                echo "<h5>Tổng số nhà sản xuất: $totalEmployees</h5>"; 
-                            } else {
-                                echo "Không có nhà sản xuất nào.";
-                            }
-
-                            $conn->close();
-                            ?>
+                                                        while ($row = $result->fetch_assoc()) {
+                                                            echo "<tr>
+                            <td>" . $row["MANSX"] . "</td>
+                            <td>" . $row["TENNSX"] . "</td>
+                            <td>
+                                <!-- Nút chỉnh sửa -->
+                                <a href='nhasanxuat_sua.php?mansx=" . $row["MANSX"] . "' class='btn btn-link'>
+                                    <i class='fa-solid fa-edit'></i>
+                                </a>
+                                <!-- Nút xóa -->
+                                <form action='nhasanxuat_crud.php' method='get' style='display:inline;'>
+                                    <input type='hidden' name='mansx' value='" . $row["MANSX"] . "'>
+                                    <button type='submit' class='btn btn-link' name='delete'>
+                                        <i class='fa-solid fa-trash'></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>";
+                                                        }
+                                                        echo '</tbody></table>';
+                                                    }
+                                                    ?>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>
