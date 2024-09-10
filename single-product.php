@@ -3,6 +3,8 @@
 <?php
 require 'head.php';
 require 'connect.php';
+require 'popup_themthanhcong.php';
+
 ?>
 
 <body>
@@ -84,41 +86,55 @@ require 'connect.php';
       <div class="order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Giỏ hàng của bạn</span>
-          <span class="badge bg-primary rounded-pill">3</span>
+          <span class="badge bg-primary rounded-pill">
+            <?php echo $_SESSION['slsp'] ?>
+          </span>
         </h4>
         <ul class="list-group mb-3">
           <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Rượu táo</h6>
-              <small class="text-body-secondary">Đây là rượu táo</small>
-            </div>
-            <span class="text-body-secondary">78.000đ</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Nho tươi</h6>
-              <small class="text-body-secondary">Đây là nho tươi</small>
-            </div>
-            <span class="text-body-secondary">28.000đ</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between lh-sm">
-            <div>
-              <h6 class="my-0">Sốt cà chua</h6>
-              <small class="text-body-secondary">Đây là sốt cà chua</small>
-            </div>
-            <span class="text-body-secondary">8.000đ</span>
-          </li>
-          <li class="list-group-item d-flex justify-content-between">
-            <span>Tổng cộng(VND)</span>
-            <strong>114.000đ</strong>
-          </li>
-        </ul>
-
-        <button class="w-100 btn btn-primary btn-lg" type="submit">Tiếp tục thanh toán</button>
+            <?php
+            if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+              foreach ($_SESSION['cart'] as $item) {
+                $sql = "SELECT * FROM sanpham WHERE MASP = '{$item['id']}'";
+                $result = $conn->query($sql);
+                $row = $result->fetch_assoc();
+                $string = $row['MASP'];
+                $masp = preg_replace('/[0-9]/', '', $string);
+                ?>
+                <div>
+                  <h6 class="my-0"><a href="#" class="product-name">
+                      <?php echo $row['TENSP'] ?>
+                    </a></h6>
+                  <small class="text-body-secondary">
+                    <?php echo $row['MOTA'] ?>
+                  </small>
+                </div>
+                <span class="text-body-secondary">
+                  <?php echo number_format($row['DONGIABANSP']) ?>
+                </span>
+              </li>
+              <div class="qty">
+                <label for="cart[id123][qty]">Số lượng:</label>
+                <input type="number" class="input-qty" name="cart[id123][qty]" id="cart[id123][qty]"
+                  value="<?php echo $item['quant'] ?>" disabled>
+              </div>
+              <?php
+              }
+              ?>
+            <button class="w-100 btn btn-primary btn-lg" id="checkoutButton" type="button">Tiếp tục thanh toán</button>
+            <?php
+            } else {
+              echo '<p style="margin-top: 15px; font-size: 18px !important">Không có sản phẩm nào trong giỏ hàng</p>';
+            }
+            ?>
       </div>
     </div>
   </div>
-
+  <script>
+    document.getElementById("checkoutButton").addEventListener("click", function () {
+      window.location.href = "giohang.php";
+    });
+  </script>
   <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasSearch"
     aria-labelledby="Search">
     <div class="offcanvas-header justify-content-center">
@@ -129,7 +145,7 @@ require 'connect.php';
         <h4 class="d-flex justify-content-between align-items-center mb-3">
           <span class="text-primary">Search</span>
         </h4>
-        <form role="search" action="index.html" method="get" class="d-flex mt-3 gap-0">
+        <form role="search" action="index.php" method="get" class="d-flex mt-3 gap-0">
           <input class="form-control rounded-start rounded-0 bg-light" type="email"
             placeholder="What are you looking for?" aria-label="What are you looking for?">
           <button class="btn btn-dark rounded-end rounded-0" type="submit">Search</button>
