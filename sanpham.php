@@ -412,18 +412,32 @@ require 'popup_themthanhcong.php';
                         <use xlink:href="#cart"></use>
                       </svg>
                       <script>
-                      function addToCart(productId) {
-                        var inputField = document.getElementById('quantity_' + productId); // Assume each product has a unique quantity input field
-                        var currentQuantity = parseInt(inputField.value);
-                        if (isNaN(currentQuantity)) {
-                          currentQuantity = 0;
+                        function incrementQuantity(productId) {
+                          var inputField = document.getElementById('quantity_' + productId);
+                          var currentValue = parseInt(inputField.value);
+                          if (currentValue < 9) {
+                            inputField.value = currentValue + 1;
+                          }
                         }
-                        if (currentQuantity < 9) {
-                          inputField.value = currentQuantity + 1; // Increment only if less than 10
+
+                        function decrementQuantity(productId) {
+                          var inputField = document.getElementById('quantity_' + productId);
+                          var currentValue = parseInt(inputField.value);
+                          if (currentValue > 1) { // Ensure quantity doesn't go below 1
+                            inputField.value = currentValue - 1;
+                          }
                         }
-                        window.location.href = 'themvaogiohang.php?sb_cate=&pdid=' + productId + '&qty12554=' + currentQuantity;
-                      }
-                    </script>
+
+                        function addToCart(productId) {
+                          var inputField = document.getElementById('quantity_' + productId);
+                          var currentQuantity = parseInt(inputField.value);
+                          if (isNaN(currentQuantity)) {
+                            currentQuantity = 1; // Default to 1 if not a number
+                          }
+                          window.location.href = 'themvaogiohang.php?sb_cate=&pdid=' + productId + '&qty12554=' + currentQuantity;
+                        }
+                      </script>
+
 
                     </a>
                   </div>

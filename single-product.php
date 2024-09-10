@@ -257,12 +257,26 @@ require 'popup_themthanhcong.php';
                       </button>
                     </span>
                   </div>
+                  <!-- Trang single-product.php -->
                   <div class="qty-button d-flex flex-wrap pt-3">
-                    <button type="submit" name="sb_dathang"
-                      class="btn btn-primary py-3 px-4 text-uppercase me-3 mt-3">Mua ngay</button>
-                    <button type="submit" name="sb_giohang" value="1269"
-                      class="btn btn-dark py-3 px-4 text-uppercase mt-3">Thêm vào giỏ hàng</button>
+                    <button type="button" name="sb_dathang" class="btn btn-primary py-3 px-4 text-uppercase me-3 mt-3"
+                      onclick="buyNow()">Mua ngay</button>
+                    <button type="button" name="sb_giohang" value="<?php echo $row['MASP']; ?>"
+                      class="btn btn-dark py-3 px-4 text-uppercase mt-3"
+                      onclick="addToCart('<?php echo $row['MASP']; ?>')">Thêm vào giỏ hàng</button>
                   </div>
+
+                  <script>
+                    function addToCart(productId) {
+                      var quantity = 1; // Mặc định số lượng là 1
+                      window.location.href = 'themvaogiohang.php?sb_cate=&pdid=' + productId + '&qty12554=' + quantity;
+                    }
+
+                    function buyNow() {
+                      // Xử lý hành động "Mua ngay" nếu cần
+                    }
+                  </script>
+
                 </div>
               </div>
             </div>
@@ -275,39 +289,39 @@ require 'popup_themthanhcong.php';
                   </li>
                 </ul>
               </div>
-            <div class="meta-product py-2">
-              <div class="meta-item d-flex align-items-baseline">
-                <h6 class="item-title no-margin pe-2">Mã hàng:</h6>
-                <ul class="select-list list-unstyled d-flex">
-                  <li data-value="S" class="select-item">
-                    <?php echo $row['MASP'] ?>
-                  </li>
-                </ul>
-              </div>
-              <div class="meta-item d-flex align-items-baseline">
-                <h6 class="item-title no-margin pe-2">Danh mục sản phẩm:</h6>
-                <ul class="select-list list-unstyled d-flex">
-                  <li data-value="S" class="select-item">
-                    <a href="#">
-                      <?php echo $row['TENLOAI']; ?>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="meta-item d-flex align-items-baseline">
-                <h6 class="item-title no-margin pe-2">Nhà Sản Xuất:</h6>
-                <ul class="select-list list-unstyled d-flex">
-                  <li data-value="S" class="select-item">
-                    <?php echo $row['TENNSX']; ?>
-                  </li>
+              <div class="meta-product py-2">
+                <div class="meta-item d-flex align-items-baseline">
+                  <h6 class="item-title no-margin pe-2">Mã hàng:</h6>
+                  <ul class="select-list list-unstyled d-flex">
+                    <li data-value="S" class="select-item">
+                      <?php echo $row['MASP'] ?>
+                    </li>
+                  </ul>
+                </div>
+                <div class="meta-item d-flex align-items-baseline">
+                  <h6 class="item-title no-margin pe-2">Danh mục sản phẩm:</h6>
+                  <ul class="select-list list-unstyled d-flex">
+                    <li data-value="S" class="select-item">
+                      <a href="#">
+                        <?php echo $row['TENLOAI']; ?>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="meta-item d-flex align-items-baseline">
+                  <h6 class="item-title no-margin pe-2">Nhà Sản Xuất:</h6>
+                  <ul class="select-list list-unstyled d-flex">
+                    <li data-value="S" class="select-item">
+                      <?php echo $row['TENNSX']; ?>
+                    </li>
 
-                </ul>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   </section>
 
   <section class="product-info-tabs py-5">
