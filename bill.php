@@ -169,7 +169,7 @@ require 'connect.php';
           </nav>
         </div>
                   <?php
-          $sql = "SELECT * FROM nguoidung, hoadon WHERE hoadon.EMAIL = nguoidung.EMAIL AND hoadon.EMAIL ='" . $_SESSION['email'] . "'";
+          $sql = "SELECT * FROM nguoidung, hoadon WHERE hoadon.EMAIL = nguoidung.EMAIL AND hoadon.EMAIL ='" . $_SESSION['email'] . "' ORDER BY hoadon.NGAYLAP DESC";
           $result = $conn->query($sql);
           while ($row = $result->fetch_assoc()) {
               // Xác định trạng thái đơn hàng
