@@ -2,14 +2,15 @@
 include('connect.php');
 
 // Add a new supplier
-// Add a new supplier
 if (isset($_POST["add"])) {
     $ma = $_POST['ma'];
     $ten = $_POST['ten'];
     $diachi = $_POST['diachi'];
 
-    $sql = "INSERT INTO nhacungcap (MANCC, TENNCC, DIACHI) VALUES ('$ma', '$ten', '$diachi')";
-    $result = $conn->query($sql);
+    $stmt = $conn->prepare("INSERT INTO nhacungcap (MANCC, TENNCC, DIACHI) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $ma, $ten, $diachi);
+    $result = $stmt->execute();
+
     if ($result) {
         echo '<script language="javascript">
         alert("Đã thêm nhà cung cấp!");
@@ -21,22 +22,29 @@ if (isset($_POST["add"])) {
         window.location.href = "nhacungcap_them.php";
         </script>';
     }
+    $stmt->close();
 }
 
-
 // Delete a supplier
-if (isset($_GET["tt"])) {
-    $loai1 = $_GET['mancc'];
-    $sql2 = "UPDATE nhacungcap SET LOAITT = 0 WHERE MANCC = '$loai1'";
-    $result2 = $conn->query($sql2);
-    if ($result2) {
+if (isset($_POST["delete"])) {
+    $mancc = $_POST['mancc'];
+
+    $stmt = $conn->prepare("DELETE FROM nhacungcap WHERE MANCC = ?");
+    $stmt->bind_param("s", $mancc);
+    $result = $stmt->execute();
+
+    if ($result) {
         echo '<script language="javascript">
         alert("Đã xóa nhà cung cấp!");
+        window.location.href = "nhacungcap.php";
         </script>';
-        header('Location: nhacungcap.php');
     } else {
-        echo 'Lỗi';
+        echo '<script language="javascript">
+        alert("Không thể xóa nhà cung cấp!");
+        window.location.href = "nhacungcap.php";
+        </script>';
     }
+    $stmt->close();
 }
 
 // Update supplier details
@@ -44,24 +52,31 @@ if (isset($_POST["update"])) {
     $mancc = $_POST['mancc'];
     $ten = $_POST['ten'];
     $diachi = $_POST['diachi'];
-    
-    $sql4 = "UPDATE nhacungcap SET TENNCC = '$ten', DIACHI = '$diachi' WHERE MANCC = '$mancc'";
-    $result4 = $conn->query($sql4);
-    if ($result4) {
+
+    $stmt = $conn->prepare("UPDATE nhacungcap SET TENNCC = ?, DIACHI = ? WHERE MANCC = ?");
+    $stmt->bind_param("sss", $ten, $diachi, $mancc);
+    $result = $stmt->execute();
+
+    if ($result) {
         header('Location: nhacungcap.php');
         exit();
     } else {
         echo 'Lỗi cập nhật';
     }
+    $stmt->close();
 }
 
 // Fetch supplier details for editing
 if (isset($_GET["edit"])) {
     $mancc = $_GET['mancc'];
-    $sql3 = "SELECT * FROM nhacungcap WHERE MANCC = '$mancc'";
-    $result3 = $conn->query($sql3);
-    if ($result3->num_rows > 0) {
-        $row = $result3->fetch_assoc();
+
+    $stmt = $conn->prepare("SELECT * FROM nhacungcap WHERE MANCC = ?");
+    $stmt->bind_param("s", $mancc);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
         echo '<script>
             document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("tenncc").value = "'.$row['TENNCC'].'";
@@ -69,5 +84,8 @@ if (isset($_GET["edit"])) {
             });
             </script>';
     }
+    $stmt->close();
 }
+
+$conn->close();
 ?>

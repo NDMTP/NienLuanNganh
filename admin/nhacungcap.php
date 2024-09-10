@@ -30,66 +30,55 @@ include('head.php');
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <div class="card-header">
-                                        <h4>Danh sách nhà cung cấp</h4>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-                                            <table class="table table-striped table-hover" id="tableExport"
-                                                style="width:100%;">
-                                                <tbody>
-                                                    <?php
-                                                    $hd = "SELECT * FROM nhacungcap";
-                                                    $result = $conn->query($hd);
+                                <div class="card-header">
+    <h4>Danh sách nhà cung cấp</h4>
+</div>
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Mã nhà cung cấp</th>
+                    <th>Tên nhà cung cấp</th>
+                    <th>Địa chỉ</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                $hd = "SELECT * FROM nhacungcap";
+                $result = $conn->query($hd);
 
-                                                    if ($result->num_rows > 0) {
-                                                        echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
-                                                        echo '<thead>';
-                                                        echo '<tr>';
-                                                        echo '<th>Mã nhà cung cấp</th>';
-                                                        echo '<th>Tên nhà cung cấp</th>';
-                                                        echo '<th>Địa chỉ</th>';
-                                                        echo '<th>Thao tác</th>';
-                                                        echo '</tr>';
-                                                        echo '</thead>';
-                                                        echo '<tbody>';
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>
+                            <td>" . htmlspecialchars($row["MANCC"]) . "</td>
+                            <td>" . htmlspecialchars($row["TENNCC"]) . "</td>
+                            <td>" . htmlspecialchars($row["DIACHI"]) . "</td>
+                            <td>
+                                <!-- Nút chỉnh sửa -->
+                                <a href='nhacungcap_sua.php?mancc=" . htmlspecialchars($row["MANCC"]) . "' class='btn btn-link'>
+                                    <i class='fa-solid fa-edit'></i>
+                                </a>
+                                <!-- Nút xóa -->
+                                <form action='nhacungcap_crud.php' method='post' style='display:inline;'>
+                                    <input type='hidden' name='mancc' value='" . htmlspecialchars($row["MANCC"]) . "'>
+                                    <button type='submit' class='btn btn-link' name='delete'>
+                                        <i class='fa-solid fa-trash'></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>";
+                    }
+                } else {
+                    echo "<tr><td colspan='4'>Không có dữ liệu.</td></tr>";
+                }
+                ?>
+            </tbody>
+        </table>
+    </div>
+</div>
 
-                                                        while ($row = $result->fetch_assoc()) {
-                                                            echo "<tr>
-                                <td>" . $row["MANCC"] . "</td>
-                                <td>" . $row["TENNCC"] . "</td>
-                                <td>" . $row["DIACHI"] . "</td>
-                                <td>
-                                    <!-- Nút chỉnh sửa -->
-                                    <a href='nhacungcap_sua.php?mancc=" . $row["MANCC"] . "' class='btn btn-link'>
-                                        <i class='fa-solid fa-edit'></i>
-                                    </a>
-                                    <!-- Nút xóa -->
-                                    <form action='nhacungcap_crud.php' method='get' style='display:inline;'>
-                                        <input type='hidden' name='mancc' value='" . $row["MANCC"] . "'>
-                                        <button type='submit' class='btn btn-link' name='tt'>
-                                            <i class='fa-solid fa-trash'></i>
-                                        </button>
-                                    </form>
-                                </td>
-                              </tr>";
-                                                        }
-
-                                                        echo '</tbody>';
-                                                        echo '</table>';
-
-                                                        $totalSuppliers = $result->num_rows;
-                                                        echo "<h5>Tổng số nhà cung cấp: $totalSuppliers</h5>";
-                                                    } else {
-                                                        echo "Không có nhà cung cấp nào.";
-                                                    }
-
-                                                    $conn->close();
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
 
                                     </tbody>
                                     </table>
