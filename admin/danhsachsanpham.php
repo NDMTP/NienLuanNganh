@@ -51,7 +51,7 @@ include('head.php');
                                                     }
 
                                                     // Xác định số sản phẩm mỗi trang và trang hiện tại
-                                                    $productsPerPage = 30;
+                                                    $productsPerPage = 20;
                                                     $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
                                                     $start = ($page - 1) * $productsPerPage;
 
