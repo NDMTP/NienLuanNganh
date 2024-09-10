@@ -31,45 +31,45 @@ include('head.php');
               <div class="col-lg-3"></div>
               <div class="col-6 col-md-6 col-lg-6">
                 <div class="card">
-                <form method="POST" action="nhacungcap_crud.php">
-    <div class="card-header">
-        <h4>Cập nhật nhà cung cấp</h4>
-    </div>
-    <?php
-    if (isset($_GET['mancc'])) {
-        $mancc = $_GET['mancc'];
-        echo '<input type="hidden" name="mancc" value="' . $mancc . '">';
-    }
-    ?>
-    <div class="card-body">
-        <div class="mb-3">
-            <label class="form-label" for="basic-icon-default-fullname">Mã nhà cung cấp</label>
-            <div class="input-group input-group-merge">
-                <span id="basic-icon-default-fullname2" class="input-group-text"></span>
-                <input type="text" value="<?php echo isset($_GET['mancc']) ? $_GET['mancc'] : '' ?>" name="ma"
-                    class="form-control" id="basic-icon-default-fullname" aria-label="John Doe"
-                    aria-describedby="basic-icon-default-fullname2" readonly />
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="basic-icon-default-company">Tên nhà cung cấp</label>
-            <div class="input-group input-group-merge">
-                <span id="basic-icon-default-fullname2" class="input-group-text"></span>
-                <input type="text" name="ten" class="form-control" id="tenncc" aria-label="John Doe"
-                    aria-describedby="basic-icon-default-fullname2" />
-            </div>
-        </div>
-        <div class="mb-3">
-            <label class="form-label" for="basic-icon-default-company">Địa chỉ</label>
-            <div class="input-group input-group-merge">
-                <span id="basic-icon-default-fullname2" class="input-group-text"></span>
-                <input type="text" name="diachi" class="form-control" id="diachi" aria-label="John Doe"
-                    aria-describedby="basic-icon-default-fullname2" />
-            </div>
-        </div>
-        <button type="submit" name="update" class="btn btn-primary">Cập nhật</button>
-    </div>
-</form>
+                  <form method="POST" action="nhacungcap_crud.php">
+                    <div class="card-header">
+                      <h4>Cập nhật nhà cung cấp</h4>
+                    </div>
+                    <?php
+                    if (isset($_GET['mancc'])) {
+                      $mancc = $_GET['mancc'];
+                      echo '<input type="hidden" name="mancc" value="' . $mancc . '">';
+                    }
+                    ?>
+                    <div class="card-body">
+                      <div class="mb-3">
+                        <label class="form-label" for="basic-icon-default-fullname">Mã nhà cung cấp</label>
+                        <div class="input-group input-group-merge">
+                          <span id="basic-icon-default-fullname2" class="input-group-text"></span>
+                          <input type="text" value="<?php echo isset($_GET['mancc']) ? $_GET['mancc'] : '' ?>" name="ma"
+                            class="form-control" id="basic-icon-default-fullname" aria-label="John Doe"
+                            aria-describedby="basic-icon-default-fullname2" readonly />
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="basic-icon-default-company">Tên nhà cung cấp</label>
+                        <div class="input-group input-group-merge">
+                          <span id="basic-icon-default-fullname2" class="input-group-text"></span>
+                          <input type="text" name="ten" class="form-control" id="tenncc" aria-label="John Doe"
+                            aria-describedby="basic-icon-default-fullname2" />
+                        </div>
+                      </div>
+                      <div class="mb-3">
+                        <label class="form-label" for="basic-icon-default-company">Địa chỉ</label>
+                        <div class="input-group input-group-merge">
+                          <span id="basic-icon-default-fullname2" class="input-group-text"></span>
+                          <input type="text" name="diachi" class="form-control" id="diachi" aria-label="John Doe"
+                            aria-describedby="basic-icon-default-fullname2" />
+                        </div>
+                      </div>
+                      <button type="submit" name="update" class="btn btn-primary">Cập nhật</button>
+                    </div>
+                  </form>
 
 
                 </div>
