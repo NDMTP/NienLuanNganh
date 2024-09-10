@@ -411,6 +411,20 @@ require 'popup_themthanhcong.php';
                       <svg width="18" height="18">
                         <use xlink:href="#cart"></use>
                       </svg>
+                      <script>
+                      function addToCart(productId) {
+                        var inputField = document.getElementById('quantity_' + productId); // Assume each product has a unique quantity input field
+                        var currentQuantity = parseInt(inputField.value);
+                        if (isNaN(currentQuantity)) {
+                          currentQuantity = 0;
+                        }
+                        if (currentQuantity < 9) {
+                          inputField.value = currentQuantity + 1; // Increment only if less than 10
+                        }
+                        window.location.href = 'themvaogiohang.php?sb_cate=&pdid=' + productId + '&qty12554=' + currentQuantity;
+                      }
+                    </script>
+
                     </a>
                   </div>
                 </div>
