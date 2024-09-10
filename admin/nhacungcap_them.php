@@ -50,7 +50,7 @@
             <label class="form-label" for="basic-icon-default-fullname">Mã nhà cung cấp</label>
             <div class="input-group input-group-merge">
                 <span id="basic-icon-default-fullname2" class="input-group-text"></span>
-                <input type="text" value="<?php echo $maloai ?>" name="ma" class="form-control" id="basic-icon-default-fullname" placeholder="ABC" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" />
+                <input type="text" value="<?php echo $maloai ?>" name="ma" class="form-control" id="basic-icon-default-fullname" placeholder="ABC" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2" readonly />
             </div>
         </div>
         <div class="mb-3">
