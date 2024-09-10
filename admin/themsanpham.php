@@ -16,14 +16,15 @@ $tensp = $_POST["tensp"];
 $dongiabansp = $_POST["dongiabansp"];
 $mansx = $_POST["nsx"];
 $motasp = $_POST["mota"];
+$soluongkho = $_POST['soluongkho'];
 
 // Generate the next product ID
-$sql = "SELECT max(CAST(SUBSTRING(MASP, 3) AS SIGNED)) AS maxid FROM sanpham WHERE MALOAI = '$maloai'";
+$sql = "SELECT MAX(CAST(SUBSTRING(MASP, 3) AS SIGNED)) AS maxid FROM sanpham WHERE MALOAI = '$maloai'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $maxid = $row['maxid'] + 1;
 
-$sql = "SELECT max(MASP) as maxid FROM sanpham WHERE MALOAI = '{$maloai}'";
+$sql = "SELECT MAX(MASP) as maxid FROM sanpham WHERE MALOAI = '{$maloai}'";
 $result = $conn->query($sql);
 $row = $result->fetch_assoc();
 $id = $row['maxid'];
@@ -61,8 +62,9 @@ if (isset($_FILES["pdimg"]) && $_FILES["pdimg"]["error"] == 0) {
     echo "No file was uploaded or there was an upload error.";
 }
 
-$sql = "INSERT INTO sanpham (MASP, MANSX, MALOAI, TENSP, DONGIABANSP, MOTA, LINKANH)
-VALUES ('$nextid', '$mansx', '$maloai', '$tensp', '$dongiabansp', '$motasp', '$pdimg')";
+// Insert product into database
+$sql = "INSERT INTO sanpham (MASP, MALOAI, MANSX, TENSP, DONGIABANSP, MOTA, LINKANH, SOLUONGKHO) 
+        VALUES ('$nextid', '$maloai', '$mansx', '$tensp', '$dongiabansp', '$motasp', '$pdimg', '$soluongkho')";
 
 if ($conn->query($sql) === TRUE) {
     echo '<script language="javascript">alert("Thêm thành công!");</script>';

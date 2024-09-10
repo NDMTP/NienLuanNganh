@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-<!-- chat.html  21 Nov 2019 03:50:11 GMT -->
 <?php
 include("connect.php");
 include('head.php');
@@ -20,7 +18,6 @@ include('head.php');
             }
             if ($_SESSION['PHANQUYEN'] == 'nhanvien') {
                 include('sidebar_nv.php');
-
             }
             ?>
             <!-- Main Content -->
@@ -35,8 +32,19 @@ include('head.php');
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-hover" id="tableExport"
-                                                style="width:100%;">
+                                            <table class="table table-striped table-hover" id="tableExport" style="width:100%;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Hình ảnh</th>
+                                                        <th>Mã sản phẩm</th>
+                                                        <th>Tên loại</th>
+                                                        <th>Tên sản phẩm</th>
+                                                        <th>Mô tả</th>
+                                                        <th>Số lượng kho</th>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
                                                 <tbody>
                                                     <?php
                                                     $servername = "localhost";
@@ -52,7 +60,7 @@ include('head.php');
 
                                                     // Xác định số sản phẩm mỗi trang và trang hiện tại
                                                     $productsPerPage = 20;
-                                                    $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+                                                    $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
                                                     $start = ($page - 1) * $productsPerPage;
 
                                                     // Truy vấn SQL để lấy tổng số sản phẩm
@@ -62,102 +70,76 @@ include('head.php');
                                                     $totalProducts = $rowTotal['total'];
 
                                                     // Truy vấn SQL để lấy danh sách sản phẩm cho trang hiện tại
-                                                    $sql = "SELECT sanpham.masp, loaisanpham.tenloai, sanpham.tensp, sanpham.mota, sanpham.linkanh
-        FROM sanpham 
-        INNER JOIN loaisanpham ON sanpham.maloai = loaisanpham.maloai
-        LIMIT $start, $productsPerPage";
+                                                    $sql = "SELECT sanpham.masp, loaisanpham.tenloai, sanpham.tensp, sanpham.mota, sanpham.linkanh, sanpham.soluongkho
+                                                            FROM sanpham 
+                                                            INNER JOIN loaisanpham ON sanpham.maloai = loaisanpham.maloai
+                                                            LIMIT $start, $productsPerPage";
                                                     $result = $conn->query($sql);
 
                                                     if ($result->num_rows > 0) {
-                                                        echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
-                                                        echo '<thead>';
-                                                        echo '<tr>';
-                                                        echo '<th>Hình ảnh</th>';
-                                                        echo '<th>Mã sản phẩm</th>';
-                                                        echo '<th>Tên loại</th>';
-                                                        echo '<th>Tên sản phẩm</th>';
-                                                        echo '<th>Mô tả</th>';
-                                                        echo '<th></th>';
-                                                        echo '<th></th>';
-                                                        echo '</tr>';
-                                                        echo '</thead>';
-                                                        echo '<tbody>';
-
                                                         while ($row = $result->fetch_assoc()) {
                                                             preg_match('/^[A-Za-z]+/', $row['masp'], $matches);
                                                             $spImgDir = $matches[0];
                                                             echo "<tr>
-            <td><img style='width: 4rem;' src='../images/" . $spImgDir . "/" . $row["linkanh"] . "'/></td>
-            <td>" . $row["masp"] . "</td>
-            <td>" . $row["tenloai"] . "</td>
-            <td>" . $row["tensp"] . "</td>
-            <td>" . $row["mota"] . "</td>
-            <td>";
-                                                            ?>
-                                                            <form action="sanpham_sua.php" method="get">
-                                                                <input type="hidden" name="spid"
-                                                                    value="<?php echo $row["masp"] ?>">
-                                                                <button class="btn btn-link"><i
-                                                                        class="fas fa-edit"></i></button>
-                                                            </form>
-                                                            <?php
-                                                            echo "</td>
-            <td>";
-                                                            ?>
-                                                            <form action="sanpham_xoa.php" method="get">
-                                                                <input type="hidden" name="spid"
-                                                                    value="<?php echo $row["masp"] ?>">
-                                                                <button class="btn btn-link"><i
-                                                                        class="fas fa-trash-alt"></i></button>
-                                                            </form>
-                                                            <?php
-                                                            echo "</td>
-        </tr>";
+                                                                <td><img style='width: 4rem;' src='../images/" . $spImgDir . "/" . $row["linkanh"] . "'/></td>
+                                                                <td>" . $row["masp"] . "</td>
+                                                                <td>" . $row["tenloai"] . "</td>
+                                                                <td>" . $row["tensp"] . "</td>
+                                                                <td>" . $row["mota"] . "</td>
+                                                                <td>" . $row["soluongkho"] . "</td>
+                                                                <td>
+                                                                    <form action='sanpham_sua.php' method='get'>
+                                                                        <input type='hidden' name='spid' value='" . $row["masp"] . "'>
+                                                                        <button class='btn btn-link'><i class='fas fa-edit'></i></button>
+                                                                    </form>
+                                                                </td>
+                                                                <td>
+                                                                    <form action='sanpham_xoa.php' method='get'>
+                                                                        <input type='hidden' name='spid' value='" . $row["masp"] . "'>
+                                                                        <button class='btn btn-link'><i class='fas fa-trash-alt'></i></button>
+                                                                    </form>
+                                                                </td>
+                                                            </tr>";
                                                         }
-
-                                                        echo '</tbody>';
-                                                        echo '</table>';
                                                     } else {
-                                                        echo "Không có dữ liệu sản phẩm.";
+                                                        echo "<tr><td colspan='8'>Không có dữ liệu sản phẩm.</td></tr>";
                                                     }
-
-                                                    // Hiển thị tổng số sản phẩm
-                                                    echo "<p>Tổng số sản phẩm: $totalProducts</p>";
-
-                                                    // Tính số trang
-                                                    $totalPages = ceil($totalProducts / $productsPerPage);
-
-                                                    // Hiển thị các liên kết phân trang
-                                                    echo '<nav aria-label="Page navigation">';
-                                                    echo '<ul class="pagination">';
-
-                                                    // Liên kết đến trang trước
-                                                    if ($page > 1) {
-                                                        echo '<li class="page-item"><a class="page-link" href="?page=' . ($page - 1) . '">«</a></li>';
-                                                    }
-
-                                                    // Liên kết đến các trang
-                                                    for ($i = 1; $i <= $totalPages; $i++) {
-                                                        $active = ($i == $page) ? ' active' : '';
-                                                        echo '<li class="page-item' . $active . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-                                                    }
-
-                                                    // Liên kết đến trang sau
-                                                    if ($page < $totalPages) {
-                                                        echo '<li class="page-item"><a class="page-link" href="?page=' . ($page + 1) . '">»</a></li>';
-                                                    }
-
-                                                    echo '</ul>';
-                                                    echo '</nav>';
-
-                                                    $conn->close();
                                                     ?>
-
-
-
                                                 </tbody>
                                             </table>
                                         </div>
+                                        <?php
+                                        // Hiển thị tổng số sản phẩm
+                                        echo "<p>Tổng số sản phẩm: $totalProducts</p>";
+
+                                        // Tính số trang
+                                        $totalPages = ceil($totalProducts / $productsPerPage);
+
+                                        // Hiển thị các liên kết phân trang
+                                        echo '<nav aria-label="Page navigation">';
+                                        echo '<ul class="pagination">';
+
+                                        // Liên kết đến trang trước
+                                        if ($page > 1) {
+                                            echo '<li class="page-item"><a class="page-link" href="?page=' . ($page - 1) . '">«</a></li>';
+                                        }
+
+                                        // Liên kết đến các trang
+                                        for ($i = 1; $i <= $totalPages; $i++) {
+                                            $active = ($i == $page) ? ' active' : '';
+                                            echo '<li class="page-item' . $active . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                        }
+
+                                        // Liên kết đến trang sau
+                                        if ($page < $totalPages) {
+                                            echo '<li class="page-item"><a class="page-link" href="?page=' . ($page + 1) . '">»</a></li>';
+                                        }
+
+                                        echo '</ul>';
+                                        echo '</nav>';
+
+                                        $conn->close();
+                                        ?>
                                     </div>
                                 </div>
                             </div>
@@ -168,9 +150,8 @@ include('head.php');
                     <a href="javascript:void(0)" class="settingPanelToggle"> <i class="fa fa-spin fa-cog"></i>
                     </a>
                     <div class="settingSidebar-body ps-container ps-theme-default">
-                        <div class=" fade show active">
-                            <div class="setting-panel-header">Setting Panel
-                            </div>
+                        <div class="fade show active">
+                            <div class="setting-panel-header">Setting Panel</div>
                             <div class="p-15 border-bottom">
                                 <h6 class="font-medium m-b-10">Select Layout</h6>
                                 <div class="selectgroup layout-color w-50">
@@ -264,3 +245,6 @@ include('head.php');
             require 'settingSide.php';
             require 'footer.php';
             ?>
+</body>
+
+</html>

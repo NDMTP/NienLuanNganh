@@ -155,7 +155,7 @@ require 'popup_themthanhcong.php';
   </div>
 
   <?php
-  include ('header.php');
+  include('header.php');
   ?>
 
   <section class="py-5 mb-5" style="background: url(images/background-pattern.jpg);">
@@ -321,60 +321,55 @@ require 'popup_themthanhcong.php';
 
             // Xác định trang hiện tại từ biến GET
             $current_page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
-            // Truy vấn lấy dữ liệu sản phẩm từ cơ sở dữ liệu
             $offset = ($current_page - 1) * $productsPerPage;
 
+            // Tạo điều kiện truy vấn dựa trên các tham số lọc
             $sql = " WHERE 1";
 
-
-
             if (isset($_GET['loai']) && $_GET['loai'] != "all") {
-              $sql = $sql . " AND MALOAI = " . $_GET['loai'];
+              $sql .= " AND MALOAI = " . $_GET['loai'];
             }
             if (isset($_GET['gia'])) {
               switch ($_GET['gia']) {
                 case 'gia1':
-                  $sql = $sql . " AND DONGIABANSP BETWEEN 0 AND 10000";
+                  $sql .= " AND DONGIABANSP BETWEEN 0 AND 10000";
                   break;
                 case 'gia2':
-                  $sql = $sql . " AND DONGIABANSP BETWEEN 10000 AND 20000";
+                  $sql .= " AND DONGIABANSP BETWEEN 10000 AND 20000";
                   break;
                 case 'gia3':
-                  $sql = $sql . " AND DONGIABANSP BETWEEN 20000 AND 50000";
+                  $sql .= " AND DONGIABANSP BETWEEN 20000 AND 50000";
                   break;
                 case 'gia4':
-                  $sql = $sql . " AND DONGIABANSP BETWEEN 50000 AND 100000";
+                  $sql .= " AND DONGIABANSP BETWEEN 50000 AND 100000";
                   break;
                 case 'gia5':
-                  $sql = $sql . " AND DONGIABANSP >  100000";
-                  break;
-                default:
+                  $sql .= " AND DONGIABANSP > 100000";
                   break;
               }
-
             }
-
-
-
-
             if (isset($_GET['search'])) {
               $s = $_GET['search'];
-            } else
+            } else {
               $s = '';
-            $sql .= " AND TENSP like '%" . $s . "%'";
+            }
+            $sql .= " AND TENSP LIKE '%" . $s . "%'";
 
-            $sql = $sql . " LIMIT $offset, $productsPerPage";
+            // Truy vấn tổng số sản phẩm để tính số trang
+            $sql_count = "SELECT COUNT(*) as total FROM sanpham" . $sql;
+            $result_count = $conn->query($sql_count);
+            $totalProducts = $result_count->fetch_assoc()['total'];
+            $totalPages = ceil($totalProducts / $productsPerPage);
 
+            // Truy vấn lấy dữ liệu sản phẩm
+            $sql .= " LIMIT $offset, $productsPerPage";
             $query = "SELECT * FROM sanpham" . $sql;
 
             $result = $conn->query($query);
+
             if ($result->num_rows > 0) {
-              $result = $conn->query($query);
-              $result_all = $result->fetch_all(MYSQLI_ASSOC);
-              foreach ($result_all as $row) {
+              while ($row = $result->fetch_assoc()) {
                 $string = $row['MASP'];
-                // Loại bỏ các kí tự số khỏi chuỗi
                 $masp = preg_replace('/[0-9]/', '', $string);
                 ?>
                 <div class="product-item">
@@ -388,13 +383,8 @@ require 'popup_themthanhcong.php';
                         class="tab-image">
                     </a>
                   </figure>
-                  <h3>
-                    <?php echo $row['TENSP'] ?>
-                  </h3>
-
-                  <span class="price">
-                    <?php echo number_format($row['DONGIABANSP']) ?> đ
-                  </span>
+                  <h3><?php echo $row['TENSP'] ?></h3>
+                  <span class="price"><?php echo number_format($row['DONGIABANSP']) ?> đ</span>
                   <div class="d-flex align-items-center justify-content-between">
                     <div class="input-group product-qty">
                       <span class="input-group-btn">
@@ -405,39 +395,15 @@ require 'popup_themthanhcong.php';
                           </svg>
                         </button>
                       </span>
-                      <?php
-                      $biennhap = 1;
-
-                      ?>
                       <input type="text" id="quantity_<?php echo $row['MASP']; ?>" name="quantity"
-                        class="form-control input-number" value="<?php echo $biennhap ?>" min="1" max="9">
-
+                        class="form-control input-number" value="1" min="1" max="9">
                       <span class="input-group-btn">
-
                         <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus"
                           onclick="incrementQuantity('<?php echo $row['MASP']; ?>')">
                           <svg width="16" height="16">
                             <use xlink:href="#plus"></use>
                           </svg>
                         </button>
-                        <script>
-                          function incrementQuantity(productId) {
-                            var inputField = document.getElementById('quantity_' + productId);
-                            var currentValue = parseInt(inputField.value);
-                            if (currentValue < 9) {
-                              inputField.value = currentValue + 1;
-                            }
-                          }
-
-                          function decrementQuantity(productId) {
-                            var inputField = document.getElementById('quantity_' + productId);
-                            var currentValue = parseInt(inputField.value);
-                            if (currentValue > 1) { // Assuming you do not want the quantity to go below 1
-                              inputField.value = currentValue - 1;
-                            }
-                          }
-                        </script>
-
                       </span>
                     </div>
                     <a href="javascript:void(0);" onclick="addToCart('<?php echo $row['MASP']; ?>')" class="nav-link">Thêm
@@ -446,59 +412,56 @@ require 'popup_themthanhcong.php';
                         <use xlink:href="#cart"></use>
                       </svg>
                     </a>
-                    <script>
-                      function addToCart(productId) {
-                        var inputField = document.getElementById('quantity_' + productId); // Assume each product has a unique quantity input field
-                        var currentQuantity = parseInt(inputField.value);
-                        if (isNaN(currentQuantity)) {
-                          currentQuantity = 0;
-                        }
-                        if (currentQuantity < 9) {
-                          inputField.value = currentQuantity + 1; // Increment only if less than 10
-                        }
-                        window.location.href = 'themvaogiohang.php?sb_cate=&pdid=' + productId + '&qty12554=' + currentQuantity;
-                      }
-                    </script>
-
                   </div>
-
                 </div>
                 <?php
               }
             } else {
               echo "Không tìm thấy sản phẩm phù hợp";
             }
+
+            // Phân trang
             ?>
-            <!-- <div class="col">
-            </div> -->
+            <nav class="text-center py-4" style="margin: auto" aria-label="Page navigation">
+              <ul class="pagination d-flex justify-content-center">
+                <?php if ($current_page > 1): ?>
+                  <li class="page-item">
+                    <a class="page-link border-0" href="?page=<?php echo $current_page - 1; ?>" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                <?php else: ?>
+                  <li class="page-item disabled">
+                    <a class="page-link bg-none border-0" href="#" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                <?php endif; ?>
 
-          </div>
-          <!-- / product-grid -->
+                <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                  <li class="page-item <?php echo ($i == $current_page) ? 'active' : ''; ?>">
+                    <a class="page-link border-0" href="?page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                  </li>
+                <?php endfor; ?>
 
-          <nav class="text-center py-4" aria-label="Page navigation">
-            <ul class="pagination d-flex justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link bg-none border-0" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item active" aria-current="page"><a class="page-link border-0"
-                  href="sanpham.php?page=1">1</a></li>
-              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=2">2</a></li>
-              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=3">3</a></li>
-              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=4">4</a></li>
-              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=5">5</a></li>
-              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=6">6</a></li>
-              <li class="page-item"><a class="page-link border-0" href="sanpham.php?page=7">7</a></li>
-
-              <li class="page-item">
-                <a class="page-link border-0" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-
-          </nav>
+                <?php if ($current_page < $totalPages): ?>
+                  <li class="page-item">
+                    <a class="page-link border-0" href="?page=<?php echo $current_page + 1; ?>" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                <?php else: ?>
+                  <li class="page-item disabled">
+                    <a class="page-link bg-none border-0" href="#" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                <?php endif; ?>
+              </ul>
+            </nav>
+            <?php
+            $conn->close();
+            ?>
 
         </main>
 
@@ -553,7 +516,7 @@ require 'popup_themthanhcong.php';
   </section>
 
   <?php
-  include ("footer.php");
+  include("footer.php");
   ?>
 
 </html>

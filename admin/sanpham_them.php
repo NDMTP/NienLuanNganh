@@ -4,8 +4,8 @@
 
 <!-- email-inbox.html  21 Nov 2019 03:50:57 GMT -->
 <?php
-  include("connect.php");
-  include('head.php');
+include("connect.php");
+include('head.php');
 ?>
 
 <body>
@@ -13,14 +13,14 @@
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
-      <?php 
-        include('navbar.php');
-        if($_SESSION['PHANQUYEN']=='Admin'){
-          include('sidebar.php');
+      <?php
+      include('navbar.php');
+      if ($_SESSION['PHANQUYEN'] == 'Admin') {
+        include('sidebar.php');
       }
-      if($_SESSION['PHANQUYEN']=='nhanvien'){
-          include('sidebar_nv.php');
-          
+      if ($_SESSION['PHANQUYEN'] == 'nhanvien') {
+        include('sidebar_nv.php');
+
       }
       ?>
       <!-- Main Content -->
@@ -31,64 +31,71 @@
               <div class="col-lg-3"></div>
               <div class="col-6 col-md-6 col-lg-6">
                 <div class="card">
-                <form method="POST" action="themsanpham.php" enctype="multipart/form-data">
-    <div class="card-header">
-        <h4>Thêm sản phẩm</h4>
-    </div>
-    <div class="card-body">
-        <div class="form-group">
-            <label>Nhà sản xuất</label>
-            <select name="nsx" id="" class="form-control">
-                <?php
-                $sql = "SELECT * FROM nhasanxuat";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    $result_all = $result->fetch_all(MYSQLI_ASSOC);
-                    foreach ($result_all as $row) {
-                        echo '<option value="'.$row['MANSX'].'">'.$row['TENNSX'].'</option>';
-                    }
-                }
-                ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Loại sản phẩm</label>
-            <select name="loai" id="" class="form-control">
-                <?php
-                $sql = "SELECT * FROM loaisanpham";
-                $result = $conn->query($sql);
-                if ($result->num_rows > 0) {
-                    $result_all = $result->fetch_all(MYSQLI_ASSOC);
-                    foreach ($result_all as $row) {
-                        echo '<option value="'.$row['MALOAI'].'">'.$row['TENLOAI'].'</option>';
-                    }
-                }
-                ?>
-            </select>
-        </div>
-        <div class="form-group">
-            <label>Tên sản phẩm</label>
-            <input type="text" class="form-control" id="tensp" name="tensp">
-        </div>
-        <div class="form-group">
-            <label>Giá:</label>
-            <input type="text" class="form-control" id="dongiabansp" name="dongiabansp">
-        </div>
-        <div class="form-group">
-            <label>Mô tả</label>
-            <input type="text" class="form-control" id="mota" name="mota">
-        </div>
-        <div class="form-group">
-            <label>Ảnh sản phẩm</label><br>
-            <div class="text-center">
-                <input type="file" name="pdimg" id="">
-            </div>
-        </div>
-    </div>
-    <div class="card-footer text-right">
-        <button class="btn btn-primary" class="mt-2">Thêm sản phẩm</button>
-    </div>
-</form>
+                  <form method="POST" action="themsanpham.php" enctype="multipart/form-data">
+                    <div class="card-header">
+                      <h4>Thêm sản phẩm</h4>
+                    </div>
+                    <div class="card-body">
+                      <div class="form-group">
+                        <label>Nhà sản xuất</label>
+                        <select name="nsx" id="" class="form-control">
+                          <?php
+                          $sql = "SELECT * FROM nhasanxuat";
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {
+                            $result_all = $result->fetch_all(MYSQLI_ASSOC);
+                            foreach ($result_all as $row) {
+                              echo '<option value="' . $row['MANSX'] . '">' . $row['TENNSX'] . '</option>';
+                            }
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Loại sản phẩm</label>
+                        <select name="loai" id="" class="form-control">
+                          <?php
+                          $sql = "SELECT * FROM loaisanpham";
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {
+                            $result_all = $result->fetch_all(MYSQLI_ASSOC);
+                            foreach ($result_all as $row) {
+                              echo '<option value="' . $row['MALOAI'] . '">' . $row['TENLOAI'] . '</option>';
+                            }
+                          }
+                          ?>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>Tên sản phẩm</label>
+                        <input type="text" class="form-control" id="tensp" name="tensp">
+                      </div>
+                      <div class="form-group">
+                        <label>Giá:</label>
+                        <input type="text" class="form-control" id="dongiabansp" name="dongiabansp">
+                      </div>
+                      <div class="form-group">
+                        <label>Mô tả</label>
+                        <input type="text" class="form-control" id="mota" name="mota">
+                      </div>
+                      <div class="form-group">
+                        <label>Ảnh sản phẩm</label><br>
+                        <div class="text-center">
+                          <input type="file" name="pdimg" id="">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="soluongkho">Số lượng kho:</label><br>
+                        <div class="text-center">
+                          <input type="number" id="soluongkho" name="soluongkho" min="0" required>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="card-footer text-right">
+                      <button class="btn btn-primary" class="mt-2">Thêm sản phẩm</button>
+                    </div>
+                  </form>
 
                 </div>
               </div>
@@ -209,4 +216,5 @@
 
 
 <!-- email-inbox.html  21 Nov 2019 03:50:58 GMT -->
+
 </html>
