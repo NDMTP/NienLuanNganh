@@ -77,36 +77,29 @@ include('head.php');
                                                             preg_match('/^[A-Za-z]+/', $row['masp'], $matches);
                                                             $spImgDir = $matches[0];
                                                             echo "<tr>
-                                        <td><img style='width: 4rem;' src='../images/" . $spImgDir . "/" . $row["linkanh"] . "'/></td>
-                                        <td>" . $row["masp"] . "</td>
-                                        <td>" . $row["tenloai"] . "</td>
-                                        <td>" . $row["tensp"] . "</td>
-                                        <td>" . $row["mota"] . "</td>
-                                        <td>";
-                                                            ?>
-                                                            <form action="sanpham_sua.php" method="get">
-                                                                <input type="hidden" name="spid"
-                                                                    value="<?php echo $row["masp"] ?>">
-                                                                <button class="btn btn-link" href="sanpham_sua.php"><i
-                                                                        class="fas fa-edit"></i></button>
-                                                            </form>
-                                                            <?php
-                                                            echo "</td>
-                                      <td>";
-                                                            ?>
-
-                                                            <form action="sanpham_xoa.php" method="get">
-                                                                <input type="hidden" name="spid"
-                                                                    value="<?php echo $row["masp"] ?>">
-                                                                <button class="btn btn-link"><i
-                                                                        class="fas fa-trash-alt"></i></button>
-                                                            </form>
-                                                            <?php
-
-                                                            echo "</td>
-                                      </td>
-                                      </tr>";
-
+                                                            <td><img style='width: 4rem;' src='../images/" . $spImgDir . "/" . $row["linkanh"] . "'/></td>
+                                                            <td>" . $row["masp"] . "</td>
+                                                            <td>" . $row["tenloai"] . "</td>
+                                                            <td>" . $row["tensp"] . "</td>
+                                                            <td>" . $row["mota"] . "</td>
+                                                            <td>";
+                                                        ?>
+                                                        <form action="sanpham_sua.php" method="get">
+                                                            <input type="hidden" name="spid" value="<?php echo $row["masp"] ?>">
+                                                            <button class="btn btn-link"><i class="fas fa-edit"></i></button>
+                                                        </form>
+                                                        <?php
+                                                        echo "</td>
+                                                            <td>";
+                                                        ?>
+                                                        <form action="sanpham_xoa.php" method="get">
+                                                            <input type="hidden" name="spid" value="<?php echo $row["masp"] ?>">
+                                                            <button class="btn btn-link"><i class="fas fa-trash-alt"></i></button>
+                                                        </form>
+                                                        <?php
+                                                        echo "</td>
+                                                        </tr>";
+                                                        
                                                             $totalProducts++; // Tăng tổng số sản phẩm lên 1
                                                         }
 

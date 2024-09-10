@@ -31,81 +31,65 @@
               <div class="col-lg-3"></div>
               <div class="col-6 col-md-6 col-lg-6">
                 <div class="card">
-                  <form method="GET" action="themsanpham.php">
-                    <div class="card-header">
-                      <h4>Thêm sản phẩm</h4>
-                    </div>
-                    <div class="card-body">
-                    <div class="form-group">
-                        <label>Nhà sản xuất</label>
-                        <select name="nsx" id="" class="form-control">
-                          <?php
-                            $sql = "select * from nhasanxuat";
-                            $result = $conn->query($sql);
-                            if ($result->num_rows > 0) {
-                              $result = $conn->query($sql);
-                              $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-                              foreach ($result_all as $row) {
-                                echo '<option value="'.$row['MANSX'].'">'.$row['TENNSX'].'</option>';
-                              }
-                            }
-                          ?>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label>Loại sản phẩm</label>
-                        <select name="loai" id="" class="form-control">
-                          <?php
-                            $sql = "select * from loaisanpham";
-                            $result = $conn->query($sql);
-                            if ($result->num_rows > 0) {
-                              $result = $conn->query($sql);
-                              $result_all = $result -> fetch_all(MYSQLI_ASSOC);
-                              foreach ($result_all as $row) {
-                                echo '<option value="'.$row['MALOAI'].'">'.$row['TENLOAI'].'</option>';
-                              }
-                            }
-                          ?>
-                        </select>
-                      </div>
-                      <div class="form-group">
-                        <label>Tên sản phẩm</label>
-                        <input type="text" class="form-control" id="tensp" name="tensp" >
-                      </div>
-                      <div class="form-group">
-                        <label>Giá:</label>
-                        <input type="text" class="form-control" id="dongiabansp" name="dongiabansp" >
-                        <div class="row">
-                          <div class="col-1"></div>
+                <form method="POST" action="themsanpham.php" enctype="multipart/form-data">
+    <div class="card-header">
+        <h4>Thêm sản phẩm</h4>
+    </div>
+    <div class="card-body">
+        <div class="form-group">
+            <label>Nhà sản xuất</label>
+            <select name="nsx" id="" class="form-control">
+                <?php
+                $sql = "SELECT * FROM nhasanxuat";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    $result_all = $result->fetch_all(MYSQLI_ASSOC);
+                    foreach ($result_all as $row) {
+                        echo '<option value="'.$row['MANSX'].'">'.$row['TENNSX'].'</option>';
+                    }
+                }
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Loại sản phẩm</label>
+            <select name="loai" id="" class="form-control">
+                <?php
+                $sql = "SELECT * FROM loaisanpham";
+                $result = $conn->query($sql);
+                if ($result->num_rows > 0) {
+                    $result_all = $result->fetch_all(MYSQLI_ASSOC);
+                    foreach ($result_all as $row) {
+                        echo '<option value="'.$row['MALOAI'].'">'.$row['TENLOAI'].'</option>';
+                    }
+                }
+                ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Tên sản phẩm</label>
+            <input type="text" class="form-control" id="tensp" name="tensp">
+        </div>
+        <div class="form-group">
+            <label>Giá:</label>
+            <input type="text" class="form-control" id="dongiabansp" name="dongiabansp">
+        </div>
+        <div class="form-group">
+            <label>Mô tả</label>
+            <input type="text" class="form-control" id="mota" name="mota">
+        </div>
+        <div class="form-group">
+            <label>Ảnh sản phẩm</label><br>
+            <div class="text-center">
+                <input type="file" name="pdimg" id="">
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-right">
+        <button class="btn btn-primary" class="mt-2">Thêm sản phẩm</button>
+    </div>
+</form>
 
-                          <style>
-                            .price{
-                              display: flex;
-                              flex-direction: column;
-                              justify-content: space-between;
-                            }
-
-                            .price input{
-                              max-width: 8rem;
-                            }
-                          </style>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label>Mô tả</label>
-                        <input type="text" class="form-control" id="mota" name="mota" >
-                      </div>
-                      <div class="form-group">
-                        <label>Link ảnh sản phẩm</label><br>
-                        <div class="text-center">
-                          <input type="file" name="pdimg" id="">
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-footer text-right">
-                      <button class="btn btn-primary" class="mt-2">Thêm sản phẩm</button>
-                    </div>
-                  </form>
                 </div>
               </div>
               <div class="col-lg-3"></div>
