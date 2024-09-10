@@ -2,21 +2,27 @@
 include('connect.php');
 
 // Add a new supplier
-if (isset($_GET["add"])) {
-    $sql = "INSERT INTO nhacungcap VALUES ('".$_GET['ma']."','".$_GET['ten']."', '".$_GET['diachi']."')";
+// Add a new supplier
+if (isset($_POST["add"])) {
+    $ma = $_POST['ma'];
+    $ten = $_POST['ten'];
+    $diachi = $_POST['diachi'];
+
+    $sql = "INSERT INTO nhacungcap (MANCC, TENNCC, DIACHI) VALUES ('$ma', '$ten', '$diachi')";
     $result = $conn->query($sql);
     if ($result) {
         echo '<script language="javascript">
         alert("Đã thêm nhà cung cấp!");
-        history.back();
+        window.location.href = "nhacungcap.php";
         </script>';
     } else {
         echo '<script language="javascript">
         alert("Không thể thêm nhà cung cấp!");
-        history.back();
+        window.location.href = "nhacungcap_them.php";
         </script>';
     }
 }
+
 
 // Delete a supplier
 if (isset($_GET["tt"])) {
