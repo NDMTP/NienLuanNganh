@@ -326,13 +326,14 @@
 
                         <ul class="p-0 m-0">
                             <?php
-                            $tongloai = "SELECT loaisanpham.TENLOAI, COUNT(sanpham.MASP) as tongsp FROM sanpham,loaisanpham
-                                                    WHERE sanpham.MALOAI = loaisanpham.MALOAI
-                                                    GROUP BY loaisanpham.TENLOAI";
+                            // Modified query to order by the count of products (tongsp) in descending order
+                            $tongloai = "SELECT loaisanpham.TENLOAI, COUNT(sanpham.MASP) AS tongsp 
+                 FROM sanpham
+                 JOIN loaisanpham ON sanpham.MALOAI = loaisanpham.MALOAI
+                 GROUP BY loaisanpham.TENLOAI
+                 ORDER BY tongsp DESC";
                             $result_loai = $conn->query($tongloai);
                             while ($row_loai = $result_loai->fetch_assoc()) {
-
-
                                 ?>
                                 <li class="d-flex mb-4 pb-1">
                                     <div class="avatar flex-shrink-0 me-3 d-flex justify-content-center">
@@ -346,7 +347,6 @@
                                             <h6 class="mb-0">
                                                 <?php echo $row_loai['TENLOAI']; ?>
                                             </h6>
-
                                         </div>
                                         <div class="user-progress">
                                             <small class="fw-semibold">
@@ -354,9 +354,10 @@
                                             </small>
                                         </div>
                                     </div>
-                                <?php } ?>
-                            </li>
+                                </li>
+                            <?php } ?>
                         </ul>
+
                     </div>
                 </div>
 
@@ -380,13 +381,16 @@
                     <div class="card-body">
                         <ul class="p-0 m-0">
                             <?php
-                            $topclient = "SELECT nguoidung.TEN,nguoidung.EMAIL, sum(hoadon.TONGTIEN) as TONG
-                                                FROM hoadon,nguoidung WHERE HOADON.EMAIL =nguoidung.EMAIL AND hoadon.TRANGTHAIHOADON=2 GROUP BY (email) LIMIT 7";
+                            // Modified query to order by TONG descending
+                            $topclient = "SELECT nguoidung.TEN, nguoidung.EMAIL, SUM(hoadon.TONGTIEN) AS TONG
+                      FROM hoadon
+                      JOIN nguoidung ON HOADON.EMAIL = nguoidung.EMAIL
+                      WHERE hoadon.TRANGTHAIHOADON = 2
+                      GROUP BY nguoidung.EMAIL
+                      ORDER BY TONG DESC
+                      LIMIT 7";
                             $result_top = $conn->query($topclient);
-                            //$row_top = $result_top->fetch_assoc();
                             while ($row_top = $result_top->fetch_assoc()) {
-
-
                                 ?>
                                 <li class="d-flex mb-4 pb-1">
                                     <div class="avatar flex-shrink-0 me-3 d-flex justify-content-center ">
@@ -394,9 +398,9 @@
                                     </div>
                                     <div class="d-flex w-120 flex-wrap align-items-center justify-content-between gap-2 ">
                                         <div class="me-2 m-2">
-                                            <h6 class="mb-0" style=" max-width: 170px; white-space: nowrap;
-                                                                overflow: hidden;text-overflow: ellipsis;"
-                                                title=" <?php echo $row_top['EMAIL'] ?>">
+                                            <h6 class="mb-0"
+                                                style="max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                                                title="<?php echo $row_top['EMAIL'] ?>">
                                                 <?php echo $row_top['TEN'] ?>
                                             </h6>
                                             <h6 class="mt-2">
@@ -408,6 +412,7 @@
                             <?php } ?>
                         </ul>
                     </div>
+
                 </div>
             </div>
             <div class="col-12 col-sm-12 col-lg-4">
@@ -422,17 +427,21 @@
                                 </div>
                                 <ul class="mt-4">
                                     <?php
-                                    $topsp = "SELECT sanpham.TENSP, sanpham.MASP,Sum(chitiethoadon.SOLUONGSP) as tongban
-                FROM sanpham,hoadon,chitiethoadon WHERE sanpham.MASP = chitiethoadon.MASP AND chitiethoadon.MAHOADON = hoadon.MAHOADON AND hoadon.TRANGTHAIHOADON=2 
-                GROUP BY sanpham.MASP ORDER BY tongban DESC LIMIT 6";
+                                    // SQL query to get products sorted by quantity sold in descending order
+                                    $topsp = "SELECT sanpham.TENSP, sanpham.MASP, SUM(chitiethoadon.SOLUONGSP) AS tongban
+              FROM sanpham
+              JOIN chitiethoadon ON sanpham.MASP = chitiethoadon.MASP
+              JOIN hoadon ON chitiethoadon.MAHOADON = hoadon.MAHOADON
+              WHERE hoadon.TRANGTHAIHOADON = 2
+              GROUP BY sanpham.MASP
+              ORDER BY tongban DESC
+              LIMIT 7";
 
                                     $result_top = $conn->query($topsp);
                                     while ($row_topsp = $result_top->fetch_assoc()) {
-
-
                                         ?>
                                         <li class="d-flex mb-4 pb-1">
-                                            <div class="avatar flex-shrink-0 me-3 d-flex justify-content-center ">
+                                            <div class="avatar flex-shrink-0 me-3 d-flex justify-content-center">
                                                 <i class="fa-solid fa-bowl-food mt-3"></i>
                                             </div>
 
@@ -440,9 +449,9 @@
                                                 class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                                 <div class="me-2 m-2">
                                                     <h6 class="mb-0" data-bs-toggle="tooltip" data-popup="tooltip-custom"
-                                                        data-bs-placement="top" style=" max-width: 170px; white-space: nowrap;
-                                    overflow: hidden;text-overflow: ellipsis;"
-                                                        title=" <?php echo $row_topsp['TENSP'] ?>">
+                                                        data-bs-placement="top"
+                                                        style="max-width: 170px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                                                        title="<?php echo $row_topsp['TENSP']; ?>">
                                                         <?php echo $row_topsp['TENSP']; ?>
                                                     </h6>
                                                     <h6 class="mb-0">
@@ -455,10 +464,10 @@
                                                     </small>
                                                 </div>
                                             </div>
-
                                         </li>
                                     <?php } ?>
                                 </ul>
+
                             </div>
 
                         </div>
