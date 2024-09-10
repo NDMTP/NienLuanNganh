@@ -36,65 +36,76 @@
                                             <table class="table table-striped table-hover" id="tableExport"
                                                 style="width:100%;">
                                                 <tbody>
-                                                    <?php
-                        $servername = "localhost";
-                        $username = "root";
-                        $password = "";
-                        $dbname = "qlsthi"; // 
+                                                <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "qlsthi"; // 
 
-                        // Tạo kết nối đến cơ sở dữ liệu
-                        $conn = new mysqli($servername, $username, $password, $dbname);
-                        if ($conn->connect_error) {
-                            die("Connection failed: " . $conn->connect_error);
-                        }
+    // Tạo kết nối đến cơ sở dữ liệu
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
 
-                        // Truy vấn SQL để lấy danh sách sản phẩm với tên loại sản phẩm
-                        $sql = "select * from khuyenmai";
-                        $result = $conn->query($sql);
+    // Truy vấn SQL để lấy danh sách sản phẩm với tên loại sản phẩm
+    $sql = "SELECT * FROM khuyenmai";
+    $result = $conn->query($sql);
 
-                        if ($result->num_rows > 0) {
-                            echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
-                            echo '<thead>';
-                            echo '<tr>';
-                            echo '<th>Mã khuyến mãi</th>';
-                            echo '<th>Phần trăm KM</th>';
-                            echo '<th>Điều kiện khuyến mãi</th>';
-                            echo '<th>Ngày bắt đầu</th>';
-                            echo '<th>Ngày kết thúc</th>';
-                            echo '<th>Trạng thái</th>';
-                            echo '</tr>';
-                            echo '</thead>';
-                            echo '<tbody>';
+    if ($result->num_rows > 0) {
+        echo '<table class="table table-striped table-hover" id="tableExport" style="width:100%;">';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<th>Mã khuyến mãi</th>';
+        echo '<th>Phần trăm KM</th>';
+        echo '<th>Điều kiện khuyến mãi</th>';
+        echo '<th>Ngày bắt đầu</th>';
+        echo '<th>Ngày kết thúc</th>';
+        echo '<th>Trạng thái</th>';
+        echo '<th>Hành động</th>'; // Thêm cột Hành động
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
 
-                            while ($row = $result->fetch_assoc()) {
-                                echo "<tr>
-                                        <td>" . $row["MAKM"] . "</td>
-                                        <td>" . $row["PHANTRAMKM"] . "</td>
-                                        <td>" . $row["DIEUKIENKM"] . "</td>
-                                        <td>" . $row["NGAYBD"] . "</td>
-                                        <td>" . $row["NGAYKT"] . "</td>
-                                        <td>"; 
-                                        $endDate = $row["NGAYKT"];
-                                        $curDate = date("Y-m-d");
-                                        if ($endDate >= $curDate) {
-                                
-                                            echo '<span class="badge badge-success">Hoạt động</span>';
-                                        } else {
-                                            echo '<span class="badge badge-danger">Hết hạn</span>';
-                                        }
-                                echo "</td>
-                                    </tr>";
-                            }
+        while ($row = $result->fetch_assoc()) {
+            echo "<tr>
+                    <td>" . $row["MAKM"] . "</td>
+                    <td>" . $row["PHANTRAMKM"] . "</td>
+                    <td>" . $row["DIEUKIENKM"] . "</td>
+                    <td>" . $row["NGAYBD"] . "</td>
+                    <td>" . $row["NGAYKT"] . "</td>
+                    <td>"; 
+                    $endDate = $row["NGAYKT"];
+                    $curDate = date("Y-m-d");
+                    if ($endDate >= $curDate) {
+                        echo '<span class="badge badge-success">Hoạt động</span>';
+                    } else {
+                        echo '<span class="badge badge-danger">Hết hạn</span>';
+                    }
+            echo "</td>
+                  <td>
+                      <button class='btn btn-danger btn-sm' onclick='deletePromotion(\"" . $row["MAKM"] . "\")'>Xóa</button> 
+                  </td>";
+            echo "</tr>";
+        }
 
-                            echo '</tbody>';
-                            echo '</table>';
+        echo '</tbody>';
+        echo '</table>';
 
-                        } else {
-                            echo "Không có dữ liệu sản phẩm.";
-                        }
+    } else {
+        echo "Không có dữ liệu sản phẩm.";
+    }
 
-                        $conn->close();
-                        ?>
+    $conn->close();
+?>
+
+<script>
+    function deletePromotion(makm) {
+        if (confirm("Bạn có chắc chắn muốn xóa khuyến mãi này?")) {
+            window.location.href = "khuyenmai_xoa.php?makm=" + makm;
+        }
+    }
+</script>
 
 
 
