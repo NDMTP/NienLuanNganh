@@ -252,6 +252,15 @@ require 'connect.php';
             </div>
             <div class="meta-product py-2">
               <div class="meta-item d-flex align-items-baseline">
+                <h6 class="item-title no-margin pe-2">Kho:</h6>
+                <ul class="select-list list-unstyled d-flex">
+                  <li data-value="S" class="select-item">
+                    <?php echo $row['SOLUONGKHO'] ?>
+                  </li>
+                </ul>
+              </div>
+            <div class="meta-product py-2">
+              <div class="meta-item d-flex align-items-baseline">
                 <h6 class="item-title no-margin pe-2">Mã hàng:</h6>
                 <ul class="select-list list-unstyled d-flex">
                   <li data-value="S" class="select-item">
