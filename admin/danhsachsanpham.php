@@ -42,18 +42,30 @@ include('head.php');
                                                     $servername = "localhost";
                                                     $username = "root";
                                                     $password = "";
-                                                    $dbname = "qlsthi"; // 
-                                                    
+                                                    $dbname = "qlsthi";
+
                                                     // Tạo kết nối đến cơ sở dữ liệu
                                                     $conn = new mysqli($servername, $username, $password, $dbname);
                                                     if ($conn->connect_error) {
                                                         die("Connection failed: " . $conn->connect_error);
                                                     }
 
-                                                    // Truy vấn SQL để lấy danh sách sản phẩm với tên loại sản phẩm
+                                                    // Xác định số sản phẩm mỗi trang và trang hiện tại
+                                                    $productsPerPage = 30;
+                                                    $page = isset($_GET['page']) ? (int) $_GET['page'] : 1;
+                                                    $start = ($page - 1) * $productsPerPage;
+
+                                                    // Truy vấn SQL để lấy tổng số sản phẩm
+                                                    $sqlTotal = "SELECT COUNT(*) AS total FROM sanpham";
+                                                    $resultTotal = $conn->query($sqlTotal);
+                                                    $rowTotal = $resultTotal->fetch_assoc();
+                                                    $totalProducts = $rowTotal['total'];
+
+                                                    // Truy vấn SQL để lấy danh sách sản phẩm cho trang hiện tại
                                                     $sql = "SELECT sanpham.masp, loaisanpham.tenloai, sanpham.tensp, sanpham.mota, sanpham.linkanh
-                                FROM sanpham 
-                                INNER JOIN loaisanpham ON sanpham.maloai = loaisanpham.maloai";
+        FROM sanpham 
+        INNER JOIN loaisanpham ON sanpham.maloai = loaisanpham.maloai
+        LIMIT $start, $productsPerPage";
                                                     $result = $conn->query($sql);
 
                                                     if ($result->num_rows > 0) {
@@ -71,45 +83,72 @@ include('head.php');
                                                         echo '</thead>';
                                                         echo '<tbody>';
 
-                                                        $totalProducts = 0; // Khởi tạo biến tổng số sản phẩm
-                                                    
                                                         while ($row = $result->fetch_assoc()) {
                                                             preg_match('/^[A-Za-z]+/', $row['masp'], $matches);
                                                             $spImgDir = $matches[0];
                                                             echo "<tr>
-                                                            <td><img style='width: 4rem;' src='../images/" . $spImgDir . "/" . $row["linkanh"] . "'/></td>
-                                                            <td>" . $row["masp"] . "</td>
-                                                            <td>" . $row["tenloai"] . "</td>
-                                                            <td>" . $row["tensp"] . "</td>
-                                                            <td>" . $row["mota"] . "</td>
-                                                            <td>";
-                                                        ?>
-                                                        <form action="sanpham_sua.php" method="get">
-                                                            <input type="hidden" name="spid" value="<?php echo $row["masp"] ?>">
-                                                            <button class="btn btn-link"><i class="fas fa-edit"></i></button>
-                                                        </form>
-                                                        <?php
-                                                        echo "</td>
-                                                            <td>";
-                                                        ?>
-                                                        <form action="sanpham_xoa.php" method="get">
-                                                            <input type="hidden" name="spid" value="<?php echo $row["masp"] ?>">
-                                                            <button class="btn btn-link"><i class="fas fa-trash-alt"></i></button>
-                                                        </form>
-                                                        <?php
-                                                        echo "</td>
-                                                        </tr>";
-                                                        
-                                                            $totalProducts++; // Tăng tổng số sản phẩm lên 1
+            <td><img style='width: 4rem;' src='../images/" . $spImgDir . "/" . $row["linkanh"] . "'/></td>
+            <td>" . $row["masp"] . "</td>
+            <td>" . $row["tenloai"] . "</td>
+            <td>" . $row["tensp"] . "</td>
+            <td>" . $row["mota"] . "</td>
+            <td>";
+                                                            ?>
+                                                            <form action="sanpham_sua.php" method="get">
+                                                                <input type="hidden" name="spid"
+                                                                    value="<?php echo $row["masp"] ?>">
+                                                                <button class="btn btn-link"><i
+                                                                        class="fas fa-edit"></i></button>
+                                                            </form>
+                                                            <?php
+                                                            echo "</td>
+            <td>";
+                                                            ?>
+                                                            <form action="sanpham_xoa.php" method="get">
+                                                                <input type="hidden" name="spid"
+                                                                    value="<?php echo $row["masp"] ?>">
+                                                                <button class="btn btn-link"><i
+                                                                        class="fas fa-trash-alt"></i></button>
+                                                            </form>
+                                                            <?php
+                                                            echo "</td>
+        </tr>";
                                                         }
 
                                                         echo '</tbody>';
                                                         echo '</table>';
-
-                                                        echo "<p>Tổng số sản phẩm: $totalProducts</p>"; // Hiển thị tổng số sản phẩm
                                                     } else {
                                                         echo "Không có dữ liệu sản phẩm.";
                                                     }
+
+                                                    // Hiển thị tổng số sản phẩm
+                                                    echo "<p>Tổng số sản phẩm: $totalProducts</p>";
+
+                                                    // Tính số trang
+                                                    $totalPages = ceil($totalProducts / $productsPerPage);
+
+                                                    // Hiển thị các liên kết phân trang
+                                                    echo '<nav aria-label="Page navigation">';
+                                                    echo '<ul class="pagination">';
+
+                                                    // Liên kết đến trang trước
+                                                    if ($page > 1) {
+                                                        echo '<li class="page-item"><a class="page-link" href="?page=' . ($page - 1) . '">«</a></li>';
+                                                    }
+
+                                                    // Liên kết đến các trang
+                                                    for ($i = 1; $i <= $totalPages; $i++) {
+                                                        $active = ($i == $page) ? ' active' : '';
+                                                        echo '<li class="page-item' . $active . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+                                                    }
+
+                                                    // Liên kết đến trang sau
+                                                    if ($page < $totalPages) {
+                                                        echo '<li class="page-item"><a class="page-link" href="?page=' . ($page + 1) . '">»</a></li>';
+                                                    }
+
+                                                    echo '</ul>';
+                                                    echo '</nav>';
 
                                                     $conn->close();
                                                     ?>
