@@ -130,7 +130,7 @@
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Search</span>
           </h4>
-          <form role="search" action="index.html" method="get" class="d-flex mt-3 gap-0">
+          <form role="search" action="index.php" method="get" class="d-flex mt-3 gap-0">
             <input class="form-control rounded-start rounded-0 bg-light" type="email" placeholder="What are you looking for?" aria-label="What are you looking for?">
             <button class="btn btn-dark rounded-end rounded-0" type="submit">Search</button>
           </form>
@@ -144,7 +144,7 @@
           
           <div class="col-sm-4 col-lg-2 text-center text-sm-start">
             <div class="main-logo">
-              <a href="index.html">
+              <a href="index.php">
                 <img src="images/logo.jpg" alt="logo" class="img-fluid" width="115" height="36">
               </a>
             </div>
@@ -167,7 +167,7 @@
                 </select>
               </div>
               <div class="col-11 col-md-7">
-                <form id="search-form" class="text-center" action="index.html" method="post">
+                <form id="search-form" class="text-center" action="index.php" method="post">
                   <input type="text" class="form-control border-0 bg-transparent" placeholder="Bạn đang tìm gì vậy ?" />
                 </form>
               </div>
@@ -249,16 +249,16 @@
               
                   <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
                     <li class="nav-item active">
-                      <a href="index.html" class="nav-link">Trang chủ</a>
+                      <a href="index.php" class="nav-link">Trang chủ</a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="sanpham.html" class="nav-link">Sản phẩm</a>
+                      <a href="sanpham.php" class="nav-link">Sản phẩm</a>
                     </li>
                     <li class="nav-item">
-                      <a href="bill.html" class="nav-link">Hóa đơn</a>
+                      <a href="bill.php" class="nav-link">Hóa đơn</a>
                     </li>
                     <li class="nav-item">
-                      <a href="contact.html" class="nav-link">Liên hệ</a>
+                      <a href="contact.php" class="nav-link">Liên hệ</a>
                     </li>
                     <li class="nav-item">
                       <a href="#blog" class="nav-link">Blog</a>
@@ -305,7 +305,7 @@
         <div class="d-flex justify-content-between">
           <h1 class="page-title pb-2">Liên hệ</h1>
           <nav class="breadcrumb fs-6">
-            <a class="breadcrumb-item nav-link" href="index.html">Trang chủ</a>
+            <a class="breadcrumb-item nav-link" href="index.php">Trang chủ</a>
             <a class="breadcrumb-item nav-link" href="contact.html">Liên hệ</a>
           </nav>
         </div>
@@ -391,31 +391,32 @@
     </section>
 
     <section class="google-map">
-      <div class="mapouter">
-        <div class="gmap_canvas">
-          <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=2880%20Broadway,%20New%20York&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
-          <a href="https://getasearch.com/fmovies"></a>
-          <br>
-          <style>
-            .mapouter {
-              position: relative;
-              text-align: right;
-              height: 500px;
-              width: 100%;
-            }
-          </style>
-          <a href="https://www.embedgooglemap.net">embedgooglemap.net</a>
-          <style>
-            .gmap_canvas {
-              overflow: hidden;
-              background: none !important;
-              height: 500px;
-              width: 100%;
-            }
-          </style>
-        </div>
-      </div>
-    </section>
+  <div class="mapouter">
+    <div class="gmap_canvas">
+      <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=%C4%90%E1%BA%A1i%20h%E1%BB%8Dc%20C%E1%BA%A7n%20Th%C6%A1&hl=vi-VN&ie=UTF8&z=17&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+      <a href="https://getasearch.com/fmovies"></a>
+      <br>
+      <style>
+        .mapouter {
+          position: relative;
+          text-align: right;
+          height: 500px;
+          width: 100%;
+        }
+      </style>
+      <a href="https://www.embedgooglemap.net">embedgooglemap.net</a>
+      <style>
+        .gmap_canvas {
+          overflow: hidden;
+          background: none !important;
+          height: 500px;
+          width: 100%;
+        }
+      </style>
+    </div>
+  </div>
+</section>
+
 
 
     <footer class="py-5">
