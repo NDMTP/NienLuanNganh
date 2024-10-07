@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <?php
@@ -34,7 +32,7 @@ require 'popup_themthanhcong.php';
 
     /* Chat box styles */
     #chat-box {
-        display: none;
+        display: none; /* Mặc định là ẩn */
         position: fixed;
         bottom: 80px;
         right: 20px;
@@ -55,12 +53,24 @@ require 'popup_themthanhcong.php';
         padding: 10px;
         border-radius: 10px 10px 0 0;
         text-align: center;
+        position: relative; /* Để chứa nút đóng */
+    }
+
+    #chat-box .close-btn {
+        position: absolute;
+        right: 10px;
+        top: 5px;
+        background-color: transparent;
+        border: none;
+        color: white;
+        font-size: 18px;
+        cursor: pointer;
     }
 
     #chat-box .messages {
         padding: 10px;
         overflow-y: auto;
-        height: 280px; /* Giảm chiều cao cho phần hiển thị tin nhắn */
+        height: 280px;
         border-bottom: 1px solid #ddd;
     }
 
@@ -96,7 +106,7 @@ require 'popup_themthanhcong.php';
         padding: 10px;
         background-color: #f9f9f9;
         border-top: 1px solid #ddd;
-        justify-content: center; /* Căn giữa các gợi ý */
+        justify-content: center;
     }
 
     .suggestion-button {
@@ -115,7 +125,10 @@ require 'popup_themthanhcong.php';
     <div id="chat-bubble">Chat</div>
 
     <div id="chat-box">
-        <header>Chatbot Support</header>
+        <header>
+            Chatbot Support
+            <button class="close-btn" onclick="closeChatBox()">X</button> <!-- Nút X -->
+        </header>
         <div class="messages">
             <!-- Messages will appear here -->
         </div>
@@ -124,15 +137,28 @@ require 'popup_themthanhcong.php';
             <input type="text" id="message" placeholder="Nhập tin nhắn...">
             <button onclick="sendMessage()">Gửi</button>
         </footer>
-
     </div>
 
     <script>
+        // Mặc định là ẩn
+        var chatBox = document.getElementById('chat-box');
+        chatBox.style.display = 'none';
+
+        // Toggle chat box visibility khi nhấn vào chat-bubble
         document.getElementById('chat-bubble').addEventListener('click', function () {
-            var chatBox = document.getElementById('chat-box');
-            chatBox.style.display = (chatBox.style.display === 'none' || chatBox.style.display === '') ? 'block' : 'none';
+            if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'block'; // Hiển thị
+            } else {
+                chatBox.style.display = 'none'; // Ẩn
+            }
         });
 
+        // Hàm đóng hộp thoại chat khi nhấn nút X
+        function closeChatBox() {
+            chatBox.style.display = 'none'; // Ẩn hộp thoại chat
+        }
+
+        // Function to send a message
         function sendMessage() {
             var message = document.getElementById('message').value;
             if (message.trim() !== "") {
@@ -146,9 +172,20 @@ require 'popup_themthanhcong.php';
                         var messagesDiv = document.querySelector('.messages');
                         var suggestionsContainer = document.getElementById('suggestions-container');
 
-                        messagesDiv.innerHTML += `<div>Bạn: ${message}</div><div>Bot: ${response.message}</div>`;
-                        suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+                        // Clear previous suggestions
+                        suggestionsContainer.innerHTML = '';
 
+                        // Add user message
+                        var userMessage = document.createElement('div');
+                        userMessage.textContent = "Bạn: " + message;
+                        messagesDiv.appendChild(userMessage);
+
+                        // Add bot response
+                        var botMessage = document.createElement('div');
+                        botMessage.textContent = "Bot: " + response.message;
+                        messagesDiv.appendChild(botMessage);
+
+                        // Add suggestions
                         response.suggestions.forEach(function (suggestion) {
                             var suggestionButton = document.createElement('button');
                             suggestionButton.textContent = suggestion;
@@ -160,13 +197,16 @@ require 'popup_themthanhcong.php';
                             suggestionsContainer.appendChild(suggestionButton);
                         });
 
-                        document.getElementById('message').value = "";  // Clear input after sending
+                        // Clear the message input after sending
+                        document.getElementById('message').value = "";
                     }
                 };
+
                 xhr.send('message=' + encodeURIComponent(message));
             }
         }
 
+        // Event listener for Enter key in the input field
         document.getElementById('message').addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
@@ -174,77 +214,6 @@ require 'popup_themthanhcong.php';
             }
         });
     </script>
-</body>
-</html>
-
-
-<script>
-    // Toggle chat box visibility
-    document.getElementById('chat-bubble').addEventListener('click', function() {
-        var chatBox = document.getElementById('chat-box');
-        if (chatBox.style.display === 'none') {
-            chatBox.style.display = 'block';
-        } else {
-            chatBox.style.display = 'none';
-        }
-    });
-
-    // Function to send a message
-    function sendMessage() {
-        var message = document.getElementById('message').value;
-        if (message.trim() !== "") {
-            var xhr = new XMLHttpRequest();
-            xhr.open('POST', 'chatbot.php', true);
-            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    var messagesDiv = document.querySelector('.messages');
-                    var suggestionsContainer = document.getElementById('suggestions-container');
-
-                    // Clear previous suggestions
-                    suggestionsContainer.innerHTML = '';
-
-                    // Add user message
-                    var userMessage = document.createElement('div');
-                    userMessage.textContent = "Bạn: " + message;
-                    messagesDiv.appendChild(userMessage);
-
-                    // Add bot response
-                    var botMessage = document.createElement('div');
-                    botMessage.textContent = "Bot: " + response.message;
-                    messagesDiv.appendChild(botMessage);
-
-                    // Add suggestions
-                    response.suggestions.forEach(function(suggestion) {
-                        var suggestionButton = document.createElement('button');
-                        suggestionButton.textContent = suggestion;
-                        suggestionButton.className = 'suggestion-button';
-                        suggestionButton.onclick = function() {
-                            document.getElementById('message').value = suggestion; // Đặt giá trị ô nhập
-                            sendMessage(); // Gọi hàm gửi
-                        };
-                        suggestionsContainer.appendChild(suggestionButton);
-                    });
-
-                    document.getElementById('message').value = "";  // Clear input after sending
-                }
-            };
-
-            xhr.send('message=' + encodeURIComponent(message));
-        }
-    }
-
-    // Lắng nghe sự kiện cho ô nhập
-    document.getElementById('message').addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault(); // Ngăn chặn hành động mặc định của phím Enter (như xuống dòng)
-            sendMessage(); // Gọi hàm gửi tin nhắn
-        }
-    });
-</script>
-
 </body>
 </html>
 
