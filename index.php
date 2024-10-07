@@ -38,7 +38,7 @@ require 'popup_themthanhcong.php';
         bottom: 80px;
         right: 20px;
         width: 300px;
-        max-height: 400px;
+        max-height: 450px; /* Tăng chiều cao tối đa của khung chat */
         border: 1px solid #ddd;
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         background-color: white;
@@ -57,7 +57,7 @@ require 'popup_themthanhcong.php';
     #chat-box .messages {
         padding: 10px;
         overflow-y: auto;
-        height: 300px;
+        height: 320px; /* Tăng chiều cao cho phần hiển thị tin nhắn */
         border-bottom: 1px solid #ddd;
     }
 
@@ -105,17 +105,183 @@ require 'popup_themthanhcong.php';
 <body>
 <div id="chat-bubble">Chat</div>
 
-<div id="chat-box">
-    <header>Chatbot Support</header>
-    <div class="messages">
-        <!-- Messages will appear here -->
+<!DOCTYPE html>
+<html lang="en">
+<?php
+require 'head.php';
+require 'connect.php';
+require 'popup_themthanhcong.php';
+?>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        position: relative;
+    }
+
+    /* Chat bubble styles */
+    #chat-bubble {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #4CAF50;
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 50px;
+        cursor: pointer;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+
+    /* Chat box styles */
+    #chat-box {
+        display: none;
+        position: fixed;
+        bottom: 80px;
+        right: 20px;
+        width: 300px;
+        max-height: 450px;
+        border: 1px solid #ddd;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        border-radius: 10px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #chat-box header {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        border-radius: 10px 10px 0 0;
+        text-align: center;
+    }
+
+    #chat-box .messages {
+        padding: 10px;
+        overflow-y: auto;
+        height: 280px; /* Giảm chiều cao cho phần hiển thị tin nhắn */
+        border-bottom: 1px solid #ddd;
+    }
+
+    #chat-box footer {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+        border-top: 1px solid #ddd;
+        background-color: #f9f9f9;
+    }
+
+    #chat-box input {
+        flex: 1;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        margin-right: 5px;
+    }
+
+    #chat-box button {
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    /* Suggestions styles */
+    .suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-top: 1px solid #ddd;
+        justify-content: center; /* Căn giữa các gợi ý */
+    }
+
+    .suggestion-button {
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div id="chat-bubble">Chat</div>
+
+    <div id="chat-box">
+        <header>Chatbot Support</header>
+        <div class="messages">
+            <!-- Messages will appear here -->
+        </div>
+        <div class="suggestions" id="suggestions-container"></div>
+        <footer>
+            <input type="text" id="message" placeholder="Nhập tin nhắn...">
+            <button onclick="sendMessage()">Gửi</button>
+        </footer>
+
     </div>
-    <footer>
-        <input type="text" id="message" placeholder="Nhập tin nhắn...">
-        <button onclick="sendMessage()">Gửi</button>
-    </footer>
-    <div class="suggestions" id="suggestions-container"></div> <!-- Container for suggestions -->
-</div>
+
+    <script>
+        document.getElementById('chat-bubble').addEventListener('click', function () {
+            var chatBox = document.getElementById('chat-box');
+            chatBox.style.display = (chatBox.style.display === 'none' || chatBox.style.display === '') ? 'block' : 'none';
+        });
+
+        function sendMessage() {
+            var message = document.getElementById('message').value;
+            if (message.trim() !== "") {
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'chatbot.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        var response = JSON.parse(xhr.responseText);
+                        var messagesDiv = document.querySelector('.messages');
+                        var suggestionsContainer = document.getElementById('suggestions-container');
+
+                        messagesDiv.innerHTML += `<div>Bạn: ${message}</div><div>Bot: ${response.message}</div>`;
+                        suggestionsContainer.innerHTML = ''; // Clear previous suggestions
+
+                        response.suggestions.forEach(function (suggestion) {
+                            var suggestionButton = document.createElement('button');
+                            suggestionButton.textContent = suggestion;
+                            suggestionButton.className = 'suggestion-button';
+                            suggestionButton.onclick = function () {
+                                document.getElementById('message').value = suggestion;
+                                sendMessage();
+                            };
+                            suggestionsContainer.appendChild(suggestionButton);
+                        });
+
+                        document.getElementById('message').value = "";  // Clear input after sending
+                    }
+                };
+                xhr.send('message=' + encodeURIComponent(message));
+            }
+        }
+
+        document.getElementById('message').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
+
 
 <script>
     // Toggle chat box visibility
