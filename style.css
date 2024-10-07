@@ -1015,38 +1015,3 @@ height: 740px;
   margin-left: 6px;
   display: inline-block;
 }
-#chatbot-icon {
-  /* Style your chatbot icon here */
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: blue;
-  cursor: pointer;
-}
-
-#chatbot-modal.hidden {
-  display: none;
-}
-
-#chatbot-modal {
-  /* Style your chatbot modal here */
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 300px;
-  height: 400px;
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-#chatbot-messages {
-  overflow-y: auto;
-  flex-grow: 1;
-}
