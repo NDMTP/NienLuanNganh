@@ -42,6 +42,14 @@
                     <li><a class="nav-link" href="capnhat.php">Thêm nhân viên</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="command"></i><span>Quản lí chatbot</span></a>
+                <ul>
+                    <li><a class="nav-link" href="themcauhoi.php">Thêm câu hỏi</a></li>
+                    <li><a class="nav-link" href="danhsachcauhoi.php">Danh sách câu hỏi</a></li>
+                    
+                </ul>
+            </li>
             <!-- hoadon -->
         </ul>
     </aside>
