@@ -38,6 +38,8 @@ include('head.php');
                                                         <th>ID</th>
                                                         <th>Câu hỏi</th>
                                                         <th>Trả lời</th>
+                                                        <th>Sửa</th>
+                                                        <th>Xóa</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -63,10 +65,22 @@ include('head.php');
                                                                 <td>" . $row["id"] . "</td>
                                                                 <td>" . $row["cauhoi"] . "</td>
                                                                 <td>" . $row["traloi"] . "</td>
+                                                                <td>
+                                                                    <form action='cauhoi_sua.php' method='get'>
+                                                                        <input type='hidden' name='id' value='" . $row["id"] . "'>
+                                                                        <button class='btn btn-link'><i class='fas fa-edit'></i></button>
+                                                                    </form>
+                                                                </td>
+                                                                <td>
+                                                                    <form action='cauhoi_xoa.php' method='get'>
+                                                                        <input type='hidden' name='id' value='" . $row["id"] . "'>
+                                                                        <button class='btn btn-link'><i class='fas fa-trash-alt'></i></button>
+                                                                    </form>
+                                                                </td>
                                                             </tr>";
                                                         }
                                                     } else {
-                                                        echo "<tr><td colspan='3'>Không có dữ liệu câu hỏi.</td></tr>";
+                                                        echo "<tr><td colspan='5'>Không có dữ liệu câu hỏi.</td></tr>";
                                                     }
 
                                                     $conn->close();
